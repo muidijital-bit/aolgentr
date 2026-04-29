@@ -365,6 +365,139 @@ footer a:hover { color: #fff; }
 
 /* Sections defaults */
 .section { padding: 96px 0; }
-@media (max-width: 720px) { .section { padding: 64px 0; } }
+@media (max-width: 720px) { .section { padding: 56px 0; } }
 
 .stripe-holder { background: linear-gradient(135deg, var(--slate-50), #fff); border: 1px solid var(--border); border-radius: var(--radius-lg); }
+
+/* ── Responsive grid utilities (use !important to override inline styles) ── */
+@media (max-width: 980px) {
+  .r4-2 { grid-template-columns: repeat(2, 1fr) !important; }
+  .r3-1 { grid-template-columns: 1fr !important; }
+}
+@media (max-width: 720px) {
+  .mob-1 { grid-template-columns: 1fr !important; gap: 32px !important; }
+  .mob-1-nogap { grid-template-columns: 1fr !important; }
+  .mob-2 { grid-template-columns: repeat(2, 1fr) !important; }
+  .mob-hide { display: none !important; }
+  .mob-full { width: 100% !important; min-width: 0 !important; }
+  .mob-stack { flex-direction: column !important; align-items: stretch !important; }
+  .mob-center { text-align: center !important; }
+  .mob-pad-sm { padding: 20px !important; }
+}
+@media (max-width: 520px) {
+  .mob-xs-1 { grid-template-columns: 1fr !important; }
+}
+
+/* ── Hamburger / Mobile nav ── */
+.hamburger {
+  display: none;
+  width: 40px; height: 40px;
+  align-items: center; justify-content: center;
+  border-radius: var(--radius-sm);
+  color: var(--text);
+  cursor: pointer;
+  transition: background 160ms;
+  flex-shrink: 0;
+}
+.hamburger:hover { background: var(--slate-100); }
+@media (max-width: 980px) { .hamburger { display: flex; } }
+
+.mob-nav {
+  position: fixed; inset: 0; z-index: 200;
+  background: rgba(15,23,42,0.45);
+  backdrop-filter: blur(4px);
+  opacity: 0; pointer-events: none;
+  transition: opacity 240ms var(--ease);
+}
+.mob-nav.open { opacity: 1; pointer-events: auto; }
+
+.mob-nav-panel {
+  position: absolute; top: 0; right: 0; bottom: 0;
+  width: min(320px, 85vw);
+  background: #fff;
+  transform: translateX(100%);
+  transition: transform 280ms var(--ease);
+  display: flex; flex-direction: column;
+  overflow-y: auto;
+}
+.mob-nav.open .mob-nav-panel { transform: translateX(0); }
+
+.mob-nav-head {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 20px 20px 16px;
+  border-bottom: 1px solid var(--border);
+}
+.mob-nav-close {
+  width: 36px; height: 36px; display: grid; place-items: center;
+  border-radius: var(--radius-sm); color: var(--text); cursor: pointer;
+}
+.mob-nav-close:hover { background: var(--slate-100); }
+
+.mob-nav-links {
+  flex: 1; padding: 12px 12px;
+  display: flex; flex-direction: column; gap: 2px;
+}
+.mob-nav-link {
+  padding: 13px 14px; border-radius: var(--radius);
+  font-size: 15px; font-weight: 500; color: var(--slate-700);
+  transition: background 140ms; cursor: pointer;
+  display: block;
+}
+.mob-nav-link:hover, .mob-nav-link.active { background: var(--slate-50); color: var(--primary); }
+.mob-nav-link.active { font-weight: 600; }
+
+.mob-nav-sub {
+  padding-left: 14px; margin-top: 2px;
+  display: flex; flex-direction: column; gap: 1px;
+}
+.mob-nav-sub .mob-nav-link { font-size: 13.5px; padding: 9px 14px; color: var(--text-2); }
+.mob-nav-sub .mob-nav-link:hover { color: var(--primary); }
+
+.mob-nav-footer {
+  padding: 16px 20px 24px;
+  border-top: 1px solid var(--border);
+  display: flex; flex-direction: column; gap: 10px;
+}
+
+/* ── Footer responsive ── */
+@media (max-width: 900px) {
+  .footer-grid { grid-template-columns: 1fr 1fr !important; gap: 40px !important; }
+}
+@media (max-width: 560px) {
+  .footer-grid { grid-template-columns: 1fr !important; }
+}
+
+/* ── Hero responsive ── */
+@media (max-width: 720px) {
+  .hero { padding: 48px 0 64px; }
+  .hero-stats { grid-template-columns: repeat(3,1fr) !important; gap: 0; }
+  .hero-visual { display: none; }
+  .hv-float-1, .hv-float-2 { display: none; }
+  .slider-track { aspect-ratio: 4/3 !important; }
+}
+
+/* ── Branch card map responsive ── */
+@media (max-width: 720px) {
+  .branch-card-grid { grid-template-columns: 1fr !important; }
+  .branch-map { min-height: 220px !important; }
+}
+
+/* ── Product detail image ── */
+@media (max-width: 720px) {
+  .product-detail-img { height: 240px !important; }
+}
+
+/* ── Contact form sticky cancel on mobile ── */
+@media (max-width: 720px) {
+  .contact-sticky { position: static !important; }
+}
+
+/* ── Agencies grid ── */
+@media (max-width: 980px) { .agencies-grid { grid-template-columns: repeat(4, 1fr) !important; } }
+@media (max-width: 640px) { .agencies-grid { grid-template-columns: repeat(3, 1fr) !important; } }
+@media (max-width: 420px) { .agencies-grid { grid-template-columns: repeat(2, 1fr) !important; } }
+
+/* ── Agency card logo height ── */
+@media (max-width: 640px) {
+  .agency-logo-wrap { height: 36px !important; }
+}

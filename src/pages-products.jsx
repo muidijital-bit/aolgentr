@@ -11,7 +11,7 @@ export function ProductsList({ go }) {
         breadcrumb="Ana Sayfa / Ürünler" />
       <section className="section">
         <div className="container">
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 16 }}>
+          <div className="r3-1 mob-1" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 16 }}>
             {PRODUCTS.map(p => {
               const Ico = ICONS_BY_PRODUCT[p.id];
               return (
@@ -42,7 +42,7 @@ export function ProductDetail({ id, go }) {
       {/* Featured product image */}
       <section style={{ paddingTop: 8 }}>
         <div className="container">
-          <div style={{ position: 'relative', height: 360, borderRadius: 24, overflow: 'hidden', border: '1px solid var(--border)', background: 'linear-gradient(135deg, var(--primary-50), var(--slate-100))' }}>
+          <div className="product-detail-img" style={{ position: 'relative', height: 360, borderRadius: 24, overflow: 'hidden', border: '1px solid var(--border)', background: 'linear-gradient(135deg, var(--primary-50), var(--slate-100))' }}>
             <img src={`/assets/product-${p.id}.jpg`} alt={p.title}
                  onError={e => { e.target.style.display = 'none'; }}
                  style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
@@ -66,7 +66,7 @@ export function ProductDetail({ id, go }) {
 
       <section className="section">
         <div className="container">
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 48 }}>
+          <div className="mob-1" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 48 }}>
             <div className="card" style={{ padding: 32 }}>
               <SectionLabel>Teminat kapsamı</SectionLabel>
               <ul style={{ listStyle: 'none', padding: 0, margin: '20px 0 0', display: 'grid', gap: 12 }}>

@@ -20,7 +20,7 @@ export function ProductsSection({ go }) {
             Zorunlu teminatlardan bireysel planlara — yedi ana ürün kategorisinde uzman danışmanlık.
           </p>
         </div>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 16 }}>
+        <div className="r4-2 mob-1" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 16 }}>
           {PRODUCTS.map(p => {
             const Ico = ICONS_BY_PRODUCT[p.id];
             return (
@@ -48,7 +48,7 @@ export function AboutStrip({ go }) {
   return (
     <section className="section" style={{ background: 'var(--slate-50)' }}>
       <div className="container">
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 64, alignItems: 'center' }}>
+        <div className="mob-1" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 64, alignItems: 'center' }}>
           <div>
             <SectionLabel>Hakkımızda</SectionLabel>
             <h2 className="display-2" style={{ margin: '14px 0 20px' }}>
@@ -98,7 +98,7 @@ export function QuickQuote({ go }) {
   return (
     <section className="section">
       <div className="container">
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.4fr', gap: 64, alignItems: 'flex-start' }}>
+        <div className="mob-1" style={{ display: 'grid', gridTemplateColumns: '1fr 1.4fr', gap: 64, alignItems: 'flex-start' }}>
           <div>
             <SectionLabel>Hızlı Teklif</SectionLabel>
             <h2 className="display-2" style={{ margin: '14px 0 20px' }}>
@@ -131,7 +131,7 @@ function AgencyCard({ agency, tall = false }) {
       display: 'flex', alignItems: 'center', justifyContent: 'center',
     }}>
       {!imgFailed ? (
-        <div style={{ width: '100%', height: h, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <div className="agency-logo-wrap" style={{ width: '100%', height: h, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
           <img
             src={agency.logo}
             alt={agency.name}
@@ -158,7 +158,7 @@ export function AgenciesSection({ go, compact = false }) {
           </div>
           {!compact && <button className="btn btn-secondary" onClick={() => go('/acenteliklerimiz')}>Tümünü gör <IconArrow size={12} /></button>}
         </div>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(6, 1fr)', gap: 8 }}>
+        <div className="agencies-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(6, 1fr)', gap: 8 }}>
           {AGENCIES.map(a => (
             <AgencyCard key={a.name} agency={a} />
           ))}

@@ -14,7 +14,7 @@ export function AboutPage({ go }) {
     { n: '30+', l: 'Yıllık sektör deneyimi' },
     { n: '20',  l: 'Yıldır bağımsız acente' },
     { n: '22',  l: 'Yetkili sigorta acenteliği' },
-    { n: '2',   l: 'Şehirde hizmet — Ankara & Denizli' },
+    { n: '5',   l: 'Türkiye genelinde şube' },
   ];
   return (
     <div className="page-enter">
@@ -28,7 +28,7 @@ export function AboutPage({ go }) {
       {/* Ne istiyorsunuz */}
       <section className="section" style={{ paddingTop: 64, paddingBottom: 64 }}>
         <div className="container">
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 64, alignItems: 'center' }}>
+          <div className="mob-1" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 64, alignItems: 'center' }}>
             <div>
               <SectionLabel>Müşteri odağımız</SectionLabel>
               <h2 className="display-2" style={{ margin: '14px 0 24px' }}>
@@ -45,7 +45,7 @@ export function AboutPage({ go }) {
                 ))}
               </ul>
             </div>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
+            <div className="mob-xs-1" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
               {milestones.map((m, i) => (
                 <div key={i} className="card" style={{ padding: 28 }}>
                   <div style={{ fontFamily: 'var(--font-display)', fontSize: 48, fontWeight: 800, letterSpacing: '-0.03em', lineHeight: 1, color: 'var(--primary)' }}>{m.n}</div>
@@ -60,7 +60,7 @@ export function AboutPage({ go }) {
       {/* Doğru Yerdesiniz */}
       <section className="section" style={{ background: 'var(--slate-50)', paddingTop: 80, paddingBottom: 80 }}>
         <div className="container">
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 64, alignItems: 'flex-start' }}>
+          <div className="mob-1" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 64, alignItems: 'flex-start' }}>
             <div>
               <SectionLabel>Kimiz?</SectionLabel>
               <h2 className="display-2" style={{ margin: '14px 0 24px' }}>
@@ -152,7 +152,7 @@ export function AgenciesPage({ go }) {
         lead="Türkiye'nin önde gelen ulusal ve uluslararası sigorta şirketleri." breadcrumb="Ana Sayfa / Acentelikler" />
       <section className="section">
         <div className="container">
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 12 }}>
+          <div className="r4-2 mob-1" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 12 }}>
             {AGENCIES.map((a, i) => (
               <AgencyCardFull key={a.name} agency={a} idx={i + 1} />
             ))}
@@ -200,11 +200,11 @@ function ContactForm() {
 
   return (
     <form onSubmit={submit} style={{ display: 'grid', gap: 14 }}>
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
+      <div className="mob-xs-1" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
         <F label="Ad Soyad *" err={errs.name}><input style={ip} value={s.name} onChange={e => setS({ ...s, name: e.target.value })} /></F>
         <F label="Telefon *" err={errs.phone}><input style={ip} type="tel" value={s.phone} onChange={e => setS({ ...s, phone: e.target.value })} /></F>
       </div>
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
+      <div className="mob-xs-1" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
         <F label="E-posta" err={errs.email}><input style={ip} type="email" value={s.email} onChange={e => setS({ ...s, email: e.target.value })} /></F>
         <F label="Konu" err={errs.subject}>
           <select style={ip} value={s.subject} onChange={e => setS({ ...s, subject: e.target.value })}>
@@ -242,7 +242,7 @@ export function ContactPage({ go }) {
       />
       <section className="section" style={{ paddingTop: 48, paddingBottom: 80 }}>
         <div className="container">
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 32, alignItems: 'flex-start' }}>
+          <div className="mob-1" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 32, alignItems: 'flex-start' }}>
 
             {/* Sol: Şube listesi */}
             <div style={{ display: 'grid', gap: 10 }}>
@@ -269,7 +269,7 @@ export function ContactPage({ go }) {
             </div>
 
             {/* Sağ: İletişim formu */}
-            <div className="card" style={{ padding: 32, position: 'sticky', top: 100 }}>
+            <div className="card contact-sticky" style={{ padding: 32, position: 'sticky', top: 100 }}>
               <div style={{ marginBottom: 24 }}>
                 <SectionLabel>İletişim Formu</SectionLabel>
                 <h3 className="display-3" style={{ margin: '8px 0 6px' }}>Mesaj gönderin.</h3>
@@ -319,7 +319,7 @@ export function QuoteFormKasko({ compact = false }) {
   return (
     <form onSubmit={submit} style={{ display: 'grid', gap: 14 }}>
       {/* Bireysel / Kurumsal toggle */}
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
+      <div className="mob-xs-1" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
         {['bireysel', 'kurumsal'].map(t => (
           <label key={t} className="card" style={{ padding: '10px 14px', display: 'flex', gap: 8, alignItems: 'center', cursor: 'pointer', background: s.type === t ? 'var(--primary-50)' : '#fff', borderColor: s.type === t ? 'var(--primary)' : 'var(--border)' }}>
             <input type="radio" checked={s.type === t} onChange={() => setS({ ...s, type: t, tc: '', vkn: '', dob: '' })} />
@@ -330,7 +330,7 @@ export function QuoteFormKasko({ compact = false }) {
 
       {/* TC / VKN + tarih */}
       {s.type === 'bireysel' ? (
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
+        <div className="mob-xs-1" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
           <F label="T.C. Kimlik No *" err={errs.tc}><input style={ip} maxLength={11} value={s.tc} onChange={e => setS({ ...s, tc: e.target.value.replace(/\D/g, '') })} /></F>
           <F label="Doğum tarihi *" err={errs.dob}><input type="date" style={ip} value={s.dob} onChange={e => setS({ ...s, dob: e.target.value })} /></F>
         </div>
@@ -338,11 +338,11 @@ export function QuoteFormKasko({ compact = false }) {
         <F label="Vergi Kimlik No (VKN) *" err={errs.vkn}><input style={ip} maxLength={10} value={s.vkn} onChange={e => setS({ ...s, vkn: e.target.value.replace(/\D/g, '') })} /></F>
       )}
 
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
+      <div className="mob-xs-1" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
         <F label="Telefon *" err={errs.phone}><input style={ip} type="tel" value={s.phone} onChange={e => setS({ ...s, phone: e.target.value })} /></F>
         <F label="Meslek *" err={errs.job}><input style={ip} value={s.job} onChange={e => setS({ ...s, job: e.target.value })} /></F>
       </div>
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
+      <div className="mob-xs-1" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
         <F label="Plaka *" err={errs.plate}><input style={ip} placeholder="06 ABC 123" value={s.plate} onChange={e => setS({ ...s, plate: e.target.value.toUpperCase() })} /></F>
         <F label="Belge seri no *" err={errs.docSerial}><input style={ip} value={s.docSerial} onChange={e => setS({ ...s, docSerial: e.target.value.toUpperCase() })} /></F>
       </div>
@@ -388,7 +388,7 @@ export function QuoteFormSaglik({ compact = false }) {
       {parts.map((p, i) => (
         <div key={i} className="card" style={{ padding: 16, background: 'var(--slate-50)' }}>
           <div className="mono-tag" style={{ marginBottom: 10 }}>Kişi {i+1}</div>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
+          <div className="mob-xs-1" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
             <input style={ip} placeholder="TC No" maxLength={11} value={p.tc} onChange={e => setParts(parts.map((x, j) => j === i ? { ...x, tc: e.target.value.replace(/\D/g, '') } : x))} />
             <input type="date" style={ip} value={p.dob} onChange={e => setParts(parts.map((x, j) => j === i ? { ...x, dob: e.target.value } : x))} />
             {(errs['tc'+i] || errs['dob'+i]) && (
@@ -398,7 +398,7 @@ export function QuoteFormSaglik({ compact = false }) {
         </div>
       ))}
       <button type="button" className="btn btn-secondary btn-sm" style={{ justifySelf: 'start' }} onClick={() => setParts([...parts, { tc: '', dob: '' }])}>+ Katılımcı ekle</button>
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
+      <div className="mob-xs-1" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
         <label className="card" style={{ padding: 14, display: 'flex', gap: 10, alignItems: 'center', background: mode === 'new' ? 'var(--primary-50)' : '#fff', borderColor: mode === 'new' ? 'var(--primary)' : 'var(--border)' }}>
           <input type="radio" checked={mode === 'new'} onChange={() => setMode('new')} /> İlk poliçe
         </label>
@@ -439,7 +439,7 @@ export function QuotePage({ go }) {
         lead="22 şirketin tekliflerini sizin için karşılaştırıyoruz." breadcrumb="Ana Sayfa / Teklif Al" />
       <section className="section">
         <div className="container">
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: 32 }}>
+          <div className="mob-1" style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: 32 }}>
             <aside>
               <div style={{ display: 'grid', gap: 8 }}>
                 {[['kasko','Form 01','Kasko / Trafik'], ['saglik','Form 02','Sağlık Sigortası']].map(([k, n, t]) => (
@@ -474,7 +474,7 @@ export function BranchesPage({ go }) {
           <div style={{ display: 'grid', gap: 40 }}>
             {BRANCHES.map((b) => (
               <div key={b.id} className="card" style={{ overflow: 'hidden', padding: 0 }}>
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr' }}>
+                <div className="branch-card-grid mob-1-nogap" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr' }}>
                   {/* Sol: bilgi */}
                   <div style={{ padding: 36, display: 'flex', flexDirection: 'column', gap: 20 }}>
                     <div>

@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { COMPANY, PRODUCTS } from './data.jsx';
+import { COMPANY, PRODUCTS, BRANCHES } from './data.jsx';
 import { ICONS_BY_PRODUCT, IconCar, IconHeart, IconHouse, IconPig, IconShield, IconCheck, IconPhone, IconArrow } from './icons.jsx';
 import { AolLogo } from './logo.jsx';
 import { TWEAKS } from './tweaks.js';
@@ -52,12 +52,23 @@ export function TopBar() {
 /* ---------- Header ---------- */
 export function Header({ route, go }) {
   const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [productsOpen, setProductsOpen] = useState(false);
+
   useEffect(() => {
     const on = () => setScrolled(window.scrollY > 12);
     window.addEventListener('scroll', on, { passive: true });
     on();
     return () => window.removeEventListener('scroll', on);
   }, []);
+
+  useEffect(() => {
+    if (menuOpen) document.body.style.overflow = 'hidden';
+    else document.body.style.overflow = '';
+    return () => { document.body.style.overflow = ''; };
+  }, [menuOpen]);
+
+  const nav = (path) => { go(path); setMenuOpen(false); };
 
   const active = (id) => {
     if (route === '/' && id === 'home') return true;
@@ -77,7 +88,7 @@ export function Header({ route, go }) {
           <div className="row">
             <a href="/" onClick={e => { e.preventDefault(); go('/'); }}
                style={{ display: 'inline-flex', alignItems: 'center' }}>
-              <AolLogo height={scrolled ? 52 : 60} />
+              <AolLogo height={scrolled ? 48 : 56} />
             </a>
 
             <nav className="nav-links">
@@ -85,7 +96,6 @@ export function Header({ route, go }) {
                  className={'nav-item' + (active('home') ? ' active' : '')}>Ana Sayfa</a>
               <a href="/hakkimizda" onClick={e => { e.preventDefault(); go('/hakkimizda'); }}
                  className={'nav-item' + (active('about') ? ' active' : '')}>Hakkımızda</a>
-
               <div className="has-dd">
                 <a href="/urunler" onClick={e => { e.preventDefault(); go('/urunler'); }}
                    className={'nav-item' + (active('products') ? ' active' : '')}>
@@ -111,7 +121,6 @@ export function Header({ route, go }) {
                   </div>
                 </div>
               </div>
-
               <a href="/acenteliklerimiz" onClick={e => { e.preventDefault(); go('/acenteliklerimiz'); }}
                  className={'nav-item' + (active('agencies') ? ' active' : '')}>Acentelikler</a>
               <a href="/subeler" onClick={e => { e.preventDefault(); go('/subeler'); }}
@@ -129,9 +138,63 @@ export function Header({ route, go }) {
                 Teklif Al <span className="arrow"><IconArrow size={12} /></span>
               </button>
             </div>
+
+            {/* Hamburger */}
+            <button className="hamburger" onClick={() => setMenuOpen(true)} aria-label="Menüyü aç">
+              <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                <line x1="3" y1="6" x2="19" y2="6"/><line x1="3" y1="11" x2="19" y2="11"/><line x1="3" y1="16" x2="19" y2="16"/>
+              </svg>
+            </button>
           </div>
         </div>
       </header>
+
+      {/* Mobile nav drawer */}
+      <div className={'mob-nav' + (menuOpen ? ' open' : '')} onClick={e => { if (e.target === e.currentTarget) setMenuOpen(false); }}>
+        <div className="mob-nav-panel">
+          <div className="mob-nav-head">
+            <AolLogo height={44} />
+            <button className="mob-nav-close" onClick={() => setMenuOpen(false)} aria-label="Kapat">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                <line x1="4" y1="4" x2="16" y2="16"/><line x1="16" y1="4" x2="4" y2="16"/>
+              </svg>
+            </button>
+          </div>
+          <div className="mob-nav-links">
+            {[['/', 'Ana Sayfa', 'home'], ['/hakkimizda', 'Hakkımızda', 'about'], ['/acenteliklerimiz', 'Acenteliklerimiz', 'agencies'], ['/subeler', 'Şubeler', 'branches'], ['/iletisim', 'İletişim', 'contact']].map(([path, label, id]) => (
+              <a key={id} href={path} onClick={e => { e.preventDefault(); nav(path); }}
+                 className={'mob-nav-link' + (active(id) ? ' active' : '')}>{label}</a>
+            ))}
+            <div>
+              <button className={'mob-nav-link' + (active('products') ? ' active' : '')}
+                style={{ width: '100%', textAlign: 'left', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}
+                onClick={() => setProductsOpen(x => !x)}>
+                Ürünler
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" style={{ transform: productsOpen ? 'rotate(180deg)' : 'none', transition: 'transform 200ms' }}>
+                  <path d="M3 5l4 4 4-4"/>
+                </svg>
+              </button>
+              {productsOpen && (
+                <div className="mob-nav-sub">
+                  {PRODUCTS.map(p => (
+                    <a key={p.id} href={`/urunler/${p.id}`}
+                       onClick={e => { e.preventDefault(); nav(`/urunler/${p.id}`); }}
+                       className="mob-nav-link">{p.title}</a>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+          <div className="mob-nav-footer">
+            <a className="btn btn-secondary" href={`tel:${COMPANY.hq.phone.replace(/\s/g,'')}`}>
+              <IconPhone size={14} /> {COMPANY.hq.phone}
+            </a>
+            <button className="btn btn-primary" onClick={() => nav('/teklif-al')}>
+              Teklif Al <IconArrow size={12} />
+            </button>
+          </div>
+        </div>
+      </div>
     </>
   );
 }
@@ -237,7 +300,7 @@ export function Hero({ go }) {
                 <div className="av more">+</div>
               </div>
               <div style={{ fontSize: 13.5, color: 'var(--text-2)' }}>
-                <strong style={{ color: 'var(--text)' }}>10.000+</strong> mutlu müşteri · Ankara & Denizli
+                <strong style={{ color: 'var(--text)' }}>10.000+</strong> mutlu müşteri · {BRANCHES.map(b => b.city).join(', ')}
               </div>
             </div>
 
@@ -246,7 +309,7 @@ export function Hero({ go }) {
               {[
                 { v: <><span>30</span><span className="pct">+</span></>, l: 'Yıl sektör deneyimi' },
                 { v: <>22</>, l: 'Sigorta şirketi acentesi' },
-                { v: <>2</>, l: 'Lokasyon · Ankara & Denizli' },
+                { v: <>5</>, l: 'Türkiye genelinde şube' },
               ].map((s, i) => (
                 <div key={i} style={{ paddingLeft: i === 0 ? 0 : 24, borderLeft: i === 0 ? 'none' : '1px solid var(--border)' }}>
                   <div className="hero-stat-value">{s.v}</div>

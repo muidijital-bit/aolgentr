@@ -9,7 +9,7 @@ export function Footer({ go }) {
   return (
     <footer>
       <div className="container" style={{ paddingTop: 80, paddingBottom: 40 }}>
-        <div style={{ display: 'grid', gridTemplateColumns: '1.4fr 1fr 1fr 1fr', gap: 48 }}>
+        <div className="footer-grid" style={{ display: 'grid', gridTemplateColumns: '1.4fr 1fr 1fr 1fr', gap: 48 }}>
           <div>
             <AolLogo height={64} mono />
             <p style={{ marginTop: 20, maxWidth: 340, color: 'rgba(255,255,255,0.7)', fontSize: 14, lineHeight: 1.65 }}>
@@ -54,12 +54,12 @@ export function Footer({ go }) {
         </div>
         <div style={{ height: 48 }} />
         <div style={{ height: 1, background: 'rgba(255,255,255,0.1)' }} />
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: 24, fontSize: 13, color: 'rgba(255,255,255,0.55)' }}>
+        <div className="mob-stack" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: 24, gap: 12, fontSize: 13, color: 'rgba(255,255,255,0.55)' }}>
           <span>© {new Date().getFullYear()} Artı Oluşum Sigorta · Tüm hakları saklıdır</span>
-          <div style={{ display: 'flex', gap: 20 }}>
-            <a href="/gizlilik" onClick={e => { e.preventDefault(); go('/gizlilik'); }}>Gizlilik Politikası</a>
+          <div style={{ display: 'flex', gap: 20, flexWrap: 'wrap' }}>
+            <a href="/gizlilik" onClick={e => { e.preventDefault(); go('/gizlilik'); }}>Gizlilik</a>
             <a href="/kvkk" onClick={e => { e.preventDefault(); go('/kvkk'); }}>KVKK</a>
-            <a href="/cerez" onClick={e => { e.preventDefault(); go('/cerez'); }}>Çerez Tercihleri</a>
+            <a href="/cerez" onClick={e => { e.preventDefault(); go('/cerez'); }}>Çerez</a>
           </div>
         </div>
         <div style={{ paddingTop: 16, textAlign: 'center' }}>
@@ -134,7 +134,7 @@ export function Stripes({ label, aspect = '4 / 5', dark = false, tall = false })
 
 export function StatRow() {
   return (
-    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 24 }}>
+    <div className="r4-2 mob-2" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 24 }}>
       {STATS.map((s, i) => (
         <div key={i} className="card" style={{ padding: 28 }}>
           <div style={{ fontFamily: 'var(--font-display)', fontSize: 56, fontWeight: 800, letterSpacing: '-0.03em', lineHeight: 1, color: 'var(--text)' }}>

@@ -22,7 +22,7 @@ export const STATS = [
   { n: '30',  s: 'yıla yakın', l: 'Sektör deneyimi' },
   { n: '22',  s: 'sigorta şirketi', l: 'Aktif acentelik' },
   { n: '12',  s: 'ana kategori', l: 'Ürün portföyü' },
-  { n: '2',   s: 'şehir', l: 'Ankara + Denizli' },
+  { n: '5',   s: 'şube', l: 'Türkiye genelinde' },
 ];
 
 export const PRODUCTS = [
