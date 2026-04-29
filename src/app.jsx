@@ -1,4 +1,9 @@
-const { useState: useStateApp, useEffect: useEffectApp, useMemo: useMemoApp } = React;
+import { useState, useEffect, useMemo } from 'react';
+import { Header, Hero } from './header-hero.jsx';
+import { Footer, TweaksPanel } from './components.jsx';
+import { ProductsSection, AboutStrip, QuickQuote, AgenciesSection } from './pages-home.jsx';
+import { ProductsList, ProductDetail } from './pages-products.jsx';
+import { AboutPage, AgenciesPage, ContactPage, QuotePage, NotFound } from './pages-misc.jsx';
 
 function HomePage({ go }) {
   return (
@@ -12,10 +17,10 @@ function HomePage({ go }) {
   );
 }
 
-function App() {
-  const [route, setRoute] = useStateApp(() => localStorage.getItem('aol-route') || '/');
-  const [, force] = useStateApp(0);
-  useEffectApp(() => {
+export default function App() {
+  const [route, setRoute] = useState(() => localStorage.getItem('aol-route') || '/');
+  const [, force] = useState(0);
+  useEffect(() => {
     const onTweak = () => force(x => x + 1);
     window.addEventListener('tweaks-changed', onTweak);
     return () => window.removeEventListener('tweaks-changed', onTweak);
@@ -25,7 +30,7 @@ function App() {
     localStorage.setItem('aol-route', path);
     window.scrollTo({ top: 0, behavior: 'instant' });
   };
-  const page = useMemoApp(() => {
+  const page = useMemo(() => {
     if (route === '/') return <HomePage go={go} />;
     if (route === '/hakkimizda') return <AboutPage go={go} />;
     if (route === '/urunler') return <ProductsList go={go} />;
@@ -44,5 +49,3 @@ function App() {
     </>
   );
 }
-
-ReactDOM.createRoot(document.getElementById('root')).render(<App />);

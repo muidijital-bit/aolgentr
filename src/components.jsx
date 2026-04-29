@@ -1,7 +1,11 @@
-const { useState, useEffect, useRef, useMemo, useCallback } = React;
+import { useState, useEffect } from 'react';
+import { COMPANY, STATS, NAV } from './data.jsx';
+import { AolLogo } from './logo.jsx';
+import { IconArrow } from './icons.jsx';
+import { TWEAKS } from './tweaks.js';
 
 /* ---------- Footer ---------- */
-function Footer({ go }) {
+export function Footer({ go }) {
   return (
     <footer>
       <div className="container" style={{ paddingTop: 80, paddingBottom: 40 }}>
@@ -59,7 +63,7 @@ function Footer({ go }) {
 }
 
 /* ---------- Section pieces reused by inner pages ---------- */
-function SectionLabel({ idx, children }) {
+export function SectionLabel({ idx, children }) {
   return (
     <div className="eyebrow">
       {idx && <span style={{ fontFamily: 'var(--font)', fontWeight: 600 }}>{idx}</span>}
@@ -69,7 +73,7 @@ function SectionLabel({ idx, children }) {
   );
 }
 
-function Stripes({ label, aspect = '4 / 5', dark = false, tall = false }) {
+export function Stripes({ label, aspect = '4 / 5', dark = false, tall = false }) {
   return (
     <div className="stripe-holder" style={{
       position: 'relative', width: '100%',
@@ -87,7 +91,7 @@ function Stripes({ label, aspect = '4 / 5', dark = false, tall = false }) {
   );
 }
 
-function StatRow() {
+export function StatRow() {
   return (
     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 24 }}>
       {STATS.map((s, i) => (
@@ -103,7 +107,7 @@ function StatRow() {
   );
 }
 
-function PageHeader({ kicker, title, lead, breadcrumb }) {
+export function PageHeader({ kicker, title, lead, breadcrumb }) {
   return (
     <section style={{ paddingTop: 64, paddingBottom: 48, background: 'linear-gradient(180deg, var(--slate-50), #fff)' }}>
       <div className="container">
@@ -116,9 +120,9 @@ function PageHeader({ kicker, title, lead, breadcrumb }) {
   );
 }
 
-function TweaksPanel() {
+export function TweaksPanel() {
   const [on, setOn] = useState(false);
-  const [vals, setVals] = useState(window.__TWEAKS);
+  const [vals, setVals] = useState({ ...TWEAKS });
   useEffect(() => {
     const onMsg = (e) => {
       const m = e.data; if (!m || typeof m !== 'object') return;
@@ -131,7 +135,8 @@ function TweaksPanel() {
   }, []);
   const set = (k, v) => {
     const next = { ...vals, [k]: v };
-    setVals(next); window.__TWEAKS = next;
+    setVals(next);
+    Object.assign(TWEAKS, next);
     window.parent.postMessage({ type: '__edit_mode_set_keys', edits: { [k]: v } }, '*');
     window.dispatchEvent(new CustomEvent('tweaks-changed'));
   };
@@ -148,5 +153,3 @@ function TweaksPanel() {
     </div>
   );
 }
-
-Object.assign(window, { Footer, SectionLabel, Stripes, StatRow, PageHeader, TweaksPanel });

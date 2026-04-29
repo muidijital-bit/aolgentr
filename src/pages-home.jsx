@@ -1,7 +1,11 @@
-const { useState: useSh, useEffect: useEh } = React;
+import { useState } from 'react';
+import { PRODUCTS, AGENCIES } from './data.jsx';
+import { ICONS_BY_PRODUCT, IconArrow } from './icons.jsx';
+import { SectionLabel } from './components.jsx';
+import { QuoteFormKasko, QuoteFormSaglik } from './pages-misc.jsx';
 
 /* ---------- Products section ---------- */
-function ProductsSection({ go }) {
+export function ProductsSection({ go }) {
   return (
     <section className="section">
       <div className="container">
@@ -21,7 +25,7 @@ function ProductsSection({ go }) {
             const Ico = ICONS_BY_PRODUCT[p.id];
             return (
               <a key={p.id} href={`/urunler/${p.id}`} onClick={e => { e.preventDefault(); go(`/urunler/${p.id}`); }}
-                 className="card card-hover" style={{ padding: 24, display: 'flex', flexDirection: 'column', minHeight: 260, color: 'var(--text)' }}>
+                 className="card card-hover" style={{ padding: 24, display: 'flex', flexDirection: 'column', minHeight: 220, color: 'var(--text)' }}>
                 <div style={{ width: 44, height: 44, borderRadius: 12, background: 'var(--primary-50)', color: 'var(--primary)', display: 'grid', placeItems: 'center', border: '1px solid var(--primary-100)' }}>
                   <Ico size={22} />
                 </div>
@@ -40,7 +44,7 @@ function ProductsSection({ go }) {
 }
 
 /* ---------- About strip ---------- */
-function AboutStrip({ go }) {
+export function AboutStrip({ go }) {
   return (
     <section className="section" style={{ background: 'var(--slate-50)' }}>
       <div className="container">
@@ -67,7 +71,7 @@ function AboutStrip({ go }) {
             </div>
           </div>
           <div style={{ position: 'relative', aspectRatio: '4/5', borderRadius: 24, overflow: 'hidden', border: '1px solid var(--border)' }}>
-            <img src="assets/about-team.jpg" alt="30 yıllık güvenilir iş ortaklığı"
+            <img src="/assets/about-cand-1.jpg" alt="30 yıllık güvenilir iş ortaklığı"
                  style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
             <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(15,23,42,0.05) 0%, rgba(15,23,42,0.55) 70%, rgba(15,23,42,0.92) 100%)' }} />
             <div style={{ position: 'absolute', left: 28, right: 28, bottom: 28, color: '#fff' }}>
@@ -89,8 +93,8 @@ function AboutStrip({ go }) {
 }
 
 /* ---------- Quick Quote (form embed) ---------- */
-function QuickQuote({ go }) {
-  const [tab, setTab] = useSh('kasko');
+export function QuickQuote({ go }) {
+  const [tab, setTab] = useState('kasko');
   return (
     <section className="section">
       <div className="container">
@@ -117,8 +121,33 @@ function QuickQuote({ go }) {
   );
 }
 
+/* ---------- Agency logo card ---------- */
+function AgencyCard({ agency, tall = false }) {
+  const [imgFailed, setImgFailed] = useState(false);
+  const h = tall ? 56 : 44;
+  return (
+    <div className="card" style={{
+      padding: '16px 12px',
+      display: 'flex', alignItems: 'center', justifyContent: 'center',
+    }}>
+      {!imgFailed ? (
+        <div style={{ width: '100%', height: h, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <img
+            src={agency.logo}
+            alt={agency.name}
+            onError={() => setImgFailed(true)}
+            style={{ width: '100%', height: '100%', objectFit: 'contain' }}
+          />
+        </div>
+      ) : (
+        <span style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-2)', lineHeight: 1.3, textAlign: 'center' }}>{agency.name}</span>
+      )}
+    </div>
+  );
+}
+
 /* ---------- Agencies ---------- */
-function AgenciesSection({ go, compact = false }) {
+export function AgenciesSection({ go, compact = false }) {
   return (
     <section className="section" style={{ background: 'var(--slate-50)' }}>
       <div className="container">
@@ -131,12 +160,10 @@ function AgenciesSection({ go, compact = false }) {
         </div>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(6, 1fr)', gap: 8 }}>
           {AGENCIES.map(a => (
-            <div key={a} className="card" style={{ padding: 18, minHeight: 84, display: 'grid', placeItems: 'center', textAlign: 'center', fontSize: 13, fontWeight: 600, color: 'var(--text)' }}>{a}</div>
+            <AgencyCard key={a.name} agency={a} />
           ))}
         </div>
       </div>
     </section>
   );
 }
-
-Object.assign(window, { ProductsSection, AboutStrip, QuickQuote, AgenciesSection });

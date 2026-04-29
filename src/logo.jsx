@@ -1,15 +1,14 @@
-/* AOL Logo — uses official brand lockups (assets/aol-logo-dark.png + aol-logo-white.png) */
-function AolLogo({ height = 56, mono = false }) {
-  // Full lockup is 902 × 692 (mark + "ARTI OLUŞUM SİGORTA / ARACILIK HİZMETLERİ LTD. ŞTİ.")
-  const src = mono ? 'assets/aol-logo-white.png' : 'assets/aol-logo-dark.png';
-  const w = Math.round(height * (902 / 692));
+export function AolLogo({ height = 56, mono = false }) {
   return (
     <img
-      src={src}
-      alt="AOL — Artı Oluşum Sigorta Aracılık Hizmetleri Ltd. Şti."
-      style={{ height, width: w, display: 'block' }}
+      src="/assets/aol-mark.png"
+      alt="AOL — Artı Oluşum Sigorta"
+      style={{
+        height,
+        width: 'auto',
+        display: 'block',
+        filter: mono ? 'brightness(0) invert(1)' : 'none',
+      }}
     />
   );
 }
-
-Object.assign(window, { AolLogo });

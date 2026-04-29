@@ -1,26 +1,119 @@
-const { useState: useSm } = React;
+import { useState } from 'react';
+import { COMPANY, AGENCIES } from './data.jsx';
+import { IconCheck, IconArrow } from './icons.jsx';
+import { SectionLabel, PageHeader } from './components.jsx';
 
-function AboutPage({ go }) {
+export function AboutPage({ go }) {
+  const wants = [
+    'İhtiyaç duyduğunuzda hemen ulaşmak ve doğru yönlendirme almak',
+    'Sigorta işlerinizi güvendiğiniz birisinin takip etmesini sağlamak',
+    'Tek bir seçeneğe mecbur kalmadan birçok alternatifin size sunulması',
+    'Tüm bunları en uygun fiyata, zahmetsizce elde etmek',
+  ];
+  const milestones = [
+    { n: '30+', l: 'Yıllık sektör deneyimi' },
+    { n: '20',  l: 'Yıldır bağımsız acente' },
+    { n: '22',  l: 'Yetkili sigorta acenteliği' },
+    { n: '2',   l: 'Şehirde hizmet — Ankara & Denizli' },
+  ];
   return (
     <div className="page-enter">
-      <PageHeader kicker="Hakkımızda" title={<>30 yıllık yolculuk, <span style={{ color: 'var(--primary)' }}>tek prensip.</span></>}
-        lead="Önce müşteri, sonra yönetici, son 20 yıldır bağımsız acente."
-        breadcrumb="Ana Sayfa / Hakkımızda" />
-      <section className="section">
+      <PageHeader
+        kicker="Hakkımızda"
+        title={<>Ne istediğinizi çok <span style={{ color: 'var(--primary)' }}>iyi biliyoruz.</span></>}
+        lead="İhtiyaç duyduğunuzda hemen ulaşmak, doğru yönlendirme almak ve sigorta işlerinizi güvendiğiniz birisine bırakmak istiyorsunuz. Doğru yerdesiniz."
+        breadcrumb="Ana Sayfa / Hakkımızda"
+      />
+
+      {/* Ne istiyorsunuz */}
+      <section className="section" style={{ paddingTop: 64, paddingBottom: 64 }}>
         <div className="container">
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 16 }}>
-            {[
-              ['Doğru eşleştirme', '22 şirketin ürünlerini karşılaştırarak ihtiyacınıza en uygun poliçeyi tespit ediyoruz.'],
-              ['Şeffaf teminat', 'Hangi risk teminat altında, hangisi değil — her madde açıkça anlatılır.'],
-              ['Hasar takibi', 'Poliçe satışı bittiğinde işimiz başlar; süreç uçtan uca yönetilir.'],
-              ['Uzun vadeli ilişki', 'Her yenileme döneminde portföyünüz yeniden optimize edilir.'],
-            ].map(([t, d], i) => (
-              <div key={i} className="card" style={{ padding: 28 }}>
-                <div style={{ width: 32, height: 32, borderRadius: 8, background: 'var(--primary-50)', color: 'var(--primary)', display: 'grid', placeItems: 'center', fontSize: 13, fontWeight: 700 }}>0{i+1}</div>
-                <h3 style={{ fontFamily: 'var(--font-display)', fontSize: 20, fontWeight: 700, margin: '16px 0 8px' }}>{t}</h3>
-                <p style={{ fontSize: 14, color: 'var(--text-2)', margin: 0 }}>{d}</p>
-              </div>
-            ))}
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 64, alignItems: 'center' }}>
+            <div>
+              <SectionLabel>Müşteri odağımız</SectionLabel>
+              <h2 className="display-2" style={{ margin: '14px 0 24px' }}>
+                Sizin için ne <span style={{ color: 'var(--primary)' }}>önemli?</span>
+              </h2>
+              <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'grid', gap: 16 }}>
+                {wants.map((w, i) => (
+                  <li key={i} style={{ display: 'flex', gap: 14, alignItems: 'flex-start' }}>
+                    <span style={{ flexShrink: 0, width: 28, height: 28, borderRadius: 8, background: 'var(--primary-50)', color: 'var(--primary)', display: 'grid', placeItems: 'center', marginTop: 2 }}>
+                      <IconCheck size={13} />
+                    </span>
+                    <span style={{ fontSize: 16, lineHeight: 1.55, color: 'var(--text)' }}>{w}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
+              {milestones.map((m, i) => (
+                <div key={i} className="card" style={{ padding: 28 }}>
+                  <div style={{ fontFamily: 'var(--font-display)', fontSize: 48, fontWeight: 800, letterSpacing: '-0.03em', lineHeight: 1, color: 'var(--primary)' }}>{m.n}</div>
+                  <div style={{ fontSize: 13.5, color: 'var(--text-2)', marginTop: 8, lineHeight: 1.4 }}>{m.l}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Doğru Yerdesiniz */}
+      <section className="section" style={{ background: 'var(--slate-50)', paddingTop: 80, paddingBottom: 80 }}>
+        <div className="container">
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 64, alignItems: 'flex-start' }}>
+            <div>
+              <SectionLabel>Kimiz?</SectionLabel>
+              <h2 className="display-2" style={{ margin: '14px 0 24px' }}>
+                Doğru <span style={{ color: 'var(--primary)' }}>yerdesiniz.</span>
+              </h2>
+              <p style={{ fontSize: 16, lineHeight: 1.75, color: 'var(--text-2)', margin: '0 0 20px' }}>
+                30 yıla yakın bir süreden beri sektörün içindeyiz. Müşteri olduk, şirket çalışanı olduk — 20 yıldan bu yana acenteyiz.
+              </p>
+              <p style={{ fontSize: 16, lineHeight: 1.75, color: 'var(--text-2)', margin: '0 0 20px' }}>
+                Ülkemizin en büyük ve uluslararası bilinirliği olan şirketlerinde çalıştık, farklı pozisyonlarda bulunduk, yöneticilik yaptık. Değişimin ve gelişimin gücüne inanıyoruz; onun için sürekli kendimizi yenilemeye çalışıyoruz.
+              </p>
+              <p style={{ fontSize: 16, lineHeight: 1.75, color: 'var(--text-2)', margin: 0 }}>
+                Çalışmayı çok seviyoruz. Şimdiye kadar hep mutluluk ve memnuniyet yarattık — bundan sonra da telefonlarımız hep memnuniyet için çalsın istiyoruz. Operasyon kalitesinin işin kalitesine önemli etkilerinin olduğunu çok iyi biliyoruz; onun için işinde uzman takım arkadaşları ile çalışıyoruz.
+              </p>
+            </div>
+            <div style={{ display: 'grid', gap: 12 }}>
+              {[
+                ['Doğru eşleştirme', '22 şirketin ürünlerini karşılaştırarak ihtiyacınıza en uygun poliçeyi birlikte belirliyoruz.'],
+                ['Şeffaf teminat', 'Hangi risk teminat altında, hangisi değil — her madde, her koşul açıkça anlatılır.'],
+                ['Hasar takibi', 'Poliçe satışı bittiğinde işimiz başlar. Hasar sürecini uçtan uca sizin adınıza yönetiyoruz.'],
+                ['Uzun vadeli ilişki', 'Her yenileme döneminde portföyünüz yeniden değerlendirilerek size en uygun seçenek sunulur.'],
+              ].map(([t, d], i) => (
+                <div key={i} className="card" style={{ padding: 24, display: 'flex', gap: 16, alignItems: 'flex-start' }}>
+                  <div style={{ flexShrink: 0, width: 32, height: 32, borderRadius: 8, background: 'var(--primary-50)', color: 'var(--primary)', display: 'grid', placeItems: 'center', fontSize: 12, fontWeight: 700 }}>0{i+1}</div>
+                  <div>
+                    <div style={{ fontFamily: 'var(--font-display)', fontSize: 17, fontWeight: 700, marginBottom: 6 }}>{t}</div>
+                    <p style={{ fontSize: 14, color: 'var(--text-2)', margin: 0, lineHeight: 1.55 }}>{d}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Portföy */}
+      <section className="section" style={{ paddingTop: 80, paddingBottom: 80 }}>
+        <div className="container">
+          <div style={{ maxWidth: 720 }}>
+            <SectionLabel>Portföy</SectionLabel>
+            <h2 className="display-2" style={{ margin: '14px 0 24px' }}>
+              Güçlü iş ortakları, <span style={{ color: 'var(--primary)' }}>doğru teklif.</span>
+            </h2>
+            <p style={{ fontSize: 16, lineHeight: 1.75, color: 'var(--text-2)', margin: '0 0 16px' }}>
+              Gerek ulusal bazda gerekse uluslararası alanda en güçlü şirketlerin güvenilir iş ortağı olarak çalışmalarımıza devam ediyoruz.
+            </p>
+            <p style={{ fontSize: 16, lineHeight: 1.75, color: 'var(--text-2)', margin: '0 0 32px' }}>
+              En doğru içeriği en uygun fiyata size sunmak için özen ve titizlikle çalışıyoruz. Bizi büyütecek en önemli unsurun sizin memnuniyetiniz ve mutluluğunuz olduğunu çok iyi biliyoruz.
+            </p>
+            <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
+              <button className="btn btn-primary" onClick={() => go('/acenteliklerimiz')}>Acenteliklerimiz <IconArrow size={12} /></button>
+              <button className="btn btn-secondary" onClick={() => go('/teklif-al')}>Teklif Al <IconArrow size={12} /></button>
+            </div>
           </div>
         </div>
       </section>
@@ -28,7 +121,31 @@ function AboutPage({ go }) {
   );
 }
 
-function AgenciesPage({ go }) {
+function AgencyCardFull({ agency, idx }) {
+  const [imgFailed, setImgFailed] = useState(false);
+  return (
+    <div className="card card-hover" style={{ padding: '24px 20px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 14, textAlign: 'center' }}>
+      <div style={{ width: '100%', height: 64, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        {!imgFailed ? (
+          <img
+            src={agency.logo}
+            alt={agency.name}
+            onError={() => setImgFailed(true)}
+            style={{ width: '100%', height: '100%', objectFit: 'contain' }}
+          />
+        ) : (
+          <span style={{ fontFamily: 'var(--font-display)', fontSize: 15, fontWeight: 700, color: 'var(--text)', lineHeight: 1.3 }}>{agency.name}</span>
+        )}
+      </div>
+      <div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)' }}>{agency.name}</div>
+        <div style={{ fontSize: 11, color: 'var(--text-2)', marginTop: 2 }}>Yetkili Acente</div>
+      </div>
+    </div>
+  );
+}
+
+export function AgenciesPage({ go }) {
   return (
     <div className="page-enter">
       <PageHeader kicker="Acentelikler" title={<>22 sigorta şirketinin <span style={{ color: 'var(--primary)' }}>yetkili acentesi.</span></>}
@@ -37,11 +154,7 @@ function AgenciesPage({ go }) {
         <div className="container">
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 12 }}>
             {AGENCIES.map((a, i) => (
-              <div key={a} className="card card-hover" style={{ padding: 24 }}>
-                <div className="mono-tag" style={{ color: 'var(--primary)' }}>{String(i+1).padStart(2,'0')}</div>
-                <div style={{ fontFamily: 'var(--font-display)', fontSize: 18, fontWeight: 700, marginTop: 8 }}>{a}</div>
-                <div style={{ fontSize: 12, color: 'var(--text-2)', marginTop: 4 }}>Yetkili Acente</div>
-              </div>
+              <AgencyCardFull key={a.name} agency={a} idx={i + 1} />
             ))}
           </div>
         </div>
@@ -50,7 +163,7 @@ function AgenciesPage({ go }) {
   );
 }
 
-function ContactPage({ go }) {
+export function ContactPage({ go }) {
   return (
     <div className="page-enter">
       <PageHeader kicker="İletişim" title={<>Bize ulaşın, <span style={{ color: 'var(--primary)' }}>netleşelim.</span></>}
@@ -82,10 +195,10 @@ function ContactPage({ go }) {
   );
 }
 
-function QuoteFormKasko({ compact = false }) {
-  const [s, setS] = useSm({ tc: '', dob: '', job: '', plate: '', docSerial: '', consent: false });
-  const [errs, setErrs] = useSm({});
-  const [sent, setSent] = useSm(false);
+export function QuoteFormKasko({ compact = false }) {
+  const [s, setS] = useState({ tc: '', dob: '', job: '', plate: '', docSerial: '', consent: false });
+  const [errs, setErrs] = useState({});
+  const [sent, setSent] = useState(false);
   const submit = (e) => {
     e.preventDefault();
     const er = {};
@@ -128,13 +241,13 @@ function QuoteFormKasko({ compact = false }) {
   );
 }
 
-function QuoteFormSaglik({ compact = false }) {
-  const [parts, setParts] = useSm([{ tc: '', dob: '' }]);
-  const [mode, setMode] = useSm('new');
-  const [prevC, setPrevC] = useSm('');
-  const [consent, setConsent] = useSm(false);
-  const [sent, setSent] = useSm(false);
-  const [errs, setErrs] = useSm({});
+export function QuoteFormSaglik({ compact = false }) {
+  const [parts, setParts] = useState([{ tc: '', dob: '' }]);
+  const [mode, setMode] = useState('new');
+  const [prevC, setPrevC] = useState('');
+  const [consent, setConsent] = useState(false);
+  const [sent, setSent] = useState(false);
+  const [errs, setErrs] = useState({});
   const submit = (e) => {
     e.preventDefault();
     const er = {};
@@ -169,7 +282,7 @@ function QuoteFormSaglik({ compact = false }) {
       {mode === 'continue' && (
         <select style={ip} value={prevC} onChange={e => setPrevC(e.target.value)}>
           <option value="">Mevcut şirket seçiniz…</option>
-          {AGENCIES.map(a => <option key={a} value={a}>{a}</option>)}
+          {AGENCIES.map(a => <option key={a.name} value={a.name}>{a.name}</option>)}
         </select>
       )}
       <label style={{ display: 'flex', gap: 10, alignItems: 'center', padding: 14, border: '1px solid var(--border)', borderRadius: 'var(--radius)', fontSize: 13 }}>
@@ -180,7 +293,7 @@ function QuoteFormSaglik({ compact = false }) {
   );
 }
 
-function QuoteSuccess({ type, onReset }) {
+export function QuoteSuccess({ type, onReset }) {
   return (
     <div style={{ padding: 8 }}>
       <div style={{ width: 56, height: 56, borderRadius: 16, background: 'var(--primary-50)', color: 'var(--primary)', display: 'grid', placeItems: 'center' }}><IconCheck size={28} /></div>
@@ -191,8 +304,8 @@ function QuoteSuccess({ type, onReset }) {
   );
 }
 
-function QuotePage({ go }) {
-  const [tab, setTab] = useSm('kasko');
+export function QuotePage({ go }) {
+  const [tab, setTab] = useState('kasko');
   return (
     <div className="page-enter">
       <PageHeader kicker="Teklif Al" title={<>Teklifinizi alın, <span style={{ color: 'var(--primary)' }}>biz kıyaslayalım.</span></>}
@@ -220,7 +333,7 @@ function QuotePage({ go }) {
   );
 }
 
-function NotFound({ go }) {
+export function NotFound({ go }) {
   return (
     <div className="page-enter">
       <section className="section" style={{ textAlign: 'center', padding: '120px 0' }}>
@@ -233,5 +346,3 @@ function NotFound({ go }) {
     </div>
   );
 }
-
-Object.assign(window, { AboutPage, AgenciesPage, ContactPage, QuotePage, QuoteFormKasko, QuoteFormSaglik, QuoteSuccess, NotFound });

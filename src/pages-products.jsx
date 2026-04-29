@@ -1,4 +1,9 @@
-function ProductsList({ go }) {
+import { PRODUCTS } from './data.jsx';
+import { ICONS_BY_PRODUCT, IconArrow, IconCheck } from './icons.jsx';
+import { SectionLabel, PageHeader } from './components.jsx';
+import { NotFound } from './pages-misc.jsx';
+
+export function ProductsList({ go }) {
   return (
     <div className="page-enter">
       <PageHeader kicker="Ürünler" title={<>Yedi ürün, <span style={{ color: 'var(--primary)' }}>tek danışman.</span></>}
@@ -26,7 +31,7 @@ function ProductsList({ go }) {
   );
 }
 
-function ProductDetail({ id, go }) {
+export function ProductDetail({ id, go }) {
   const p = PRODUCTS.find(x => x.id === id);
   if (!p) return <NotFound go={go} />;
   const Ico = ICONS_BY_PRODUCT[p.id];
@@ -37,8 +42,9 @@ function ProductDetail({ id, go }) {
       {/* Featured product image */}
       <section style={{ paddingTop: 8 }}>
         <div className="container">
-          <div style={{ position: 'relative', height: 360, borderRadius: 24, overflow: 'hidden', border: '1px solid var(--border)' }}>
-            <img src={`assets/product-${p.id}.jpg`} alt={p.title}
+          <div style={{ position: 'relative', height: 360, borderRadius: 24, overflow: 'hidden', border: '1px solid var(--border)', background: 'linear-gradient(135deg, var(--primary-50), var(--slate-100))' }}>
+            <img src={`/assets/product-${p.id}.jpg`} alt={p.title}
+                 onError={e => { e.target.style.display = 'none'; }}
                  style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
             <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(90deg, rgba(15,23,42,0.78) 0%, rgba(15,23,42,0.42) 50%, rgba(15,23,42,0.05) 100%)' }} />
             <div style={{ position: 'absolute', left: 36, right: 36, bottom: 32, display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', gap: 24, color: '#fff' }}>
@@ -91,5 +97,3 @@ function ProductDetail({ id, go }) {
     </div>
   );
 }
-
-Object.assign(window, { ProductsList, ProductDetail });

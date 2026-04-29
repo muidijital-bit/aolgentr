@@ -1,8 +1,12 @@
-const { useState: useS, useEffect: useE, useRef: useR } = React;
+import { useState, useEffect, useRef } from 'react';
+import { COMPANY, PRODUCTS } from './data.jsx';
+import { ICONS_BY_PRODUCT, IconCar, IconHeart, IconHouse, IconPig, IconShield, IconCheck, IconPhone, IconArrow } from './icons.jsx';
+import { AolLogo } from './logo.jsx';
+import { TWEAKS } from './tweaks.js';
 
 /* ---------- Topbar ---------- */
-function TopBar() {
-  if (!window.__TWEAKS.showTopBar) return null;
+export function TopBar() {
+  if (!TWEAKS.showTopBar) return null;
   return (
     <div className="topbar">
       <div className="container">
@@ -22,9 +26,9 @@ function TopBar() {
 }
 
 /* ---------- Header ---------- */
-function Header({ route, go }) {
-  const [scrolled, setScrolled] = useS(false);
-  useE(() => {
+export function Header({ route, go }) {
+  const [scrolled, setScrolled] = useState(false);
+  useEffect(() => {
     const on = () => setScrolled(window.scrollY > 12);
     window.addEventListener('scroll', on, { passive: true });
     on();
@@ -106,30 +110,30 @@ function Header({ route, go }) {
 }
 
 /* ---------- Hero Slider data ---------- */
-const HERO_SLIDES = [
+export const HERO_SLIDES = [
   {
-    id: 'kasko', cls: 'slide-kasko', img: 'assets/slide-kasko.jpg',
+    id: 'kasko', cls: 'slide-kasko', img: '/assets/slide-kasko.jpg',
     title: 'Aracınız için tam kapsamlı koruma',
     desc: 'Kasko ve zorunlu trafik sigortasında 22 şirketi sizin için karşılaştırıyoruz. Hasar anında uçtan uca takip.',
     icon: 'car',
     meta: ['Yedek araç', 'Asistans 7/24', 'Cam kırılması'],
   },
   {
-    id: 'saglik', cls: 'slide-saglik', img: 'assets/slide-saglik.jpg',
+    id: 'saglik', cls: 'slide-saglik', img: '/assets/slide-saglik.jpg',
     title: 'Özel sağlıkta serbest hekim seçimi',
     desc: 'Özel hastane ağı, yurt içi ve yurt dışı teminat. Aile paketleri ve kurumsal çalışan grupları.',
     icon: 'heart',
     meta: ['Yatarak / Ayakta', 'Check-up', 'Yurt dışı'],
   },
   {
-    id: 'konut', cls: 'slide-konut', img: 'assets/slide-konut.jpg',
-    title: 'Eviniz ve işyeriniz güvencede',
-    desc: 'Yangın, hırsızlık, deprem ve su baskını için kişiye ve kuruma özel paketler.',
+    id: 'konut', cls: 'slide-konut', img: '/assets/slide-konut.jpg',
+    title: 'Konut ve işyeriniz güvencede',
+    desc: 'Yangın, hırsızlık, deprem ve DASK dahil kişiye ve kuruma özel paketler.',
     icon: 'home',
-    meta: ['Deprem', 'Yangın', 'Hırsızlık'],
+    meta: ['Deprem / DASK', 'Yangın', 'Hırsızlık'],
   },
   {
-    id: 'bes', cls: 'slide-bes', img: 'assets/slide-bes.jpg',
+    id: 'bes', cls: 'slide-bes', img: '/assets/slide-bes.jpg',
     title: 'Geleceğinizi bugünden planlayın',
     desc: 'Bireysel Emeklilik (BES) ile %30 devlet katkısı, esnek katkı payı ve fon seçim özgürlüğü.',
     icon: 'pig',
@@ -138,11 +142,11 @@ const HERO_SLIDES = [
 ];
 
 /* ---------- Hero ---------- */
-function Hero({ go }) {
-  const [idx, setIdx] = useS(0);
-  const timer = useR(null);
+export function Hero({ go }) {
+  const [idx, setIdx] = useState(0);
+  const timer = useRef(null);
 
-  useE(() => {
+  useEffect(() => {
     timer.current = setInterval(() => setIdx(i => (i + 1) % HERO_SLIDES.length), 5200);
     return () => clearInterval(timer.current);
   }, []);
@@ -163,6 +167,7 @@ function Hero({ go }) {
 
   return (
     <section className="hero">
+   
       <div className="container">
         <div className="hero-grid">
           {/* LEFT */}
@@ -290,5 +295,3 @@ function Hero({ go }) {
     </section>
   );
 }
-
-Object.assign(window, { Header, TopBar, Hero, HERO_SLIDES });
