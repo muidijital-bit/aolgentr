@@ -51,14 +51,14 @@ Teklif talepleri **ortak@aol.gen.tr** adresine düşmeli.
 
 ### Form 1 – Trafik / Kasko Teklifi
 Zorunlu alanlar:
-- Ruhsat sahibi TC No + doğum tarihi + meslek
+- Ruhsat sahibi T.C. Kimlik No + doğum tarihi + meslek
 - Araç plakası
 - Araç ruhsat/belge seri numarası
 - **Ruhsat yükleme alanı** (isteğe bağlı dosya upload)
 
 ### Form 2 – Özel Sağlık Sigortası Teklifi
 Zorunlu alanlar:
-- Her katılımcı için TC No + doğum tarihi
+- Her katılımcı için T.C. Kimlik No + doğum tarihi
 - İlk poliçe mi / devam eden poliçe mi?
 - Devam poliçesiyse: hangi şirketten?
 

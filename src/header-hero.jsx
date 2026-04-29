@@ -5,14 +5,38 @@ import { AolLogo } from './logo.jsx';
 import { TWEAKS } from './tweaks.js';
 
 /* ---------- Topbar ---------- */
+function useOfficeStatus() {
+  const now = new Date();
+  const day = now.getDay(); // 0=Pazar, 1=Pzt, ..., 6=Cmt
+  const h = now.getHours();
+  const m = now.getMinutes();
+  const mins = h * 60 + m;
+  if (day === 0) return { open: false, next: 'Pazartesi 09:00' };
+  if (day >= 1 && day <= 5) {
+    if (mins >= 9 * 60 && mins < 18 * 60) return { open: true };
+    if (mins < 9 * 60) return { open: false, next: 'bugün 09:00' };
+    return { open: false, next: 'yarın 09:00' };
+  }
+  if (day === 6) {
+    if (mins >= 9 * 60 && mins < 14 * 60) return { open: true };
+    if (mins < 9 * 60) return { open: false, next: 'bugün 09:00' };
+    return { open: false, next: 'Pazartesi 09:00' };
+  }
+  return { open: false, next: 'Pazartesi 09:00' };
+}
+
 export function TopBar() {
   if (!TWEAKS.showTopBar) return null;
+  const status = useOfficeStatus();
   return (
     <div className="topbar">
       <div className="container">
         <div className="row">
           <div className="l">
-            <span className="live"><span className="d"></span>Şu an açığız · {COMPANY.hours}</span>
+            {status.open
+              ? <span className="live"><span className="d"></span>Şu an açığız · {COMPANY.hours}</span>
+              : <span style={{ opacity: 0.7 }}>{COMPANY.hours}</span>
+            }
           </div>
           <div className="r">
             <a href={`tel:${COMPANY.hq.phone.replace(/\s/g,'')}`}>{COMPANY.hq.phone}</a>
@@ -40,6 +64,7 @@ export function Header({ route, go }) {
     if (route.startsWith('/hakkimizda') && id === 'about') return true;
     if (route.startsWith('/urunler') && id === 'products') return true;
     if (route.startsWith('/acenteliklerimiz') && id === 'agencies') return true;
+    if (route.startsWith('/subeler') && id === 'branches') return true;
     if (route.startsWith('/iletisim') && id === 'contact') return true;
     return false;
   };
@@ -89,6 +114,8 @@ export function Header({ route, go }) {
 
               <a href="/acenteliklerimiz" onClick={e => { e.preventDefault(); go('/acenteliklerimiz'); }}
                  className={'nav-item' + (active('agencies') ? ' active' : '')}>Acentelikler</a>
+              <a href="/subeler" onClick={e => { e.preventDefault(); go('/subeler'); }}
+                 className={'nav-item' + (active('branches') ? ' active' : '')}>Şubeler</a>
               <a href="/iletisim" onClick={e => { e.preventDefault(); go('/iletisim'); }}
                  className={'nav-item' + (active('contact') ? ' active' : '')}>İletişim</a>
             </nav>

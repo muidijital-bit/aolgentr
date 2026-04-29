@@ -12,9 +12,9 @@ export const COMPANY = {
     phone: '+90 258 264 68 69',
     addr: 'Sümer Mah. 2482/2 Sok. Sky City No:4/1 D:73, Merkezefendi / Denizli'
   },
-  email: 'bilgi@aol.gen.tr',
+  email: 'info@aol.gen.tr',
   quoteEmail: 'ortak@aol.gen.tr',
-  hours: 'Pzt – Cmt · 08:30 – 18:30',
+  hours: 'Hafta içi 09:00 – 18:00 · Cumartesi 09:00 – 14:00',
   domain: 'aol.gen.tr'
 };
 
@@ -161,6 +161,64 @@ export const AGENCIES = [
   { name: 'ViennaLife Emeklilik', logo: '/assets/agencies/viennalife-emeklilik.png' },
 ];
 
+export const BRANCHES = [
+  {
+    id: 'ankara',
+    type: 'Merkez',
+    city: 'Ankara',
+    label: 'Ankara Merkez',
+    contact: 'AOL Sigorta Genel Müdürlük',
+    addr: 'Aziziye Mah. Cinnah Cad. No:50/12, Çankaya / Ankara',
+    phone: '+90 312 468 34 50',
+    email: 'info@aol.gen.tr',
+    mapQ: 'Aziziye+Mah.+Cinnah+Cad.+No:50/12+Çankaya+Ankara',
+  },
+  {
+    id: 'denizli',
+    type: 'Şube',
+    city: 'Denizli',
+    label: 'Denizli Şube',
+    contact: 'AOL Sigorta Denizli',
+    addr: 'Sümer Mah. 2482/2 Sok. Sky City No:4/1 D:73, Merkezefendi / Denizli',
+    phone: '+90 258 264 68 69',
+    email: 'info@aol.gen.tr',
+    mapQ: 'Sümer+Mah.+2482/2+Sok.+Sky+City+No:4/1+Merkezefendi+Denizli',
+  },
+  {
+    id: 'izmir-menemen',
+    type: 'Şube',
+    city: 'İzmir',
+    label: 'İzmir Menemen Şube',
+    contact: 'Tolgahan Aksular',
+    addr: '30 Ağustos Mah. 7120 Sk. No: 2/1 Oyka Park Evleri (4. Noter Yanı) Egekent 2, Menemen / İzmir',
+    phone: '0553 492 61 91',
+    email: 'tolga.aksular@aol.gen.tr',
+    mapQ: '30+Ağustos+Mah.+7120+Sk.+No:2/1+Egekent+2+Menemen+İzmir',
+  },
+  {
+    id: 'izmir-cigli',
+    type: 'Şube',
+    city: 'İzmir',
+    label: 'İzmir Çiğli Şube',
+    contact: 'Vildan Öztürk',
+    addr: 'Balatçık Mahallesi 8911/6 Sk. No:11/B, Çiğli / İzmir',
+    phone: '0530 313 26 75',
+    email: 'vildan.ozturk@aol.gen.tr',
+    mapQ: 'Balatçık+Mahallesi+8911/6+Sk.+No:11/B+Çiğli+İzmir',
+  },
+  {
+    id: 'corum-osmancik',
+    type: 'Şube',
+    city: 'Çorum',
+    label: 'Çorum Osmancık Şube',
+    contact: 'Uğur Aydı',
+    addr: 'Yeni Mah. Alparslan Türkeş Cad. No:91/C/C, Osmancık / Çorum',
+    phone: '0541 460 70 45',
+    email: 'ugur.aydi@aol.gen.tr',
+    mapQ: 'Alparslan+Türkeş+Cad.+No:91/C+Osmancık+Çorum',
+  },
+];
+
 export const NAV = [
   { id: 'home', label: 'Ana Sayfa', path: '/' },
   { id: 'about', label: 'Hakkımızda', path: '/hakkimizda' },
@@ -169,5 +227,6 @@ export const NAV = [
     children: PRODUCTS.map(p => ({ id: p.id, label: p.title, path: '/urunler/' + p.id, idx: p.idx }))
   },
   { id: 'agencies', label: 'Acenteliklerimiz', path: '/acenteliklerimiz' },
+  { id: 'branches', label: 'Şubeler', path: '/subeler' },
   { id: 'contact', label: 'İletişim', path: '/iletisim' },
 ];

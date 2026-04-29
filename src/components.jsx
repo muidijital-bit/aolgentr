@@ -33,9 +33,12 @@ export function Footer({ go }) {
             <div className="mono-tag" style={{ color: 'rgba(255,255,255,0.5)', marginBottom: 16 }}>Ankara · Merkez</div>
             <p style={{ margin: 0, fontSize: 14, lineHeight: 1.65, color: '#fff' }}>{COMPANY.hq.addr}</p>
             <p style={{ margin: '12px 0 0', fontSize: 14, color: 'rgba(255,255,255,0.7)' }}>{COMPANY.hq.phone}</p>
-            <div className="mono-tag" style={{ color: 'rgba(255,255,255,0.5)', marginTop: 24, marginBottom: 16 }}>Denizli · Şube</div>
-            <p style={{ margin: 0, fontSize: 14, lineHeight: 1.65, color: '#fff' }}>{COMPANY.branch.addr}</p>
-            <p style={{ margin: '12px 0 0', fontSize: 14, color: 'rgba(255,255,255,0.7)' }}>{COMPANY.branch.phone}</p>
+            <button
+              onClick={() => go('/subeler')}
+              style={{ marginTop: 20, background: 'transparent', border: '1px solid rgba(255,255,255,0.25)', color: 'rgba(255,255,255,0.75)', borderRadius: 'var(--radius)', padding: '8px 16px', fontSize: 13, cursor: 'pointer', letterSpacing: '0.01em' }}
+            >
+              Tüm Şubeleri Gör →
+            </button>
           </div>
           <div>
             <div className="mono-tag" style={{ color: 'rgba(255,255,255,0.5)', marginBottom: 16 }}>İletişim</div>
@@ -43,8 +46,10 @@ export function Footer({ go }) {
               <li><a href={`mailto:${COMPANY.email}`}>{COMPANY.email}</a></li>
               <li style={{ color: 'rgba(255,255,255,0.6)' }}>Teklif: <a href={`mailto:${COMPANY.quoteEmail}`}>{COMPANY.quoteEmail}</a></li>
             </ul>
-            <div className="mono-tag" style={{ color: 'rgba(255,255,255,0.5)', marginTop: 24, marginBottom: 16 }}>Çalışma Saatleri</div>
-            <p style={{ margin: 0, fontSize: 14, color: '#fff' }}>{COMPANY.hours}</p>
+            <div className="mono-tag" style={{ color: 'rgba(255,255,255,0.5)', marginTop: 24, marginBottom: 16 }}>Çalışma Saatlerimiz</div>
+            <p style={{ margin: 0, fontSize: 14, color: '#fff', lineHeight: 1.7 }}>
+              Hafta içi 09:00 – 18:00<br />Cumartesi 09:00 – 14:00
+            </p>
           </div>
         </div>
         <div style={{ height: 48 }} />
@@ -52,13 +57,49 @@ export function Footer({ go }) {
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: 24, fontSize: 13, color: 'rgba(255,255,255,0.55)' }}>
           <span>© {new Date().getFullYear()} Artı Oluşum Sigorta · Tüm hakları saklıdır</span>
           <div style={{ display: 'flex', gap: 20 }}>
-            <a href="#">Gizlilik Politikası</a>
-            <a href="#">KVKK</a>
-            <a href="#">Çerez Tercihleri</a>
+            <a href="/gizlilik" onClick={e => { e.preventDefault(); go('/gizlilik'); }}>Gizlilik Politikası</a>
+            <a href="/kvkk" onClick={e => { e.preventDefault(); go('/kvkk'); }}>KVKK</a>
+            <a href="/cerez" onClick={e => { e.preventDefault(); go('/cerez'); }}>Çerez Tercihleri</a>
           </div>
+        </div>
+        <div style={{ paddingTop: 16, textAlign: 'center' }}>
+          <a href="https://muimedya.com" target="_blank" rel="noopener noreferrer" style={{ fontSize: 11, color: 'rgba(255,255,255,0.18)', letterSpacing: '0.08em', textDecoration: 'none' }}>created by muimedya</a>
         </div>
       </div>
     </footer>
+  );
+}
+
+/* ---------- Cookie Consent ---------- */
+export function CookieConsent({ go }) {
+  const [visible, setVisible] = useState(() => !localStorage.getItem('aol-cookies'));
+
+  const accept = () => {
+    localStorage.setItem('aol-cookies', '1');
+    setVisible(false);
+  };
+
+  if (!visible) return null;
+  return (
+    <div style={{
+      position: 'fixed', bottom: 24, left: '50%', transform: 'translateX(-50%)',
+      zIndex: 9999, width: 'min(680px, calc(100vw - 32px))',
+      background: '#fff', borderRadius: 16, boxShadow: '0 8px 40px rgba(0,0,0,0.14)',
+      border: '1px solid var(--border)', padding: '20px 24px',
+      display: 'flex', alignItems: 'center', gap: 20, flexWrap: 'wrap',
+    }}>
+      <div style={{ flex: 1, minWidth: 240 }}>
+        <div style={{ fontFamily: 'var(--font-display)', fontSize: 15, fontWeight: 700, marginBottom: 4 }}>Bu site çerez kullanmaktadır.</div>
+        <p style={{ fontSize: 13, color: 'var(--text-2)', margin: 0, lineHeight: 1.5 }}>
+          Deneyiminizi geliştirmek ve hizmetlerimizi sunmak için çerezler kullanılmaktadır.{' '}
+          <a href="/cerez" onClick={e => { e.preventDefault(); go('/cerez'); accept(); }} style={{ color: 'var(--primary)', fontWeight: 500 }}>Çerez Politikası</a>
+        </p>
+      </div>
+      <div style={{ display: 'flex', gap: 10, flexShrink: 0 }}>
+        <button className="btn btn-secondary btn-sm" onClick={() => { go('/cerez'); accept(); }}>Tercihler</button>
+        <button className="btn btn-primary btn-sm" onClick={accept}>Kabul Et</button>
+      </div>
+    </div>
   );
 }
 

@@ -1,9 +1,9 @@
 import { useState, useEffect, useMemo } from 'react';
 import { Header, Hero } from './header-hero.jsx';
-import { Footer, TweaksPanel } from './components.jsx';
+import { Footer, TweaksPanel, CookieConsent } from './components.jsx';
 import { ProductsSection, AboutStrip, QuickQuote, AgenciesSection } from './pages-home.jsx';
 import { ProductsList, ProductDetail } from './pages-products.jsx';
-import { AboutPage, AgenciesPage, ContactPage, QuotePage, NotFound } from './pages-misc.jsx';
+import { AboutPage, AgenciesPage, ContactPage, QuotePage, BranchesPage, GizlilikPage, KvkkPage, CerezPage, NotFound } from './pages-misc.jsx';
 
 function HomePage({ go }) {
   return (
@@ -36,8 +36,12 @@ export default function App() {
     if (route === '/urunler') return <ProductsList go={go} />;
     if (route.startsWith('/urunler/')) return <ProductDetail id={route.replace('/urunler/', '')} go={go} />;
     if (route === '/acenteliklerimiz') return <AgenciesPage go={go} />;
+    if (route === '/subeler') return <BranchesPage go={go} />;
     if (route === '/iletisim') return <ContactPage go={go} />;
     if (route.startsWith('/teklif-al')) return <QuotePage go={go} />;
+    if (route === '/gizlilik') return <GizlilikPage go={go} />;
+    if (route === '/kvkk') return <KvkkPage go={go} />;
+    if (route === '/cerez') return <CerezPage go={go} />;
     return <NotFound go={go} />;
   }, [route]);
   return (
@@ -46,6 +50,7 @@ export default function App() {
       <main key={route}>{page}</main>
       <Footer go={go} />
       <TweaksPanel />
+      <CookieConsent go={go} />
     </>
   );
 }

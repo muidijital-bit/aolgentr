@@ -71,7 +71,7 @@ export function AboutStrip({ go }) {
             </div>
           </div>
           <div style={{ position: 'relative', aspectRatio: '4/5', borderRadius: 24, overflow: 'hidden', border: '1px solid var(--border)' }}>
-            <img src="/assets/about-cand-1.jpg" alt="30 yıllık güvenilir iş ortaklığı"
+            <img src="/assets/about-main.jpg" alt="30 yıllık güvenilir iş ortaklığı"
                  style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
             <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(15,23,42,0.05) 0%, rgba(15,23,42,0.55) 70%, rgba(15,23,42,0.92) 100%)' }} />
             <div style={{ position: 'absolute', left: 28, right: 28, bottom: 28, color: '#fff' }}>
