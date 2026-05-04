@@ -11,17 +11,17 @@ export function Footer({ go }) {
       <div className="container" style={{ paddingTop: 80, paddingBottom: 40 }}>
         <div className="footer-grid" style={{ display: 'grid', gridTemplateColumns: '1.4fr 1fr 1fr 1fr', gap: 48 }}>
           <div>
-            <AolLogo height={64} mono />
-            <p style={{ marginTop: 20, maxWidth: 340, color: 'rgba(255,255,255,0.7)', fontSize: 14, lineHeight: 1.65 }}>
+            <AolLogo height={80} />
+            <p style={{ marginTop: 20, maxWidth: 340, color: 'var(--text-2)', fontSize: 14, lineHeight: 1.65 }}>
               Artı Oluşum Sigorta Aracılık Hizmetleri Ltd. Şti. 22 sigorta şirketinin yetkili acentesi olarak 30 yıla yakın deneyimle yanınızdayız.
             </p>
             <div style={{ marginTop: 24, display: 'flex', gap: 10 }}>
               <button className="btn btn-primary" onClick={() => go('/teklif-al')}>Teklif Al <IconArrow size={12} /></button>
-              <a className="btn btn-ghost" style={{ color: '#fff', border: '1px solid rgba(255,255,255,0.2)' }} href={`tel:${COMPANY.hq.phone.replace(/\s/g,'')}`}>Bizi Arayın</a>
+              <a className="btn btn-secondary" href={`tel:${COMPANY.hq.phone.replace(/\s/g,'')}`}>Bizi Arayın</a>
             </div>
           </div>
           <div>
-            <div className="mono-tag" style={{ color: 'rgba(255,255,255,0.5)', marginBottom: 16 }}>Keşfet</div>
+            <div className="mono-tag" style={{ marginBottom: 16 }}>Keşfet</div>
             <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'grid', gap: 10, fontSize: 14 }}>
               {NAV.map(n => (
                 <li key={n.id}><a href={n.path} onClick={e => { e.preventDefault(); go(n.path); }}>{n.label}</a></li>
@@ -30,31 +30,31 @@ export function Footer({ go }) {
             </ul>
           </div>
           <div>
-            <div className="mono-tag" style={{ color: 'rgba(255,255,255,0.5)', marginBottom: 16 }}>Ankara · Merkez</div>
-            <p style={{ margin: 0, fontSize: 14, lineHeight: 1.65, color: '#fff' }}>{COMPANY.hq.addr}</p>
-            <p style={{ margin: '12px 0 0', fontSize: 14, color: 'rgba(255,255,255,0.7)' }}>{COMPANY.hq.phone}</p>
+            <div className="mono-tag" style={{ marginBottom: 16 }}>Ankara · Merkez</div>
+            <p style={{ margin: 0, fontSize: 14, lineHeight: 1.65, color: 'var(--text)' }}>{COMPANY.hq.addr}</p>
+            <p style={{ margin: '12px 0 0', fontSize: 14, color: 'var(--text-2)' }}>{COMPANY.hq.phone}</p>
             <button
-              onClick={() => go('/subeler')}
-              style={{ marginTop: 20, background: 'transparent', border: '1px solid rgba(255,255,255,0.25)', color: 'rgba(255,255,255,0.75)', borderRadius: 'var(--radius)', padding: '8px 16px', fontSize: 13, cursor: 'pointer', letterSpacing: '0.01em' }}
+              onClick={() => go('/iletisim')}
+              style={{ marginTop: 20, background: 'transparent', border: '1px solid var(--border)', color: 'var(--text-2)', borderRadius: 'var(--radius)', padding: '8px 16px', fontSize: 13, cursor: 'pointer', letterSpacing: '0.01em' }}
             >
               Tüm Şubeleri Gör →
             </button>
           </div>
           <div>
-            <div className="mono-tag" style={{ color: 'rgba(255,255,255,0.5)', marginBottom: 16 }}>İletişim</div>
+            <div className="mono-tag" style={{ marginBottom: 16 }}>İletişim</div>
             <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'grid', gap: 10, fontSize: 14 }}>
               <li><a href={`mailto:${COMPANY.email}`}>{COMPANY.email}</a></li>
-              <li style={{ color: 'rgba(255,255,255,0.6)' }}>Teklif: <a href={`mailto:${COMPANY.quoteEmail}`}>{COMPANY.quoteEmail}</a></li>
+              <li style={{ color: 'var(--text-2)' }}>Teklif: <a href={`mailto:${COMPANY.quoteEmail}`}>{COMPANY.quoteEmail}</a></li>
             </ul>
-            <div className="mono-tag" style={{ color: 'rgba(255,255,255,0.5)', marginTop: 24, marginBottom: 16 }}>Çalışma Saatlerimiz</div>
-            <p style={{ margin: 0, fontSize: 14, color: '#fff', lineHeight: 1.7 }}>
+            <div className="mono-tag" style={{ marginTop: 24, marginBottom: 16 }}>Çalışma Saatlerimiz</div>
+            <p style={{ margin: 0, fontSize: 14, color: 'var(--text)', lineHeight: 1.7 }}>
               Hafta içi 09:00 – 18:00<br />Cumartesi 09:00 – 14:00
             </p>
           </div>
         </div>
         <div style={{ height: 48 }} />
-        <div style={{ height: 1, background: 'rgba(255,255,255,0.1)' }} />
-        <div className="mob-stack" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: 24, gap: 12, fontSize: 13, color: 'rgba(255,255,255,0.55)' }}>
+        <div style={{ height: 1, background: 'var(--border)' }} />
+        <div className="mob-stack" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: 24, gap: 12, fontSize: 13, color: 'var(--text-2)' }}>
           <span>© {new Date().getFullYear()} Artı Oluşum Sigorta · Tüm hakları saklıdır</span>
           <div style={{ display: 'flex', gap: 20, flexWrap: 'wrap' }}>
             <a href="/gizlilik" onClick={e => { e.preventDefault(); go('/gizlilik'); }}>Gizlilik</a>
@@ -63,7 +63,7 @@ export function Footer({ go }) {
           </div>
         </div>
         <div style={{ paddingTop: 16, textAlign: 'center' }}>
-          <a href="https://muimedya.com" target="_blank" rel="noopener noreferrer" style={{ fontSize: 11, color: 'rgba(255,255,255,0.18)', letterSpacing: '0.08em', textDecoration: 'none' }}>created by muimedya</a>
+          <a href="https://muimedya.com" target="_blank" rel="noopener noreferrer" style={{ fontSize: 11, color: 'var(--slate-300)', letterSpacing: '0.08em', textDecoration: 'none' }}>created by muimedya</a>
         </div>
       </div>
     </footer>

@@ -340,9 +340,17 @@ img, svg { display: block; max-width: 100%; }
 .avatars .av:first-child { margin-left: 0; }
 .avatars .av.more { background: var(--primary); color: #fff; }
 
+/* ---------- Agency carousel ---------- */
+@keyframes agencyScroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.agency-track { animation: agencyScroll 38s linear infinite; }
+.agency-track:hover { animation-play-state: paused; }
+
 /* ---------- Footer ---------- */
-footer { background: var(--slate-900); color: rgba(255,255,255,0.85); }
-footer a:hover { color: #fff; }
+footer { background: radial-gradient(900px 700px at 95% -5%, rgb(192 24 42 / 18%), transparent 55%), radial-gradient(600px 500px at 5% 100%, rgb(192 24 42 / 8%), transparent 60%), linear-gradient(160deg, var(--slate-50) 0%, #fff 55%); color: var(--text); }
+footer a:hover { color: var(--primary); }
 
 /* page transition */
 .page-enter { animation: pageIn 420ms var(--ease) both; }

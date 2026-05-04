@@ -42,11 +42,13 @@ export const IconTruck = (p) => (
     <circle cx="8" cy="24" r="2"/><circle cx="22" cy="24" r="2"/>
   </Icon>
 );
-export const IconBaby = (p) => (
+export const IconFactory = (p) => (
   <Icon {...p}>
-    <circle cx="16" cy="12" r="6"/>
-    <path d="M13 11h1M18 11h1M13 14c1 1 4 1 5 0"/>
-    <path d="M8 28c1-5 4-8 8-8s7 3 8 8"/>
+    <path d="M4 28V16l7-5v5l7-5v5l7-5v14H4z"/>
+    <path d="M4 22h21"/>
+    <path d="M9 28v-4h4v4M17 28v-4h4v4"/>
+    <circle cx="24" cy="10" r="3.5"/>
+    <path d="M24 6.5V5M24 14.5V13M27.5 10H29M19 10h1.5M26.5 7.5l1-1M19.5 13l1-1M26.5 12.5l1 1M19.5 7.5l1 1"/>
   </Icon>
 );
 
@@ -87,18 +89,18 @@ export const IconPlane = (p) => (
 );
 
 export const ICONS_BY_PRODUCT = {
-  'kasko':              IconCar,
-  'trafik-sigortasi':   IconShield,
-  'ferdi-kaza':         IconPerson,
-  'hayat-sigortasi':    IconLife,
-  'konut-sigortasi':    IconHouse,
-  'isyeri-sigortasi':   IconBuilding,
-  'dask':               IconEarthquake,
-  'saglik-sigortasi':   IconHeart,
-  'bireysel-emeklilik': IconPig,
-  'seyahat-sigortasi':  IconPlane,
-  'nakliyat-sigortasi': IconTruck,
-  'dogum-sigortasi':    IconBaby,
+  'kasko':                  IconCar,
+  'trafik-sigortasi':       IconShield,
+  'ferdi-kaza':             IconPerson,
+  'hayat-sigortasi':        IconLife,
+  'konut-sigortasi':        IconHouse,
+  'isyeri-sigortasi':       IconBuilding,
+  'dask':                   IconEarthquake,
+  'saglik-sigortasi':       IconHeart,
+  'bireysel-emeklilik':     IconPig,
+  'seyahat-sigortasi':      IconPlane,
+  'nakliyat-sigortasi':     IconTruck,
+  'kurumsal-endustriyel':   IconFactory,
 };
 
 export const IconArrow = ({ size = 14 }) => (

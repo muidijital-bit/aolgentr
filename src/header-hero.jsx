@@ -75,7 +75,6 @@ export function Header({ route, go }) {
     if (route.startsWith('/hakkimizda') && id === 'about') return true;
     if (route.startsWith('/urunler') && id === 'products') return true;
     if (route.startsWith('/acenteliklerimiz') && id === 'agencies') return true;
-    if (route.startsWith('/subeler') && id === 'branches') return true;
     if (route.startsWith('/iletisim') && id === 'contact') return true;
     return false;
   };
@@ -88,7 +87,7 @@ export function Header({ route, go }) {
           <div className="row">
             <a href="/" onClick={e => { e.preventDefault(); go('/'); }}
                style={{ display: 'inline-flex', alignItems: 'center' }}>
-              <AolLogo height={scrolled ? 48 : 56} />
+              <AolLogo height={scrolled ? 44 : 52} />
             </a>
 
             <nav className="nav-links">
@@ -123,8 +122,6 @@ export function Header({ route, go }) {
               </div>
               <a href="/acenteliklerimiz" onClick={e => { e.preventDefault(); go('/acenteliklerimiz'); }}
                  className={'nav-item' + (active('agencies') ? ' active' : '')}>Acentelikler</a>
-              <a href="/subeler" onClick={e => { e.preventDefault(); go('/subeler'); }}
-                 className={'nav-item' + (active('branches') ? ' active' : '')}>Şubeler</a>
               <a href="/iletisim" onClick={e => { e.preventDefault(); go('/iletisim'); }}
                  className={'nav-item' + (active('contact') ? ' active' : '')}>İletişim</a>
             </nav>
@@ -161,7 +158,7 @@ export function Header({ route, go }) {
             </button>
           </div>
           <div className="mob-nav-links">
-            {[['/', 'Ana Sayfa', 'home'], ['/hakkimizda', 'Hakkımızda', 'about'], ['/acenteliklerimiz', 'Acenteliklerimiz', 'agencies'], ['/subeler', 'Şubeler', 'branches'], ['/iletisim', 'İletişim', 'contact']].map(([path, label, id]) => (
+            {[['/', 'Ana Sayfa', 'home'], ['/hakkimizda', 'Hakkımızda', 'about'], ['/acenteliklerimiz', 'Acenteliklerimiz', 'agencies'], ['/iletisim', 'İletişim', 'contact']].map(([path, label, id]) => (
               <a key={id} href={path} onClick={e => { e.preventDefault(); nav(path); }}
                  className={'mob-nav-link' + (active(id) ? ' active' : '')}>{label}</a>
             ))}
@@ -300,22 +297,35 @@ export function Hero({ go }) {
                 <div className="av more">+</div>
               </div>
               <div style={{ fontSize: 13.5, color: 'var(--text-2)' }}>
-                <strong style={{ color: 'var(--text)' }}>10.000+</strong> mutlu müşteri · {BRANCHES.map(b => b.city).join(', ')}
+                <strong style={{ color: 'var(--text)' }}>+12.000</strong> mutlu müşteri · {BRANCHES.map(b => b.city).join(', ')}
               </div>
             </div>
 
             {/* stats */}
-            <div className="hero-stats">
-              {[
-                { v: <><span>30</span><span className="pct">+</span></>, l: 'Yıl sektör deneyimi' },
-                { v: <>22</>, l: 'Sigorta şirketi acentesi' },
-                { v: <>5</>, l: 'Türkiye genelinde şube' },
-              ].map((s, i) => (
-                <div key={i} style={{ paddingLeft: i === 0 ? 0 : 24, borderLeft: i === 0 ? 'none' : '1px solid var(--border)' }}>
-                  <div className="hero-stat-value">{s.v}</div>
-                  <div className="hero-stat-label">{s.l}</div>
-                </div>
-              ))}
+            <div style={{ marginTop: 48, paddingTop: 28, borderTop: '1px solid var(--border)' }}>
+              <div style={{ display: 'flex' }}>
+                {[
+                  { v: <><span>30</span><span className="pct">+</span></>, l: 'Yıl sektör deneyimi' },
+                  { v: <>20</>, l: 'Yetkili Sigorta Acenteliği' },
+                  { v: <>5</>, l: 'Türkiye genelinde şube' },
+                ].map((s, i) => (
+                  <div key={i} style={{ flex: 1, paddingLeft: i === 0 ? 0 : 20, borderLeft: i === 0 ? 'none' : '1px solid var(--border)' }}>
+                    <div className="hero-stat-value">{s.v}</div>
+                    <div className="hero-stat-label">{s.l}</div>
+                  </div>
+                ))}
+              </div>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10, marginTop: 14 }}>
+                {[
+                  { v: '+12.000', l: 'Mutlu müşteri' },
+                  { v: '+21.000', l: 'Yönetilen poliçe' },
+                ].map((s, i) => (
+                  <div key={i} style={{ background: 'var(--primary-50)', borderRadius: 10, padding: '12px 16px', display: 'flex', alignItems: 'center', gap: 14 }}>
+                    <div style={{ fontFamily: 'var(--font-display)', fontSize: 26, fontWeight: 800, color: 'var(--primary)', letterSpacing: '-0.02em', lineHeight: 1 }}>{s.v}</div>
+                    <div style={{ fontSize: 12.5, color: 'var(--text-2)', fontWeight: 500, lineHeight: 1.3 }}>{s.l}</div>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
 

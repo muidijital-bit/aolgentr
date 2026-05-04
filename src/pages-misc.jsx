@@ -11,16 +11,16 @@ export function AboutPage({ go }) {
     'Tüm bunları en uygun fiyata, zahmetsizce elde etmek',
   ];
   const milestones = [
-    { n: '30+', l: 'Yıllık sektör deneyimi' },
-    { n: '20',  l: 'Yıldır bağımsız acente' },
-    { n: '22',  l: 'Yetkili sigorta acenteliği' },
-    { n: '5',   l: 'Türkiye genelinde şube' },
+    { n: '30+',     l: 'Yıllık sektör deneyimi' },
+    { n: '20',     l: 'Yetkili sigorta acenteliği' },
+    { n: '+12.000', l: 'Mutlu müşteri' },
+    { n: '+21.000', l: 'Yönetilen poliçe' },
   ];
   return (
     <div className="page-enter">
       <PageHeader
         kicker="Hakkımızda"
-        title={<>Ne istediğinizi çok <span style={{ color: 'var(--primary)' }}>iyi biliyoruz.</span></>}
+        title={<>Ne istediğinizi <span style={{ color: 'var(--primary)' }}>çok iyi biliyoruz.</span></>}
         lead="İhtiyaç duyduğunuzda hemen ulaşmak, doğru yönlendirme almak ve sigorta işlerinizi güvendiğiniz birisine bırakmak istiyorsunuz. Doğru yerdesiniz."
         breadcrumb="Ana Sayfa / Hakkımızda"
       />
@@ -234,50 +234,73 @@ function ContactForm() {
 export function ContactPage({ go }) {
   return (
     <div className="page-enter">
-      <PageHeader
-        kicker="İletişim"
-        title={<>Size en yakın <span style={{ color: 'var(--primary)' }}>şubemiz.</span></>}
-        lead="Ankara merkez ve 4 şubemizle Türkiye genelinde yanınızdayız. Bizi arayın veya form üzerinden ulaşın."
-        breadcrumb="Ana Sayfa / İletişim"
-      />
-      <section className="section" style={{ paddingTop: 48, paddingBottom: 80 }}>
+
+      {/* Başlık + Form yan yana */}
+      <section style={{ paddingTop: 64, paddingBottom: 64, background: 'linear-gradient(180deg, var(--slate-50), #fff)' }}>
         <div className="container">
-          <div className="mob-1" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 32, alignItems: 'flex-start' }}>
-
-            {/* Sol: Şube listesi */}
-            <div style={{ display: 'grid', gap: 10 }}>
-              {BRANCHES.map((b) => (
-                <div key={b.id} className="card" style={{ padding: '18px 22px' }}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: 12 }}>
-                    <div>
-                      <SectionLabel>{b.type}</SectionLabel>
-                      <div style={{ fontFamily: 'var(--font-display)', fontSize: 16, fontWeight: 700, margin: '4px 0 2px' }}>{b.label}</div>
-                      {b.contact !== 'AOL Sigorta Genel Müdürlük' && b.contact !== 'AOL Sigorta Denizli' && (
-                        <div style={{ fontSize: 12, color: 'var(--text-2)' }}>{b.contact}</div>
-                      )}
-                      <div style={{ fontSize: 13, color: 'var(--text-2)', marginTop: 6, lineHeight: 1.45 }}>{b.addr}</div>
-                    </div>
-                    <div style={{ flexShrink: 0, display: 'flex', flexDirection: 'column', gap: 5, alignItems: 'flex-end' }}>
-                      <a href={`tel:${b.phone.replace(/\s/g, '')}`} style={{ fontSize: 14, fontWeight: 600, color: 'var(--primary)', textDecoration: 'none', whiteSpace: 'nowrap' }}>{b.phone}</a>
-                      <a href={`https://www.google.com/maps/search/?api=1&query=${b.mapQ}`} target="_blank" rel="noopener noreferrer" className="btn btn-secondary btn-sm" style={{ fontSize: 11 }}>
-                        Haritada Aç
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              ))}
+          <div className="mob-1" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 48, alignItems: 'flex-start' }}>
+            <div>
+              <div style={{ fontSize: 13, color: 'var(--text-2)', marginBottom: 20 }}>Ana Sayfa / İletişim</div>
+              <SectionLabel>İletişim</SectionLabel>
+              <h1 className="display-1" style={{ margin: '16px 0 0', maxWidth: '16ch' }}>
+                Türkiye genelinde <span style={{ color: 'var(--primary)' }}>5 şube.</span>
+              </h1>
+              <p className="lead" style={{ marginTop: 20, maxWidth: 480 }}>
+                Ankara merkez ve 4 şubemizle Türkiye genelinde yanınızdayız. Bizi arayın veya form üzerinden ulaşın.
+              </p>
             </div>
-
-            {/* Sağ: İletişim formu */}
-            <div className="card contact-sticky" style={{ padding: 32, position: 'sticky', top: 100 }}>
-              <div style={{ marginBottom: 24 }}>
+            <div className="card" style={{ padding: 36 }}>
+              <div style={{ marginBottom: 20 }}>
                 <SectionLabel>İletişim Formu</SectionLabel>
                 <h3 className="display-3" style={{ margin: '8px 0 6px' }}>Mesaj gönderin.</h3>
                 <p style={{ fontSize: 14, color: 'var(--text-2)', margin: 0 }}>En kısa sürede uzman ekibimiz size dönüş yapar.</p>
               </div>
               <ContactForm />
             </div>
+          </div>
+        </div>
+      </section>
 
+      {/* Şubeler + Harita — full width */}
+      <section className="section" style={{ paddingTop: 64, paddingBottom: 80 }}>
+        <div className="container">
+          <div style={{ display: 'grid', gap: 20 }}>
+            {BRANCHES.map((b) => (
+              <div key={b.id} className="card" style={{ overflow: 'hidden', padding: 0 }}>
+                <div className="branch-card-grid mob-1-nogap" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr' }}>
+                  <div style={{ padding: 28, display: 'flex', flexDirection: 'column', gap: 14 }}>
+                    <div>
+                      <SectionLabel>{b.type}</SectionLabel>
+                      <h3 className="display-3" style={{ margin: '8px 0 3px' }}>{b.label}</h3>
+                      <div style={{ fontSize: 13, color: 'var(--text-2)' }}>{b.contact}</div>
+                    </div>
+                    <div style={{ display: 'grid', gap: 10 }}>
+                      <div>
+                        <div className="mono-tag" style={{ color: 'var(--text-2)', marginBottom: 3 }}>Adres</div>
+                        <div style={{ fontSize: 13.5, lineHeight: 1.5 }}>{b.addr}</div>
+                      </div>
+                      <div>
+                        <div className="mono-tag" style={{ color: 'var(--text-2)', marginBottom: 3 }}>Telefon</div>
+                        <a href={`tel:${b.phone.replace(/\s/g, '')}`} style={{ fontSize: 15, fontWeight: 600, color: 'var(--primary)', textDecoration: 'none' }}>{b.phone}</a>
+                      </div>
+                      <div>
+                        <div className="mono-tag" style={{ color: 'var(--text-2)', marginBottom: 3 }}>E-posta</div>
+                        <a href={`mailto:${b.email}`} style={{ fontSize: 13.5, color: 'var(--text)', textDecoration: 'none' }}>{b.email}</a>
+                      </div>
+                    </div>
+                  </div>
+                  <div style={{ minHeight: 240, background: 'var(--slate-50)' }}>
+                    <iframe
+                      title={b.label}
+                      src={`https://maps.google.com/maps?q=${b.mapQ}&output=embed&hl=tr`}
+                      style={{ width: '100%', height: '100%', border: 0, display: 'block', minHeight: 240 }}
+                      loading="lazy"
+                      referrerPolicy="no-referrer-when-downgrade"
+                    />
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -460,62 +483,6 @@ export function QuotePage({ go }) {
   );
 }
 
-export function BranchesPage({ go }) {
-  return (
-    <div className="page-enter">
-      <PageHeader
-        kicker="Şubeler"
-        title={<>Türkiye genelinde <span style={{ color: 'var(--primary)' }}>5 şube.</span></>}
-        lead="Ankara merkezimiz ve dört şubemizle yanınızdayız."
-        breadcrumb="Ana Sayfa / Şubeler"
-      />
-      <section className="section" style={{ paddingTop: 64, paddingBottom: 80 }}>
-        <div className="container">
-          <div style={{ display: 'grid', gap: 40 }}>
-            {BRANCHES.map((b) => (
-              <div key={b.id} className="card" style={{ overflow: 'hidden', padding: 0 }}>
-                <div className="branch-card-grid mob-1-nogap" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr' }}>
-                  {/* Sol: bilgi */}
-                  <div style={{ padding: 36, display: 'flex', flexDirection: 'column', gap: 20 }}>
-                    <div>
-                      <SectionLabel>{b.type}</SectionLabel>
-                      <h3 className="display-3" style={{ margin: '10px 0 4px' }}>{b.label}</h3>
-                      <div style={{ fontSize: 14, color: 'var(--text-2)' }}>{b.contact}</div>
-                    </div>
-                    <div style={{ display: 'grid', gap: 14 }}>
-                      <div>
-                        <div className="mono-tag" style={{ color: 'var(--text-2)', marginBottom: 4 }}>Adres</div>
-                        <div style={{ fontSize: 15, lineHeight: 1.55 }}>{b.addr}</div>
-                      </div>
-                      <div>
-                        <div className="mono-tag" style={{ color: 'var(--text-2)', marginBottom: 4 }}>Telefon</div>
-                        <a href={`tel:${b.phone.replace(/\s/g, '')}`} style={{ fontSize: 17, fontWeight: 600, color: 'var(--primary)', textDecoration: 'none' }}>{b.phone}</a>
-                      </div>
-                      <div>
-                        <div className="mono-tag" style={{ color: 'var(--text-2)', marginBottom: 4 }}>E-posta</div>
-                        <a href={`mailto:${b.email}`} style={{ fontSize: 15, color: 'var(--text)', textDecoration: 'none' }}>{b.email}</a>
-                      </div>
-                    </div>
-                  </div>
-                  {/* Sağ: harita */}
-                  <div style={{ minHeight: 280, background: 'var(--slate-50)' }}>
-                    <iframe
-                      title={b.label}
-                      src={`https://maps.google.com/maps?q=${b.mapQ}&output=embed&hl=tr`}
-                      style={{ width: '100%', height: '100%', border: 0, display: 'block', minHeight: 280 }}
-                      loading="lazy"
-                      referrerPolicy="no-referrer-when-downgrade"
-                    />
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-    </div>
-  );
-}
 
 function LegalPage({ kicker, title, children, go }) {
   return (

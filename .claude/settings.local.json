@@ -27,7 +27,13 @@
       "Bash(sed -i '' 's/style={{ display: '\\\\''grid'\\\\'', gridTemplateColumns: '\\\\''1fr 1fr'\\\\'', gap: 8 }}/className=\"mob-xs-1\" style={{ display: '\\\\''grid'\\\\'', gridTemplateColumns: '\\\\''1fr 1fr'\\\\'', gap: 8 }}/g' src/pages-misc.jsx)",
       "Bash(sed -i '' 's/style={{ display: '\\\\''grid'\\\\'', gridTemplateColumns: '\\\\''1fr 1fr'\\\\'', gap: 10 }}/className=\"mob-xs-1\" style={{ display: '\\\\''grid'\\\\'', gridTemplateColumns: '\\\\''1fr 1fr'\\\\'', gap: 10 }}/g' src/pages-misc.jsx)",
       "Bash(sed -i '' 's/style={{ display: '\\\\''grid'\\\\'', gridTemplateColumns: '\\\\''repeat\\(3, 1fr\\)'\\\\'', gap: 16 }}/className=\"r3-1 mob-1\" style={{ display: '\\\\''grid'\\\\'', gridTemplateColumns: '\\\\''repeat\\(3, 1fr\\)'\\\\'', gap: 16 }}/g' src/pages-products.jsx)",
-      "Bash(sed -i '' 's/style={{ display: '\\\\''grid'\\\\'', gridTemplateColumns: '\\\\''1fr 1fr'\\\\'', gap: 48 }}/className=\"mob-1\" style={{ display: '\\\\''grid'\\\\'', gridTemplateColumns: '\\\\''1fr 1fr'\\\\'', gap: 48 }}/g' src/pages-products.jsx)"
+      "Bash(sed -i '' 's/style={{ display: '\\\\''grid'\\\\'', gridTemplateColumns: '\\\\''1fr 1fr'\\\\'', gap: 48 }}/className=\"mob-1\" style={{ display: '\\\\''grid'\\\\'', gridTemplateColumns: '\\\\''1fr 1fr'\\\\'', gap: 48 }}/g' src/pages-products.jsx)",
+      "Bash(grep -E '\\\\.\\(tsx|ts|jsx|js|html|css\\)$')",
+      "Bash(cp \"/Users/mui/Downloads/aol artı oluşum sigorta logo-01.png\" /Users/mui/projects/aolgentr/public/assets/aol-logo-red.png)",
+      "Bash(cp \"/Users/mui/Downloads/aol artı oluşum sigorta logo-02.png\" /Users/mui/projects/aolgentr/public/assets/aol-logo-black.png)",
+      "Bash(cp \"/Users/mui/Downloads/aol artı oluşum sigorta logo-03.png\" /Users/mui/projects/aolgentr/public/assets/aol-logo-white.png)",
+      "Bash(npm install *)",
+      "Bash(node -e ' *)"
     ]
   }
 }

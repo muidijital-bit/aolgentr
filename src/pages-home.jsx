@@ -30,7 +30,7 @@ export function ProductsSection({ go }) {
                   <Ico size={22} />
                 </div>
                 <h3 style={{ fontFamily: 'var(--font-display)', fontSize: 20, fontWeight: 700, letterSpacing: '-0.015em', margin: '20px 0 8px' }}>{p.title}</h3>
-                <p style={{ fontSize: 14, color: 'var(--text-2)', lineHeight: 1.55, margin: 0 }}>{p.desc}</p>
+                <p style={{ fontSize: 14, color: 'var(--text-2)', lineHeight: 1.55, margin: 0, display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>{p.desc}</p>
                 <div style={{ marginTop: 'auto', paddingTop: 16, fontSize: 13.5, fontWeight: 600, color: 'var(--primary)', display: 'inline-flex', alignItems: 'center', gap: 6 }}>
                   Detay <IconArrow size={12} />
                 </div>
@@ -55,11 +55,10 @@ export function AboutStrip({ go }) {
               30 yıllık deneyim, <span style={{ color: 'var(--primary)' }}>butik bir disiplinle.</span>
             </h2>
             <p className="lead">
-              Önce müşteri, sonra Türkiye'nin en büyük sigorta şirketlerinde yönetici, son 20 yıldır bağımsız acente.
-              Kurumsal deneyim ve butik operasyon bir arada.
+              Kurumsal deneyim ve butik operasyon bir arada. 30 yıllık sektör birikimi, +12.000 mutlu müşteri ve +21.000 yönetilen poliçeyle.
             </p>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 12, marginTop: 32 }}>
-              {[['30+', 'Yıl deneyim'], ['20', 'Yıl acente'], ['22', 'Şirket']].map(([a, b], i) => (
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 12, marginTop: 32 }}>
+              {[['30+', 'Yıl deneyim'], ['20', 'Yetkili Sigorta Acenteliği '], ['+12.000', 'Mutlu müşteri'], ['+21.000', 'Yönetilen poliçe']].map(([a, b], i) => (
                 <div key={i} className="card" style={{ padding: 20 }}>
                   <div style={{ fontFamily: 'var(--font-display)', fontSize: 32, fontWeight: 800, letterSpacing: '-0.02em', color: 'var(--primary)' }}>{a}</div>
                   <div style={{ fontSize: 13, color: 'var(--text-2)', marginTop: 4 }}>{b}</div>
@@ -122,25 +121,15 @@ export function QuickQuote({ go }) {
 }
 
 /* ---------- Agency logo card ---------- */
-function AgencyCard({ agency, tall = false }) {
+function AgencyCard({ agency }) {
   const [imgFailed, setImgFailed] = useState(false);
-  const h = tall ? 56 : 44;
   return (
-    <div className="card" style={{
-      padding: '16px 12px',
-      display: 'flex', alignItems: 'center', justifyContent: 'center',
-    }}>
+    <div className="card" style={{ width: 148, height: 76, flexShrink: 0, padding: '12px 18px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
       {!imgFailed ? (
-        <div className="agency-logo-wrap" style={{ width: '100%', height: h, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-          <img
-            src={agency.logo}
-            alt={agency.name}
-            onError={() => setImgFailed(true)}
-            style={{ width: '100%', height: '100%', objectFit: 'contain' }}
-          />
-        </div>
+        <img src={agency.logo} alt={agency.name} onError={() => setImgFailed(true)}
+             style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
       ) : (
-        <span style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-2)', lineHeight: 1.3, textAlign: 'center' }}>{agency.name}</span>
+        <span style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-2)', lineHeight: 1.3, textAlign: 'center' }}>{agency.name}</span>
       )}
     </div>
   );
@@ -148,21 +137,24 @@ function AgencyCard({ agency, tall = false }) {
 
 /* ---------- Agencies ---------- */
 export function AgenciesSection({ go, compact = false }) {
+  const track = [...AGENCIES, ...AGENCIES];
   return (
     <section className="section" style={{ background: 'var(--slate-50)' }}>
       <div className="container">
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', gap: 40, marginBottom: 36, flexWrap: 'wrap' }}>
           <div>
             <SectionLabel>Acentelikler</SectionLabel>
-            <h2 className="display-2" style={{ margin: '14px 0 0' }}>22 güçlü iş ortağı.</h2>
+            <h2 className="display-2" style={{ margin: '14px 0 0' }}>23 güçlü iş ortağı.</h2>
           </div>
           {!compact && <button className="btn btn-secondary" onClick={() => go('/acenteliklerimiz')}>Tümünü gör <IconArrow size={12} /></button>}
         </div>
-        <div className="agencies-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(6, 1fr)', gap: 8 }}>
-          {AGENCIES.map(a => (
-            <AgencyCard key={a.name} agency={a} />
-          ))}
+      </div>
+      <div style={{ overflow: 'hidden', position: 'relative' }}>
+        <div className="agency-track" style={{ display: 'flex', gap: 8, width: 'max-content', paddingLeft: 8 }}>
+          {track.map((a, i) => <AgencyCard key={i} agency={a} />)}
         </div>
+        <div style={{ position: 'absolute', inset: '0 auto 0 0', width: 80, background: 'linear-gradient(to right, var(--slate-50), transparent)', pointerEvents: 'none' }} />
+        <div style={{ position: 'absolute', inset: '0 0 0 auto', width: 80, background: 'linear-gradient(to left, var(--slate-50), transparent)', pointerEvents: 'none' }} />
       </div>
     </section>
   );
