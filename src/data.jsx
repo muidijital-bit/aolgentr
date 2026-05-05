@@ -75,23 +75,11 @@ export const PRODUCTS = [
     ],
   },
   {
-    id: 'konut-sigortasi',
+    id: 'konut-isyeri-sigortasi',
     idx: '05',
-    title: 'Konut Sigortası',
-    kicker: 'Eviniz için kapsamlı koruma',
-    desc: 'Konut Sigortası ve İşyeri sigortası ürünlerimiz, eviniz veya işyerinizin içindeki eşyaları, makinaları, emtiaları yangından hırsızlığa, depremden su baskınına kadar pek çok riske karşı koruma altına alan geniş kapsamlı ve "kişiye ve kuruma özel" bir paket sigorta uygulamasıdır.',
-    body: [
-      'Evinizin veya İşyerinizin içerisindeki eşyaların, mallarınızın kullanılamaz veya oturulamaz hale geldiği durumlarda, taşınma veya enkaz kaldırma gibi giderler sizi mağdur edebilir. Ayrıca evinizde veya işyerinizde oluşabilecek hasarlar yüzünden kiracınızı taşınmak zorunda bırakabilir, bu nedenle kira gelirinizden mahrum olabilirsiniz. Firmamızın, sunmuş olduğu Konut Sigortası ve İşyeri Sigortası ürünleri ile sizi buna benzer oluşabilecek birçok yükten kurtarır.',
-      'Konut Sigortası, tek bir poliçe ile birçok durum için güvence sunmaktadır. Yangın, deprem, fırtına, sel ve su baskını gibi durumlar sonucu evdeki eşyaların teminat altına alınması konut paket sigortasının kapsamındadır.',
-      'Konut Sigortası kapsamında sigortalılarımızın hayatını kolaylaştıracak ve herhangi bir ek ücret istemeden verilen asistans hizmetlerini de sunuyoruz. Bunlar; konutta meydana gelen hasar sonucu oluşan tesisat ve elektrik sorunlarının tamiratından, doktor veya ambulans gönderilmesine, otel hizmetine veya konutun fatura ödemelerine destek vermeye kadar, geniş bir yelpazede bulunmaktadır.',
-    ],
-  },
-  {
-    id: 'isyeri-sigortasi',
-    idx: '06',
-    title: 'İşyeri Sigortası',
-    kicker: 'İş alanınız için bütünleşik güvence',
-    desc: 'Konut Sigortası ve İşyeri sigortası ürünlerimiz, eviniz veya işyerinizin içindeki eşyaları, makinaları, emtiaları yangından hırsızlığa, depremden su baskınına kadar pek çok riske karşı koruma altına alan geniş kapsamlı ve "kişiye ve kuruma özel" bir paket sigorta uygulamasıdır.',
+    title: 'Konut & İşyeri Sigortası',
+    kicker: 'Ev ve iş yeriniz için kapsamlı koruma',
+    desc: 'Konut ve İşyeri sigortası ürünlerimiz, eviniz veya işyerinizin içindeki eşyaları, makinaları, emtiaları yangından hırsızlığa, depremden su baskınına kadar pek çok riske karşı koruma altına alan geniş kapsamlı ve "kişiye ve kuruma özel" bir paket sigorta uygulamasıdır.',
     body: [
       'Evinizin veya İşyerinizin içerisindeki eşyaların, mallarınızın kullanılamaz veya oturulamaz hale geldiği durumlarda, taşınma veya enkaz kaldırma gibi giderler sizi mağdur edebilir. Ayrıca evinizde veya işyerinizde oluşabilecek hasarlar yüzünden kiracınızı taşınmak zorunda bırakabilir, bu nedenle kira gelirinizden mahrum olabilirsiniz. Firmamızın, sunmuş olduğu Konut Sigortası ve İşyeri Sigortası ürünleri ile sizi buna benzer oluşabilecek birçok yükten kurtarır.',
       'Konut Sigortası, tek bir poliçe ile birçok durum için güvence sunmaktadır. Yangın, deprem, fırtına, sel ve su baskını gibi durumlar sonucu evdeki eşyaların teminat altına alınması konut paket sigortasının kapsamındadır.',
@@ -100,7 +88,7 @@ export const PRODUCTS = [
   },
   {
     id: 'dask',
-    idx: '07',
+    idx: '06',
     title: 'DASK',
     kicker: 'Zorunlu deprem güvencesi',
     desc: 'Ülkemiz yüksek riskli deprem kuşaklarından birinde yer almaktadır. Depremin doğrudan neden olduğu maddi zararlar ile deprem sonucu meydana gelen yangın, infilak, dev dalga (tsunami) veya yer kaymasının kendinize ve sevdiklerinize verebileceği maddi zararların karşılanabilmesi için vakit kaybetmeden Zorunlu Deprem Sigortanızı yaptırmanızı öneriyoruz. Zorunlu Deprem Sigortası Doğal Afet Sigortaları Kurumu (DASK) tarafından sunulmaktadır.',
@@ -108,7 +96,7 @@ export const PRODUCTS = [
   },
   {
     id: 'saglik-sigortasi',
-    idx: '08',
+    idx: '07',
     title: 'Sağlık Sigortası',
     kicker: 'Özel Sağlık & Tamamlayıcı Sağlık',
     desc: 'Özel Sağlık Sigortası, dilediğiniz doktor ya da sağlık kurumunu seçme özgürlüğü sağlar. Sigortalıların herhangi bir kaza ya da hastalık sonucu ortaya çıkan ayakta ya da yatarak teşhis ve tedavilerine ait masraflar, yurtiçinde veya dünyanın neresinde olurlarsa olsun karşılanır. Sağlık sigortası bu özelliği ile olası yüksek meblağlı sağlık giderlerini karşılayarak, sigortalıların en zor anlarında en büyük yardımcısı olur.',
@@ -119,7 +107,7 @@ export const PRODUCTS = [
   },
   {
     id: 'bireysel-emeklilik',
-    idx: '09',
+    idx: '08',
     title: 'Bireysel Emeklilik',
     kicker: 'BES — Devlet katkılı tasarruf sistemi',
     desc: 'Çalışma hayatınız süresince yaptığınız düzenli tasarrufların yatırıma yönlendirilmesini sağlayarak, oluşacak birikimle, çalışma döneminizde sahip olduğunuz yaşam standartlarını emeklilik döneminizde de devam ettirmeyi amaçlayan gönüllülüğe dayalı bir sistemdir.',
@@ -134,7 +122,7 @@ export const PRODUCTS = [
   },
   {
     id: 'seyahat-sigortasi',
-    idx: '10',
+    idx: '09',
     title: 'Seyahat Sigortası',
     kicker: 'Yurt içi ve yurt dışı seyahat güvencesi',
     desc: 'Seyahat Sigortası, sizi ve sevdiklerinizi gerek iş gerekse tatil amaçlı seyahatlerinizde karşılaşabileceğiniz aksaklıklara karşı güvence altına alıyor.',
@@ -146,7 +134,7 @@ export const PRODUCTS = [
   },
   {
     id: 'nakliyat-sigortasi',
-    idx: '11',
+    idx: '10',
     title: 'Nakliyat Sigortası',
     kicker: 'Kara, deniz, hava, demir yolu',
     desc: 'Gemi, uçak, kamyon ya da tren gibi araçlarla taşınan mallar bu sigorta ile poliçede yer alan şartlar ve klozlar uyarınca bir kaza ya da bir olaya bağlı olarak fiziken zarar görmesi durumunda sigorta tarafından teminat altına alınır.',
@@ -154,7 +142,7 @@ export const PRODUCTS = [
   },
   {
     id: 'kurumsal-endustriyel',
-    idx: '12',
+    idx: '11',
     title: 'Kurumsal & Endüstriyel',
     kicker: 'İşletmenize özel sigorta çözümleri',
     desc: 'İşletmeniz için gerekli olabilecek; İnşaat tamamlama, Kefalet, All Risks, Sorumluluk, Makine Kırılması, Elektronik Cihaz, Enerji Sistemleri, Enerji Santralleri sigortaları gibi sigortaları içerir.',

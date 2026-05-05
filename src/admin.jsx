@@ -62,6 +62,20 @@ function RichEditor({ value, onChange }) {
           }
           // PDFs with bad Turkish font encoding map the 'i' glyph to '&' char code
           text = text.replace(/&(?![a-zA-Z#]\w{0,7};)/g, 'i');
+          // Some PDFs map 'i' to '(' — detect by counting '(' embedded in words
+          const badParens = (text.match(/[a-zA-ZğüşıöçĞÜŞİÖÇ]\([a-zA-ZğüşıöçĞÜŞİÖÇ]/g) || []).length;
+          if (badParens > 2) {
+            text = text.replace(/(?<=[a-zA-ZğüşıöçĞÜŞİÖÇ])\((?=[a-zA-ZğüşıöçĞÜŞİÖÇ])/g, 'i');
+            text = text.replace(/(?<=[a-zA-ZğüşıöçĞÜŞİÖÇ])\((?=[\s.,;:!?\n]|$)/gm, 'i');
+            text = text.replace(/(?<=^|\s)\((?=[a-zA-ZğüşıöçĞÜŞİÖÇ])/gm, 'i');
+          }
+          // Some PDFs map 'i' to "'" (apostrophe) — detect by lowercase pairs
+          const badApos = (text.match(/[a-zğüşöç]'[a-zğüşöç]/g) || []).length;
+          if (badApos > 2) {
+            text = text.replace(/(?<=[a-zA-ZğüşıöçĞÜŞİÖÇ])'(?=[a-zğüşıöç])/g, 'i');
+            text = text.replace(/(?<=[a-zğüşıöç])'(?=[\s.,;:!?\n()\[\]]|$)/gm, 'i');
+            text = text.replace(/(?<=^|\s)'(?=[a-zğüşıöç])/gm, 'i');
+          }
           const sel = window.getSelection();
           if (!sel.rangeCount) return;
           const range = sel.getRangeAt(0);
@@ -137,7 +151,7 @@ function ProductEditor({ product, isNew, onSaved, onCancel }) {
     const { error } = await supabase.from('products').upsert({
       id, idx, is_custom: isNew ? true : (product.is_custom || false),
       hidden: false, ...form, updated_at: new Date().toISOString(),
-    });
+    }, { onConflict: 'id' });
     setSaving(false);
     if (error) { alert('Kayıt hatası: ' + error.message); return; }
     onSaved({ id, idx, is_custom: isNew, hidden: false, ...form });
@@ -172,22 +186,20 @@ function ProductEditor({ product, isNew, onSaved, onCancel }) {
 
       {tab === 'content' && (
         <div style={{ display: 'grid', gap: 20 }}>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
-            <label style={{ display: 'grid', gap: 6 }}>
-              <span style={{ fontSize: 13, fontWeight: 600 }}>Ürün Adı *</span>
-              <input style={ip} value={form.title} onChange={e => set('title', e.target.value)} placeholder="Kasko Sigortası" />
-            </label>
-            <label style={{ display: 'grid', gap: 6 }}>
-              <span style={{ fontSize: 13, fontWeight: 600 }}>Kısa Etiket</span>
-              <input style={ip} value={form.kicker} onChange={e => set('kicker', e.target.value)} placeholder="Aracınız için tam koruma" />
-            </label>
-          </div>
           <label style={{ display: 'grid', gap: 6 }}>
-            <span style={{ fontSize: 13, fontWeight: 600 }}>Kısa Açıklama <span style={{ color: 'var(--text-2)', fontWeight: 400 }}>(kart özeti)</span></span>
-            <textarea style={{ ...ip, resize: 'vertical', minHeight: 80 }} value={form.desc_short} onChange={e => set('desc_short', e.target.value)} />
+            <span style={{ fontSize: 13, fontWeight: 600 }}>Ürün Adı *</span>
+            <input style={ip} value={form.title} onChange={e => set('title', e.target.value)} placeholder="Kasko Sigortası" />
+          </label>
+          <label style={{ display: 'grid', gap: 6 }}>
+            <span style={{ fontSize: 13, fontWeight: 600 }}>Alt Başlık <span style={{ color: 'var(--text-2)', fontWeight: 400 }}>— ürün detay sayfasında başlığın altında çıkar</span></span>
+            <input style={ip} value={form.kicker} onChange={e => set('kicker', e.target.value)} placeholder="Aracınız için tam koruma" />
           </label>
           <div style={{ display: 'grid', gap: 6 }}>
-            <span style={{ fontSize: 13, fontWeight: 600 }}>Uzun Açıklama <span style={{ color: 'var(--text-2)', fontWeight: 400 }}>(ürün sayfası)</span></span>
+            <span style={{ fontSize: 13, fontWeight: 600 }}>Kart Açıklaması <span style={{ color: 'var(--text-2)', fontWeight: 400 }}>— ana sayfada ürün kartında gösterilir</span></span>
+            <RichEditor value={form.desc_short} onChange={v => set('desc_short', v)} />
+          </div>
+          <div style={{ display: 'grid', gap: 6 }}>
+            <span style={{ fontSize: 13, fontWeight: 600 }}>Sayfa İçeriği <span style={{ color: 'var(--text-2)', fontWeight: 400 }}>— ürün detay sayfasının tam içeriği</span></span>
             <RichEditor value={form.body_html} onChange={v => set('body_html', v)} />
           </div>
         </div>
@@ -242,7 +254,10 @@ function ProductList({ dbProducts, onEdit, onDelete, onNew }) {
 
   const staticList = PRODUCTS.map(p => ({ ...p, ...(dbProducts[p.id] || {}) }));
   const customList = Object.values(dbProducts).filter(p => p.is_custom && !PRODUCTS.find(s => s.id === p.id));
-  const all = [...staticList, ...customList].filter(p => !p.hidden);
+  const seen = new Set();
+  const all = [...staticList, ...customList]
+    .filter(p => !p.hidden)
+    .filter(p => { if (seen.has(p.id)) return false; seen.add(p.id); return true; });
   const filtered = search
     ? all.filter(p => (p.title || '').toLowerCase().includes(search.toLowerCase()) || (p.kicker || '').toLowerCase().includes(search.toLowerCase()))
     : all;

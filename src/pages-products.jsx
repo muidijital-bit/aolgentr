@@ -8,7 +8,7 @@ import { supabase } from './supabase.js';
 export function ProductsList({ go }) {
   return (
     <div className="page-enter">
-      <PageHeader kicker="Ürünler" title={<>12 ürün kategorisi, <span style={{ color: 'var(--primary)' }}>tek danışman.</span></>}
+      <PageHeader kicker="Ürünler" title={<>11 ürün kategorisi, <span style={{ color: 'var(--primary)' }}>tek danışman.</span></>}
         lead="Kasko ve trafik sigortasından bireysel emeklilik ve nakliyata kadar tüm sigorta ihtiyaçlarınızda uzman rehberlik."
         breadcrumb="Ana Sayfa / Ürünler" />
       <section className="section">
@@ -154,7 +154,7 @@ export function ProductIllust({ id }) {
     </svg>
   );
 
-  if (id === 'konut-sigortasi') return (
+  if (id === 'konut-isyeri-sigortasi') return (
     <svg {...c} viewBox="0 0 280 200" style={st}>
       <path strokeWidth={w} d="M28 188 V100 L140 24 L252 100 V188 Z"/>
       <path strokeWidth={w} d="M8 108 L140 12 L272 108"/>
@@ -170,7 +170,7 @@ export function ProductIllust({ id }) {
     </svg>
   );
 
-  if (id === 'isyeri-sigortasi') return (
+  if (id === 'konut-isyeri-sigortasi-isyeri') return ( // unused fallback
     <svg {...c} viewBox="0 0 280 200" style={st}>
       <rect strokeWidth={w} x="36" y="42" width="164" height="146" rx="3"/>
       <line strokeWidth={l} x1="36" y1="68" x2="200" y2="68" opacity="0.4"/>
@@ -312,10 +312,10 @@ export function ProductDetail({ id, go }) {
   const bodyArr = (!bodyHtml && base.body?.length) ? base.body : null;
   return (
     <div className="page-enter">
-      <PageHeader kicker={kicker} title={title} lead={desc} breadcrumb={`Ana Sayfa / Ürünler / ${title}`} />
+      <PageHeader kicker={kicker} title={title} breadcrumb={`Ana Sayfa / Ürünler / ${title}`} />
 
       {/* Visual banner */}
-      <section style={{ paddingTop: 8 }}>
+      <section style={{ padding: '8px 0 0' }}>
         <div className="container">
           <div className="card" style={{ overflow: 'hidden', padding: 0 }}>
             <div className="mob-1" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', minHeight: 280 }}>
@@ -325,8 +325,7 @@ export function ProductDetail({ id, go }) {
                   <span style={{ opacity: 0.35 }}>|</span>
                   {kicker}
                 </div>
-                <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 36, fontWeight: 800, letterSpacing: '-0.025em', lineHeight: 1.1, margin: '0 0 18px', color: 'var(--text)' }}>{title}</h2>
-                <p style={{ fontSize: 15, lineHeight: 1.7, color: 'var(--text-2)', margin: 0, maxWidth: 420 }}>{desc}</p>
+                <div style={{ fontSize: 15, lineHeight: 1.7, color: 'var(--text-2)', margin: 0, maxWidth: 420 }} dangerouslySetInnerHTML={{ __html: desc }} />
               </div>
               <div style={{ background: 'var(--slate-50)', display: 'grid', placeItems: 'center', padding: 40, borderLeft: '1px solid var(--border)' }}>
                 {p.image_url
@@ -340,7 +339,7 @@ export function ProductDetail({ id, go }) {
       </section>
 
       {(bodyHtml || bodyArr) && (
-        <section className="section" style={{ paddingBottom: 0 }}>
+        <section className="section" style={{ padding: '48px 0 0' }}>
           <div className="container">
             <div className="card" style={{ padding: '36px 40px' }}>
               {bodyHtml
@@ -354,7 +353,7 @@ export function ProductDetail({ id, go }) {
         </section>
       )}
 
-      <section className="section">
+      <section className="section" style={{ padding: '48px 0' }}>
         <div className="container">
           <div className="mob-1" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 48, alignItems: 'start' }}>
             <div style={{ paddingTop: 8 }}>
