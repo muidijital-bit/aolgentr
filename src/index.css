@@ -224,6 +224,7 @@ img, svg { display: block; max-width: 100%; }
 .hero > .container { position: relative; z-index: 1; }
 
 .hero-grid { display: grid; grid-template-columns: 1.05fr 1fr; gap: 64px; align-items: center; }
+.hero-grid > * { min-width: 0; }
 @media (max-width: 980px) { .hero-grid { grid-template-columns: 1fr; gap: 48px; } }
 
 .hero-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; margin-top: 48px; padding-top: 32px; border-top: 1px solid var(--border); }
@@ -267,7 +268,7 @@ img, svg { display: block; max-width: 100%; }
 }
 @keyframes spin { to { transform: rotate(360deg); } }
 
-.hv-float {
+.hv-float { pointer-events: none; }
   background: #fff;
   border-radius: var(--radius-lg);
   border: 1px solid var(--border);
@@ -319,7 +320,7 @@ img, svg { display: block; max-width: 100%; }
 .slider-dots button { width: 24px; height: 4px; border-radius: 4px; background: var(--slate-200); transition: all 200ms var(--ease); }
 .slider-dots button.active { background: var(--primary); width: 36px; }
 
-.slider-nav { position: absolute; bottom: 22px; right: 22px; display: flex; gap: 6px; }
+.slider-nav { position: absolute; bottom: 22px; right: 22px; display: flex; gap: 6px; z-index: 20; }
 .slider-nav button {
   width: 38px; height: 38px; border-radius: 50%;
   background: #fff; border: 1px solid var(--border);
@@ -476,12 +477,18 @@ footer a:hover { color: var(--primary); }
 }
 
 /* ── Hero responsive ── */
+@media (max-width: 980px) {
+  .hv-float-1, .hv-float-2 { display: none; }
+  .slider-track { aspect-ratio: 3/2 !important; }
+}
 @media (max-width: 720px) {
   .hero { padding: 48px 0 64px; }
   .hero-stats { grid-template-columns: repeat(3,1fr) !important; gap: 0; }
   .hero-visual { display: none; }
-  .hv-float-1, .hv-float-2 { display: none; }
   .slider-track { aspect-ratio: 4/3 !important; }
+  .slide { padding: 20px !important; }
+  .slide-title { font-size: 22px !important; }
+  .slide-desc { display: none; }
 }
 
 /* ── Branch card map responsive ── */

@@ -46,6 +46,7 @@ function RichEditor({ value, onChange }) {
         {btn('Paragraf', () => cmd('formatBlock', 'p'))}
         <div style={{ width: 1, background: 'var(--border)', margin: '0 2px' }} />
         {btn('Temizle', () => cmd('removeFormat'))}
+        {btn('Tümünü Sil', () => { ref.current.innerHTML = ''; onChange(''); })}
       </div>
       <div ref={ref} contentEditable suppressContentEditableWarning
         onInput={e => onChange(e.currentTarget.innerHTML)}
@@ -60,22 +61,21 @@ function RichEditor({ value, onChange }) {
           } else {
             text = e.clipboardData.getData('text/plain');
           }
-          // PDFs with bad Turkish font encoding map the 'i' glyph to '&' char code
-          text = text.replace(/&(?![a-zA-Z#]\w{0,7};)/g, 'i');
-          // Some PDFs map 'i' to '(' — detect by counting '(' embedded in words
-          const badParens = (text.match(/[a-zA-ZğüşıöçĞÜŞİÖÇ]\([a-zA-ZğüşıöçĞÜŞİÖÇ]/g) || []).length;
-          if (badParens > 2) {
-            text = text.replace(/(?<=[a-zA-ZğüşıöçĞÜŞİÖÇ])\((?=[a-zA-ZğüşıöçĞÜŞİÖÇ])/g, 'i');
-            text = text.replace(/(?<=[a-zA-ZğüşıöçĞÜŞİÖÇ])\((?=[\s.,;:!?\n]|$)/gm, 'i');
-            text = text.replace(/(?<=^|\s)\((?=[a-zA-ZğüşıöçĞÜŞİÖÇ])/gm, 'i');
-          }
-          // Some PDFs map 'i' to "'" (apostrophe) — detect by lowercase pairs
-          const badApos = (text.match(/[a-zğüşöç]'[a-zğüşöç]/g) || []).length;
-          if (badApos > 2) {
-            text = text.replace(/(?<=[a-zA-ZğüşıöçĞÜŞİÖÇ])'(?=[a-zğüşıöç])/g, 'i');
-            text = text.replace(/(?<=[a-zğüşıöç])'(?=[\s.,;:!?\n()\[\]]|$)/gm, 'i');
-            text = text.replace(/(?<=^|\s)'(?=[a-zğüşıöç])/gm, 'i');
-          }
+          // PDF font encoding: fixes non-letter chars substituted for 'i'
+          const W = 'a-zA-ZğüşıöçĞÜŞİÖÇ';
+          const fixI = (t, ch) => {
+            const e = ch.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+            const mid   = new RegExp(`(?<=[${W}])${e}(?=[${W}])`, 'g');
+            const count = (t.match(mid) || []).length;
+            if (count < 3) return t;
+            const end   = new RegExp(`(?<=[${W}])${e}(?=[\\s.,;:!?\\n()[\\]]|$)`, 'gm');
+            const start = new RegExp(`(?<=^|\\s)${e}(?=[${W}])`, 'gm');
+            return t.replace(mid, 'i').replace(end, 'i').replace(start, 'i');
+          };
+          text = text.replace(/&(?![a-zA-Z#]\w{0,7};)/g, 'i'); // '&' always bad outside entities
+          text = fixI(text, '(');
+          text = fixI(text, "'");
+          text = fixI(text, '%');
           const sel = window.getSelection();
           if (!sel.rangeCount) return;
           const range = sel.getRangeAt(0);
@@ -143,14 +143,17 @@ function ProductEditor({ product, isNew, onSaved, onCancel }) {
   const [tab, setTab] = useState('content');
   const set = (k, v) => setForm(f => ({ ...f, [k]: v }));
 
+  const cleanHtml = (h) => (h || '').replace(/<[^>]*>/g, '').trim() ? h : '';
+
   const save = async () => {
     if (!form.title.trim()) { alert('Ürün adı zorunlu.'); return; }
     setSaving(true);
     const id = isNew ? slugify(form.title) : product.id;
     const idx = isNew ? (product.idx || String(Date.now()).slice(-4)) : product.idx;
+    const payload = { ...form, body_html: cleanHtml(form.body_html), desc_short: cleanHtml(form.desc_short) };
     const { error } = await supabase.from('products').upsert({
       id, idx, is_custom: isNew ? true : (product.is_custom || false),
-      hidden: false, ...form, updated_at: new Date().toISOString(),
+      hidden: false, ...payload, updated_at: new Date().toISOString(),
     }, { onConflict: 'id' });
     setSaving(false);
     if (error) { alert('Kayıt hatası: ' + error.message); return; }

@@ -6,6 +6,18 @@ import { NotFound } from './pages-misc.jsx';
 import { supabase } from './supabase.js';
 
 export function ProductsList({ go }) {
+  const [dbMap, setDbMap] = useState({});
+  useEffect(() => {
+    supabase.from('products').select('*')
+      .then(({ data }) => { if (data) setDbMap(Object.fromEntries(data.map(p => [p.id, p]))); });
+  }, []);
+
+  const staticVisible = PRODUCTS.filter(p => !dbMap[p.id]?.hidden);
+  const customVisible = Object.values(dbMap).filter(p => p.is_custom && !p.hidden && !PRODUCTS.find(s => s.id === p.id));
+  const all = [...staticVisible.map(p => ({ ...p, ...(dbMap[p.id] || {}) })), ...customVisible];
+
+  const DefaultIco = ({ size }) => <svg viewBox="0 0 24 24" width={size} height={size} fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M12 2l10 9H2z"/></svg>;
+
   return (
     <div className="page-enter">
       <PageHeader kicker="Ürünler" title={<>11 ürün kategorisi, <span style={{ color: 'var(--primary)' }}>tek danışman.</span></>}
@@ -14,14 +26,14 @@ export function ProductsList({ go }) {
       <section className="section">
         <div className="container">
           <div className="r3-1 mob-1" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 16 }}>
-            {PRODUCTS.map(p => {
-              const Ico = ICONS_BY_PRODUCT[p.id];
+            {all.map(p => {
+              const Ico = ICONS_BY_PRODUCT[p.id] || DefaultIco;
               return (
                 <a key={p.id} href={`/urunler/${p.id}`} onClick={e => { e.preventDefault(); go(`/urunler/${p.id}`); }}
                    className="card card-hover" style={{ padding: 28, color: 'var(--text)' }}>
                   <div style={{ width: 48, height: 48, borderRadius: 14, background: 'var(--primary-50)', color: 'var(--primary)', display: 'grid', placeItems: 'center' }}><Ico size={24} /></div>
                   <h3 style={{ fontFamily: 'var(--font-display)', fontSize: 22, fontWeight: 700, margin: '20px 0 8px', letterSpacing: '-0.015em' }}>{p.title}</h3>
-                  <p style={{ fontSize: 14, color: 'var(--text-2)', lineHeight: 1.6, margin: 0 }}>{p.desc}</p>
+                  <p style={{ fontSize: 14, color: 'var(--text-2)', lineHeight: 1.6, margin: 0 }}>{p.desc || p.desc_short}</p>
                   <div style={{ marginTop: 16, fontSize: 13.5, fontWeight: 600, color: 'var(--primary)', display: 'inline-flex', alignItems: 'center', gap: 6 }}>Detay <IconArrow size={12} /></div>
                 </a>
               );
@@ -308,8 +320,10 @@ export function ProductDetail({ id, go }) {
   const title = p.title || base.title;
   const kicker = p.kicker || base.kicker;
   const desc = p.desc_short || p.desc;
-  const bodyHtml = p.body_html || null;
-  const bodyArr = (!bodyHtml && base.body?.length) ? base.body : null;
+  const rawHtml = p.body_html || '';
+  const bodyHtml = rawHtml.replace(/<[^>]*>/g, '').trim() ? rawHtml : null;
+  // Only show static body if there's NO DB record at all — once admin saves, static fallback disabled
+  const bodyArr = (!bodyHtml && !dbData && base?.body?.length) ? base.body : null;
   return (
     <div className="page-enter">
       <PageHeader kicker={kicker} title={title} breadcrumb={`Ana Sayfa / Ürünler / ${title}`} />

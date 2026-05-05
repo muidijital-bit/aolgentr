@@ -1,11 +1,19 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { PRODUCTS, AGENCIES } from './data.jsx';
 import { ICONS_BY_PRODUCT, IconArrow } from './icons.jsx';
 import { SectionLabel } from './components.jsx';
 import { QuoteFormKasko, QuoteFormSaglik } from './pages-misc.jsx';
+import { supabase } from './supabase.js';
 
 /* ---------- Products section ---------- */
 export function ProductsSection({ go }) {
+  const [hiddenIds, setHiddenIds] = useState(new Set());
+  useEffect(() => {
+    supabase.from('products').select('id').eq('hidden', true)
+      .then(({ data }) => { if (data) setHiddenIds(new Set(data.map(d => d.id))); });
+  }, []);
+  const visible = PRODUCTS.filter(p => !hiddenIds.has(p.id));
+
   return (
     <section className="section">
       <div className="container">
@@ -21,7 +29,7 @@ export function ProductsSection({ go }) {
           </p>
         </div>
         <div className="r4-2 mob-1" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 16 }}>
-          {PRODUCTS.map(p => {
+          {visible.map(p => {
             const Ico = ICONS_BY_PRODUCT[p.id];
             return (
               <a key={p.id} href={`/urunler/${p.id}`} onClick={e => { e.preventDefault(); go(`/urunler/${p.id}`); }}

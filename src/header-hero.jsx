@@ -232,6 +232,7 @@ export const HERO_SLIDES = [
 export function Hero({ go }) {
   const [idx, setIdx] = useState(0);
   const timer = useRef(null);
+  const touchX = useRef(null);
 
   useEffect(() => {
     timer.current = setInterval(() => setIdx(i => (i + 1) % HERO_SLIDES.length), 5200);
@@ -330,9 +331,16 @@ export function Hero({ go }) {
           </div>
 
           {/* RIGHT — Creative slider */}
-          <div>
+          <div style={{ minWidth: 0, width: '100%' }}>
             <div className="slider">
-              <div className="slider-track">
+              <div className="slider-track"
+                onTouchStart={e => { touchX.current = e.touches[0].clientX; }}
+                onTouchEnd={e => {
+                  if (touchX.current === null) return;
+                  const diff = touchX.current - e.changedTouches[0].clientX;
+                  if (Math.abs(diff) > 40) diff > 0 ? next() : prev();
+                  touchX.current = null;
+                }}>
                 <div className="hv-ring" style={{ zIndex: 0 }}></div>
                 <div className="hv-shape" style={{ zIndex: 0 }}></div>
 
