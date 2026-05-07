@@ -10,6 +10,9 @@
       "Bash(cp ~/Downloads/saglik.png /Users/mui/projects/aolgentr/public/assets/slide-saglik.png)",
       "Bash(cp ~/Downloads/konutisyeri.png /Users/mui/projects/aolgentr/public/assets/slide-konut.png)",
       "Bash(cp ~/Downloads/bireyselemeklilik.png /Users/mui/projects/aolgentr/public/assets/slide-bes.png)"
+    ],
+    "additionalDirectories": [
+      "/Users/mui/Downloads"
     ]
   }
 }
