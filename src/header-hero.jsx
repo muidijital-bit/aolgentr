@@ -205,32 +205,24 @@ export function Header({ route, go }) {
 /* ---------- Hero Slider data ---------- */
 export const HERO_SLIDES = [
   {
-    id: 'kasko', cls: 'slide-kasko', img: '/assets/slide-kasko.jpg',
+    id: 'kasko', img: '/assets/slide-kasko.png', path: '/urunler/kasko',
     title: 'Aracınız için tam kapsamlı koruma',
     desc: 'Kasko ve zorunlu trafik sigortasında +20 şirketin tekliflerini sizin için hazırlıyor ve kıyaslıyoruz.',
-    icon: 'car',
-    meta: [],
   },
   {
-    id: 'saglik', cls: 'slide-saglik', img: '/assets/slide-saglik.jpg',
-    title: 'Sağlığınız için özel çözümler — Tamamlayıcı ve Özel Sağlık Sigortası',
-    desc: 'Sağlık problemlerinizde ne yapacağınızı düşünmeyin; tüm özel hastaneler ve doktorlar elinizin altında. Siz hangi planı alacağınıza karar verin.',
-    icon: 'heart',
-    meta: [],
+    id: 'saglik', img: '/assets/slide-saglik.png', path: '/urunler/saglik-sigortasi',
+    title: 'Sağlığınız için özel çözümler',
+    desc: 'Sağlık problemlerinizde ne yapacağınızı düşünmeyin; tüm özel hastaneler ve doktorlar elinizin altında.',
   },
   {
-    id: 'konut', cls: 'slide-konut', img: '/assets/slide-konut.jpg',
+    id: 'konut', img: '/assets/slide-konut.png', path: '/urunler/konut-isyeri-sigortasi',
     title: 'Konut ve işyeriniz güvencede',
     desc: 'Yangın, hırsızlık, sel ve su hasarları, deprem ve beklenmedik riskleri teminat altına alın.',
-    icon: 'home',
-    meta: [],
   },
   {
-    id: 'bes', cls: 'slide-bes', img: '/assets/slide-bes.jpg',
+    id: 'bes', img: '/assets/slide-bes.png', path: '/urunler/bireysel-emeklilik',
     title: 'Geleceğinizi bugünden planlayın',
-    desc: 'Bireysel Emeklilik ile düzenli tasarruf yapmaya başlayın ve %20 devlet katkısı ile yatırımınızı katlayın; hayat sigortası ile beklenmedik risklere karşı sevdiklerinizin geleceğini teminat altına alın.',
-    icon: 'pig',
-    meta: [],
+    desc: 'Bireysel Emeklilik ile düzenli tasarruf yapın, %20 devlet katkısı ile yatırımınızı katlayın.',
   },
 ];
 
@@ -351,43 +343,25 @@ export function Hero({ go }) {
                 <div className="hv-shape" style={{ zIndex: 0 }}></div>
 
                 {HERO_SLIDES.map((s, i) => (
-                  <div key={s.id} className={'slide ' + s.cls + (i === idx ? ' active' : '')}>
-                    <img src={s.img} alt={s.title} className="slide-bg" />
-                    <div className="slide-overlay"></div>
-                    <div className="slide-head" style={{ position: 'relative', zIndex: 2 }}>
-                      <span className="hv-badge slide-badge">
+                  <a key={s.id} href={s.path} onClick={e => { e.preventDefault(); go(s.path); }}
+                     className={'slide' + (i === idx ? ' active' : '')} style={{ flexDirection: 'column', padding: 0, justifyContent: 'flex-end', cursor: 'pointer', pointerEvents: i === idx ? 'auto' : 'none' }}>
+                    {/* image area */}
+                    <div style={{ flex: 1, background: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '16px 20px', position: 'relative', overflow: 'hidden' }}>
+                      <span className="hv-badge slide-badge" style={{ position: 'absolute', top: 12, left: 12, zIndex: 2 }}>
                         <span style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--primary)' }}></span>
-                        {String(i + 1).padStart(2, '0')} / {String(HERO_SLIDES.length).padStart(2, '0')} · {s.id.toUpperCase()}
+                        {String(i + 1).padStart(2, '0')} / {String(HERO_SLIDES.length).padStart(2, '0')}
                       </span>
-                      <span className="slide-icon-wrap">{iconFor(s.icon)}</span>
+                      <img src={s.img} alt={s.title} style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
                     </div>
-                    <div style={{ position: 'relative', zIndex: 2 }}>
-                      <h3 className="slide-title slide-title-light">{s.title}</h3>
-                      <p className="slide-desc slide-desc-light">{s.desc}</p>
-                      <div className="slide-meta">
-                        {s.meta.map(m => <div key={m}><IconCheck size={12} /> {m}</div>)}
-                      </div>
+                    {/* text area */}
+                    <div style={{ flexShrink: 0, background: 'linear-gradient(135deg, var(--slate-900) 0%, #1a2744 100%)', padding: '20px 24px' }}>
+                      <h3 className="slide-title slide-title-light" style={{ fontSize: 18 }}>{s.title}</h3>
+                      <p className="slide-desc slide-desc-light" style={{ marginTop: 6, fontSize: 13 }}>{s.desc}</p>
                     </div>
-                  </div>
+                  </a>
                 ))}
 
-                {/* floating cards */}
-                <div className="hv-float hv-float-1">
-                  <div className="ic"><IconShield size={18} /></div>
-                  <div>
-                    <div className="tt">+20 şirket karşılaştırması</div>
-                    <div className="ds">Tek başvuruyla</div>
-                  </div>
-                </div>
-                <div className="hv-float hv-float-2">
-                  <div className="ic"><IconCheck size={18} /></div>
-                  <div>
-                    <div className="tt">Ortalama 4 saatte</div>
-                    <div className="ds">Teklif dönüşü</div>
-                  </div>
-                </div>
-
-                <div className="slider-nav">
+<div className="slider-nav">
                   <button onClick={prev} aria-label="Önceki">
                     <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.6"><path d="M9 2L4 7l5 5"/></svg>
                   </button>

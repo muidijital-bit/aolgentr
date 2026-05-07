@@ -355,6 +355,17 @@ footer a:hover { color: var(--primary); }
 
 /* page transition */
 .page-enter { animation: pageIn 420ms var(--ease) both; }
+
+/* Skeleton loader */
+@keyframes shimmer {
+  0%   { background-position: -600px 0; }
+  100% { background-position:  600px 0; }
+}
+.skeleton {
+  background: linear-gradient(90deg, var(--slate-100) 25%, var(--slate-50) 50%, var(--slate-100) 75%);
+  background-size: 600px 100%;
+  animation: shimmer 1.4s infinite linear;
+}
 @keyframes pageIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
 
 /* Tweaks */

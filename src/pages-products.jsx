@@ -311,9 +311,11 @@ export function ProductIllust({ id }) {
 export function ProductDetail({ id, go }) {
   const base = PRODUCTS.find(x => x.id === id);
   const [dbData, setDbData] = useState(null);
+  const [dbLoaded, setDbLoaded] = useState(false);
   useEffect(() => {
+    setDbLoaded(false);
     supabase.from('products').select('*').eq('id', id).single()
-      .then(({ data }) => { if (data) setDbData(data); });
+      .then(({ data }) => { if (data) setDbData(data); setDbLoaded(true); });
   }, [id]);
   if (!base) return <NotFound go={go} />;
   const p = { ...base, ...(dbData || {}) };
@@ -342,9 +344,11 @@ export function ProductDetail({ id, go }) {
                 <div style={{ fontSize: 15, lineHeight: 1.7, color: 'var(--text-2)', margin: 0, maxWidth: 420 }} dangerouslySetInnerHTML={{ __html: desc }} />
               </div>
               <div style={{ background: 'var(--slate-50)', display: 'grid', placeItems: 'center', borderLeft: '1px solid var(--border)', overflow: 'hidden' }}>
-                {p.image_url
-                  ? <img src={p.image_url} alt={title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                  : <ProductIllust id={base.id} />
+                {!dbLoaded
+                  ? <div className="skeleton" style={{ width: '100%', height: '100%' }} />
+                  : p.image_url
+                    ? <img src={p.image_url} alt={title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                    : <ProductIllust id={base.id} />
                 }
               </div>
             </div>

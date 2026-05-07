@@ -5,7 +5,11 @@
       "Bash(sed -i '' 's/22 şirketi sizin için karşılaştırıyoruz/+20 şirketi sizin için karşılaştırıyoruz/g' /Users/mui/projects/aolgentr/src/header-hero.jsx)",
       "Bash(sed -i '' 's/22 şirket karşılaştırması/+20 şirket karşılaştırması/g' /Users/mui/projects/aolgentr/src/header-hero.jsx)",
       "Bash(sed -i '' 's/22 sigorta şirketinden size özel/+20 sigorta şirketinden size özel/g' /Users/mui/projects/aolgentr/src/pages-home.jsx)",
-      "Bash(sed -i '' 's/22 sigorta şirketinin yetkili acentesi olarak 30/+20 sigorta şirketinin yetkili acentesi olarak 30/g' /Users/mui/projects/aolgentr/src/components.jsx)"
+      "Bash(sed -i '' 's/22 sigorta şirketinin yetkili acentesi olarak 30/+20 sigorta şirketinin yetkili acentesi olarak 30/g' /Users/mui/projects/aolgentr/src/components.jsx)",
+      "Bash(cp ~/Downloads/kasko.png /Users/mui/projects/aolgentr/public/assets/slide-kasko.png)",
+      "Bash(cp ~/Downloads/saglik.png /Users/mui/projects/aolgentr/public/assets/slide-saglik.png)",
+      "Bash(cp ~/Downloads/konutisyeri.png /Users/mui/projects/aolgentr/public/assets/slide-konut.png)",
+      "Bash(cp ~/Downloads/bireyselemeklilik.png /Users/mui/projects/aolgentr/public/assets/slide-bes.png)"
     ]
   }
 }
