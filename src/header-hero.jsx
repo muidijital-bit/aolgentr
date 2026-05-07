@@ -314,7 +314,7 @@ export function Hero({ go }) {
                   </div>
                 ))}
               </div>
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10, marginTop: 14 }}>
+              <div className="mob-xs-1" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10, marginTop: 14 }}>
                 {[
                   { v: '+12.000', l: 'Mutlu müşteri' },
                   { v: '+21.000', l: 'Yönetilen poliçe' },
