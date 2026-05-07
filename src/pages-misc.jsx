@@ -26,13 +26,13 @@ export function AboutPage({ go }) {
       />
 
       {/* Ne istiyorsunuz */}
-      <section className="section" style={{ paddingTop: 64, paddingBottom: 64 }}>
+      <section className="section" style={{ paddingTop: 32, paddingBottom: 32 }}>
         <div className="container">
           <div className="mob-1" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 64, alignItems: 'center' }}>
             <div>
               <SectionLabel>Müşteri odağımız</SectionLabel>
               <h2 className="display-2" style={{ margin: '14px 0 24px' }}>
-                Sizin için ne <span style={{ color: 'var(--primary)' }}>önemli?</span>
+                Sizin için neler <span style={{ color: 'var(--primary)' }}>önemli?</span>
               </h2>
               <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'grid', gap: 16 }}>
                 {wants.map((w, i) => (
@@ -58,7 +58,7 @@ export function AboutPage({ go }) {
       </section>
 
       {/* Doğru Yerdesiniz */}
-      <section className="section" style={{ background: 'var(--slate-50)', paddingTop: 80, paddingBottom: 80 }}>
+      <section className="section" style={{ background: 'var(--slate-50)', paddingTop: 40, paddingBottom: 40 }}>
         <div className="container">
           <div className="mob-1" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 64, alignItems: 'flex-start' }}>
             <div>
@@ -78,7 +78,7 @@ export function AboutPage({ go }) {
             </div>
             <div style={{ display: 'grid', gap: 12 }}>
               {[
-                ['Doğru eşleştirme', '22 şirketin ürünlerini karşılaştırarak ihtiyacınıza en uygun poliçeyi birlikte belirliyoruz.'],
+                ['Doğru eşleştirme', '+20 şirketin ürünlerini karşılaştırarak ihtiyacınıza en uygun poliçeyi birlikte belirliyoruz.'],
                 ['Şeffaf teminat', 'Hangi risk teminat altında, hangisi değil — her madde, her koşul açıkça anlatılır.'],
                 ['Hasar takibi', 'Poliçe satışı bittiğinde işimiz başlar. Hasar sürecini uçtan uca sizin adınıza yönetiyoruz.'],
                 ['Uzun vadeli ilişki', 'Her yenileme döneminde portföyünüz yeniden değerlendirilerek size en uygun seçenek sunulur.'],
@@ -97,7 +97,7 @@ export function AboutPage({ go }) {
       </section>
 
       {/* Portföy */}
-      <section className="section" style={{ paddingTop: 80, paddingBottom: 80 }}>
+      <section className="section" style={{ paddingTop: 40, paddingBottom: 48 }}>
         <div className="container">
           <div style={{ maxWidth: 720 }}>
             <SectionLabel>Portföy</SectionLabel>
@@ -150,7 +150,7 @@ export function AgenciesPage({ go }) {
     <div className="page-enter">
       <PageHeader kicker="Acentelikler" title={<>22 sigorta şirketinin <span style={{ color: 'var(--primary)' }}>yetkili acentesi.</span></>}
         lead="Türkiye'nin önde gelen ulusal ve uluslararası sigorta şirketleri." breadcrumb="Ana Sayfa / Acentelikler" />
-      <section className="section">
+      <section className="section" style={{ paddingTop: 32, paddingBottom: 48 }}>
         <div className="container">
           <div className="r4-2 mob-1" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 12 }}>
             {AGENCIES.map((a, i) => (
@@ -163,7 +163,7 @@ export function AgenciesPage({ go }) {
   );
 }
 
-function ContactForm() {
+export function ContactForm() {
   const [s, setS] = useState({ name: '', phone: '', email: '', subject: '', message: '', consent: false });
   const [errs, setErrs] = useState({});
   const [sent, setSent] = useState(false);
@@ -455,17 +455,17 @@ export function QuoteSuccess({ type, onReset }) {
 }
 
 export function QuotePage({ go }) {
-  const [tab, setTab] = useState('kasko');
+  const [tab, setTab] = useState('mesaj');
   return (
     <div className="page-enter">
       <PageHeader kicker="Teklif Al" title={<>Teklifinizi alın, <span style={{ color: 'var(--primary)' }}>biz kıyaslayalım.</span></>}
-        lead="22 şirketin tekliflerini sizin için karşılaştırıyoruz." breadcrumb="Ana Sayfa / Teklif Al" />
-      <section className="section">
+        lead="+20 şirketin tekliflerini sizin için karşılaştırıyoruz." breadcrumb="Ana Sayfa / Teklif Al" />
+      <section className="section" style={{ paddingTop: 0, paddingBottom: 0 }}>
         <div className="container">
           <div className="mob-1" style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: 32 }}>
             <aside>
               <div style={{ display: 'grid', gap: 8 }}>
-                {[['kasko','Form 01','Kasko / Trafik'], ['saglik','Form 02','Sağlık Sigortası']].map(([k, n, t]) => (
+                {[['mesaj','Form 01','Mesaj Gönder'], ['kasko','Form 02','Kasko / Trafik'], ['saglik','Form 03','Sağlık Sigortası']].map(([k, n, t]) => (
                   <button key={k} onClick={() => setTab(k)} className="card" style={{ padding: 20, textAlign: 'left', background: tab === k ? 'var(--primary)' : '#fff', color: tab === k ? '#fff' : 'var(--text)', borderColor: tab === k ? 'var(--primary)' : 'var(--border)' }}>
                     <div className="mono-tag" style={{ color: tab === k ? 'rgba(255,255,255,0.7)' : 'var(--text-2)' }}>{n}</div>
                     <div style={{ fontFamily: 'var(--font-display)', fontSize: 20, fontWeight: 700, marginTop: 6 }}>{t}</div>
@@ -474,7 +474,7 @@ export function QuotePage({ go }) {
               </div>
             </aside>
             <div className="card" style={{ padding: 32 }}>
-              {tab === 'kasko' ? <QuoteFormKasko /> : <QuoteFormSaglik />}
+              {tab === 'kasko' ? <QuoteFormKasko /> : tab === 'saglik' ? <QuoteFormSaglik /> : <ContactForm />}
             </div>
           </div>
         </div>

@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(sed -i '' 's/22 sigorta şirketinin yetkili acentesi olarak; kasko/+20 sigorta şirketinin yetkili acentesi olarak; kasko/g' /Users/mui/projects/aolgentr/src/header-hero.jsx)",
+      "Bash(sed -i '' 's/22 şirketi sizin için karşılaştırıyoruz/+20 şirketi sizin için karşılaştırıyoruz/g' /Users/mui/projects/aolgentr/src/header-hero.jsx)",
+      "Bash(sed -i '' 's/22 şirket karşılaştırması/+20 şirket karşılaştırması/g' /Users/mui/projects/aolgentr/src/header-hero.jsx)",
+      "Bash(sed -i '' 's/22 sigorta şirketinden size özel/+20 sigorta şirketinden size özel/g' /Users/mui/projects/aolgentr/src/pages-home.jsx)",
+      "Bash(sed -i '' 's/22 sigorta şirketinin yetkili acentesi olarak 30/+20 sigorta şirketinin yetkili acentesi olarak 30/g' /Users/mui/projects/aolgentr/src/components.jsx)"
+    ]
+  }
+}

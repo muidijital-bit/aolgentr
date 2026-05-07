@@ -13,7 +13,7 @@ export function Footer({ go }) {
           <div>
             <AolLogo height={80} />
             <p style={{ marginTop: 20, maxWidth: 340, color: 'var(--text-2)', fontSize: 14, lineHeight: 1.65 }}>
-              Artı Oluşum Sigorta Aracılık Hizmetleri Ltd. Şti. 22 sigorta şirketinin yetkili acentesi olarak 30 yıla yakın deneyimle yanınızdayız.
+              Artı Oluşum Sigorta Aracılık Hizmetleri Ltd. Şti. +20 sigorta şirketinin yetkili acentesi olarak 30 yıla yakın deneyimle yanınızdayız.
             </p>
             <div style={{ marginTop: 24, display: 'flex', gap: 10 }}>
               <button className="btn btn-primary" onClick={() => go('/teklif-al')}>Teklif Al <IconArrow size={12} /></button>
@@ -23,7 +23,7 @@ export function Footer({ go }) {
           <div>
             <div className="mono-tag" style={{ marginBottom: 16 }}>Keşfet</div>
             <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'grid', gap: 10, fontSize: 14 }}>
-              {NAV.map(n => (
+              {NAV.filter(n => n.id !== 'branches').map(n => (
                 <li key={n.id}><a href={n.path} onClick={e => { e.preventDefault(); go(n.path); }}>{n.label}</a></li>
               ))}
               <li><a href="/teklif-al" onClick={e => { e.preventDefault(); go('/teklif-al'); }}>Teklif Al</a></li>
@@ -44,7 +44,6 @@ export function Footer({ go }) {
             <div className="mono-tag" style={{ marginBottom: 16 }}>İletişim</div>
             <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'grid', gap: 10, fontSize: 14 }}>
               <li><a href={`mailto:${COMPANY.email}`}>{COMPANY.email}</a></li>
-              <li style={{ color: 'var(--text-2)' }}>Teklif: <a href={`mailto:${COMPANY.quoteEmail}`}>{COMPANY.quoteEmail}</a></li>
             </ul>
             <div className="mono-tag" style={{ marginTop: 24, marginBottom: 16 }}>Çalışma Saatlerimiz</div>
             <p style={{ margin: 0, fontSize: 14, color: 'var(--text)', lineHeight: 1.7 }}>

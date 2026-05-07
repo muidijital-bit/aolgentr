@@ -54,6 +54,10 @@ export function Header({ route, go }) {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [productsOpen, setProductsOpen] = useState(false);
+  const [ddOpen, setDdOpen] = useState(false);
+  const ddTimer = useRef(null);
+  const openDd  = () => { clearTimeout(ddTimer.current); setDdOpen(true); };
+  const closeDd = () => { ddTimer.current = setTimeout(() => setDdOpen(false), 120); };
 
   useEffect(() => {
     const on = () => setScrolled(window.scrollY > 12);
@@ -95,8 +99,10 @@ export function Header({ route, go }) {
                  className={'nav-item' + (active('home') ? ' active' : '')}>Ana Sayfa</a>
               <a href="/hakkimizda" onClick={e => { e.preventDefault(); go('/hakkimizda'); }}
                  className={'nav-item' + (active('about') ? ' active' : '')}>Hakkımızda</a>
-              <div className="has-dd">
-                <a href="/urunler" onClick={e => { e.preventDefault(); go('/urunler'); }}
+              <div className={'has-dd' + (ddOpen ? ' open' : '')}
+                   onMouseEnter={openDd}
+                   onMouseLeave={closeDd}>
+                <a href="/urunler" onClick={e => { e.preventDefault(); setDdOpen(false); go('/urunler'); }}
                    className={'nav-item' + (active('products') ? ' active' : '')}>
                   Ürünler
                   <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" strokeWidth="1.6"><path d="M2 3.5l3 3 3-3"/></svg>
@@ -107,7 +113,7 @@ export function Header({ route, go }) {
                       const Ico = ICONS_BY_PRODUCT[p.id];
                       return (
                         <a key={p.id} href={`/urunler/${p.id}`}
-                           onClick={e => { e.preventDefault(); go(`/urunler/${p.id}`); }}
+                           onClick={e => { e.preventDefault(); setDdOpen(false); go(`/urunler/${p.id}`); }}
                            className="dd-item">
                           <span className="ic"><Ico size={20} /></span>
                           <div>
@@ -201,30 +207,30 @@ export const HERO_SLIDES = [
   {
     id: 'kasko', cls: 'slide-kasko', img: '/assets/slide-kasko.jpg',
     title: 'Aracınız için tam kapsamlı koruma',
-    desc: 'Kasko ve zorunlu trafik sigortasında 22 şirketi sizin için karşılaştırıyoruz. Hasar anında uçtan uca takip.',
+    desc: 'Kasko ve zorunlu trafik sigortasında +20 şirketin tekliflerini sizin için hazırlıyor ve kıyaslıyoruz.',
     icon: 'car',
-    meta: ['Yedek araç', 'Asistans 7/24', 'Cam kırılması'],
+    meta: [],
   },
   {
     id: 'saglik', cls: 'slide-saglik', img: '/assets/slide-saglik.jpg',
-    title: 'Özel sağlıkta serbest hekim seçimi',
-    desc: 'Özel hastane ağı, yurt içi ve yurt dışı teminat. Aile paketleri ve kurumsal çalışan grupları.',
+    title: 'Sağlığınız için özel çözümler — Tamamlayıcı ve Özel Sağlık Sigortası',
+    desc: 'Sağlık problemlerinizde ne yapacağınızı düşünmeyin; tüm özel hastaneler ve doktorlar elinizin altında. Siz hangi planı alacağınıza karar verin.',
     icon: 'heart',
-    meta: ['Yatarak / Ayakta', 'Check-up', 'Yurt dışı'],
+    meta: [],
   },
   {
     id: 'konut', cls: 'slide-konut', img: '/assets/slide-konut.jpg',
     title: 'Konut ve işyeriniz güvencede',
-    desc: 'Yangın, hırsızlık, deprem ve DASK dahil kişiye ve kuruma özel paketler.',
+    desc: 'Yangın, hırsızlık, sel ve su hasarları, deprem ve beklenmedik riskleri teminat altına alın.',
     icon: 'home',
-    meta: ['Deprem / DASK', 'Yangın', 'Hırsızlık'],
+    meta: [],
   },
   {
     id: 'bes', cls: 'slide-bes', img: '/assets/slide-bes.jpg',
     title: 'Geleceğinizi bugünden planlayın',
-    desc: 'Bireysel Emeklilik (BES) ile %30 devlet katkısı, esnek katkı payı ve fon seçim özgürlüğü.',
+    desc: 'Bireysel Emeklilik ile düzenli tasarruf yapmaya başlayın ve %20 devlet katkısı ile yatırımınızı katlayın; hayat sigortası ile beklenmedik risklere karşı sevdiklerinizin geleceğini teminat altına alın.',
     icon: 'pig',
-    meta: ['%30 devlet katkısı', 'Esnek ödeme', 'Fon seçimi'],
+    meta: [],
   },
 ];
 
@@ -276,7 +282,7 @@ export function Hero({ go }) {
               .
             </h1>
             <p className="lead" style={{ maxWidth: 540, marginTop: 28 }}>
-              22 sigorta şirketinin yetkili acentesi olarak; kasko, sağlık, konut, BES ve daha fazlasında
+              +20 sigorta şirketinin yetkili acentesi olarak; kasko, sağlık, konut, BES ve daha fazlasında
               size özel en uygun teklifi birlikte buluyoruz.
             </p>
 
@@ -369,7 +375,7 @@ export function Hero({ go }) {
                 <div className="hv-float hv-float-1">
                   <div className="ic"><IconShield size={18} /></div>
                   <div>
-                    <div className="tt">22 şirket karşılaştırması</div>
+                    <div className="tt">+20 şirket karşılaştırması</div>
                     <div className="ds">Tek başvuruyla</div>
                   </div>
                 </div>

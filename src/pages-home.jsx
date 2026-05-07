@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { PRODUCTS, AGENCIES } from './data.jsx';
 import { ICONS_BY_PRODUCT, IconArrow } from './icons.jsx';
 import { SectionLabel } from './components.jsx';
-import { QuoteFormKasko, QuoteFormSaglik } from './pages-misc.jsx';
+import { QuoteFormKasko, QuoteFormSaglik, ContactForm } from './pages-misc.jsx';
 import { supabase } from './supabase.js';
 
 /* ---------- Products section ---------- */
@@ -25,7 +25,7 @@ export function ProductsSection({ go }) {
             </h2>
           </div>
           <p className="lead" style={{ maxWidth: 420, margin: 0 }}>
-            Zorunlu teminatlardan bireysel planlara — yedi ana ürün kategorisinde uzman danışmanlık.
+            Zorunlu teminatlardan bireysel planlara — tüm ürün kategorilerinde uzman danışmanlık.
           </p>
         </div>
         <div className="r4-2 mob-1" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 16 }}>
@@ -101,7 +101,12 @@ export function AboutStrip({ go }) {
 
 /* ---------- Quick Quote (form embed) ---------- */
 export function QuickQuote({ go }) {
-  const [tab, setTab] = useState('kasko');
+  const [tab, setTab] = useState('mesaj');
+  const tabs = [
+    { k: 'mesaj',  label: 'Mesaj Gönder' },
+    { k: 'kasko',  label: 'Kasko / Trafik' },
+    { k: 'saglik', label: 'Sağlık Sigortası' },
+  ];
   return (
     <section className="section">
       <div className="container">
@@ -111,15 +116,16 @@ export function QuickQuote({ go }) {
             <h2 className="display-2" style={{ margin: '14px 0 20px' }}>
               Dakikalar içinde <span style={{ color: 'var(--primary)' }}>teklifiniz hazır.</span>
             </h2>
-            <p className="lead">22 sigorta şirketinden size özel en uygun teklifleri sizin için kıyaslıyoruz.</p>
+            <p className="lead">+20 sigorta şirketinden size özel en uygun teklifleri sizin için kıyaslıyoruz.</p>
           </div>
           <div className="card" style={{ overflow: 'hidden' }}>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', borderBottom: '1px solid var(--border)' }}>
-              <button onClick={() => setTab('kasko')} style={{ padding: 18, fontWeight: 600, color: tab === 'kasko' ? 'var(--primary)' : 'var(--text-2)', background: tab === 'kasko' ? 'var(--primary-50)' : 'transparent', borderRight: '1px solid var(--border)' }}>Kasko / Trafik</button>
-              <button onClick={() => setTab('saglik')} style={{ padding: 18, fontWeight: 600, color: tab === 'saglik' ? 'var(--primary)' : 'var(--text-2)', background: tab === 'saglik' ? 'var(--primary-50)' : 'transparent' }}>Sağlık Sigortası</button>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', borderBottom: '1px solid var(--border)' }}>
+              {tabs.map(({ k, label }, i) => (
+                <button key={k} onClick={() => setTab(k)} style={{ padding: '14px 10px', fontWeight: 600, fontSize: 13, color: tab === k ? 'var(--primary)' : 'var(--text-2)', background: tab === k ? 'var(--primary-50)' : 'transparent', borderRight: i < tabs.length - 1 ? '1px solid var(--border)' : 'none' }}>{label}</button>
+              ))}
             </div>
             <div style={{ padding: 28 }}>
-              {tab === 'kasko' ? <QuoteFormKasko compact /> : <QuoteFormSaglik compact />}
+              {tab === 'kasko' ? <QuoteFormKasko compact /> : tab === 'saglik' ? <QuoteFormSaglik compact /> : <ContactForm />}
             </div>
           </div>
         </div>

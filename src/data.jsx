@@ -50,8 +50,18 @@ export const PRODUCTS = [
     ],
   },
   {
-    id: 'ferdi-kaza',
+    id: 'kurumsal-endustriyel',
     idx: '03',
+    title: 'Kurumsal & Endüstriyel',
+    kicker: 'İşletmenize özel sigorta çözümleri',
+    desc: 'İşletmeniz için gerekli olabilecek; İnşaat tamamlama, Kefalet, All Risks, Sorumluluk, Makine Kırılması, Elektronik Cihaz, Enerji Sistemleri, Enerji Santralleri sigortaları gibi sigortaları içerir.',
+    body: [
+      'Her biri için öncelikle risk tespiti yapılıp sonrasında ihtiyaca yönelik sigorta çözümleri sunulur.',
+    ],
+  },
+  {
+    id: 'ferdi-kaza',
+    idx: '04',
     title: 'Ferdi Kaza Sigortası',
     kicker: 'Kaza anında finansal güvence',
     desc: 'Sigortalının veya yakınlarının kaza sonucu hayatını kaybetmesi veya kalıcı sakatlığı söz konusu olduğunda, belirtilen limitler doğrultusunda sigorta bedeli menfaatdarlara veya kanuni hak sahiplerine ödenir.',
@@ -64,7 +74,7 @@ export const PRODUCTS = [
   },
   {
     id: 'hayat-sigortasi',
-    idx: '04',
+    idx: '05',
     title: 'Hayat Sigortası',
     kicker: 'Sevdikleriniz için uzun vadeli güvence',
     desc: 'Hayat Sigortası, beklenmedik risklere karşı sizin ve ailenizin yaşam standartlarının aynı koşullarla korunarak devam etmesini sağlayan bir sigorta ürünüdür.',
@@ -76,7 +86,7 @@ export const PRODUCTS = [
   },
   {
     id: 'konut-isyeri-sigortasi',
-    idx: '05',
+    idx: '06',
     title: 'Konut & İşyeri Sigortası',
     kicker: 'Ev ve iş yeriniz için kapsamlı koruma',
     desc: 'Konut ve İşyeri sigortası ürünlerimiz, eviniz veya işyerinizin içindeki eşyaları, makinaları, emtiaları yangından hırsızlığa, depremden su baskınına kadar pek çok riske karşı koruma altına alan geniş kapsamlı ve "kişiye ve kuruma özel" bir paket sigorta uygulamasıdır.',
@@ -88,7 +98,7 @@ export const PRODUCTS = [
   },
   {
     id: 'dask',
-    idx: '06',
+    idx: '07',
     title: 'DASK',
     kicker: 'Zorunlu deprem güvencesi',
     desc: 'Ülkemiz yüksek riskli deprem kuşaklarından birinde yer almaktadır. Depremin doğrudan neden olduğu maddi zararlar ile deprem sonucu meydana gelen yangın, infilak, dev dalga (tsunami) veya yer kaymasının kendinize ve sevdiklerinize verebileceği maddi zararların karşılanabilmesi için vakit kaybetmeden Zorunlu Deprem Sigortanızı yaptırmanızı öneriyoruz. Zorunlu Deprem Sigortası Doğal Afet Sigortaları Kurumu (DASK) tarafından sunulmaktadır.',
@@ -96,7 +106,7 @@ export const PRODUCTS = [
   },
   {
     id: 'saglik-sigortasi',
-    idx: '07',
+    idx: '08',
     title: 'Sağlık Sigortası',
     kicker: 'Özel Sağlık & Tamamlayıcı Sağlık',
     desc: 'Özel Sağlık Sigortası, dilediğiniz doktor ya da sağlık kurumunu seçme özgürlüğü sağlar. Sigortalıların herhangi bir kaza ya da hastalık sonucu ortaya çıkan ayakta ya da yatarak teşhis ve tedavilerine ait masraflar, yurtiçinde veya dünyanın neresinde olurlarsa olsun karşılanır. Sağlık sigortası bu özelliği ile olası yüksek meblağlı sağlık giderlerini karşılayarak, sigortalıların en zor anlarında en büyük yardımcısı olur.',
@@ -107,7 +117,7 @@ export const PRODUCTS = [
   },
   {
     id: 'bireysel-emeklilik',
-    idx: '08',
+    idx: '09',
     title: 'Bireysel Emeklilik',
     kicker: 'BES — Devlet katkılı tasarruf sistemi',
     desc: 'Çalışma hayatınız süresince yaptığınız düzenli tasarrufların yatırıma yönlendirilmesini sağlayarak, oluşacak birikimle, çalışma döneminizde sahip olduğunuz yaşam standartlarını emeklilik döneminizde de devam ettirmeyi amaçlayan gönüllülüğe dayalı bir sistemdir.',
@@ -122,7 +132,7 @@ export const PRODUCTS = [
   },
   {
     id: 'seyahat-sigortasi',
-    idx: '09',
+    idx: '10',
     title: 'Seyahat Sigortası',
     kicker: 'Yurt içi ve yurt dışı seyahat güvencesi',
     desc: 'Seyahat Sigortası, sizi ve sevdiklerinizi gerek iş gerekse tatil amaçlı seyahatlerinizde karşılaşabileceğiniz aksaklıklara karşı güvence altına alıyor.',
@@ -134,21 +144,11 @@ export const PRODUCTS = [
   },
   {
     id: 'nakliyat-sigortasi',
-    idx: '10',
+    idx: '11',
     title: 'Nakliyat Sigortası',
     kicker: 'Kara, deniz, hava, demir yolu',
     desc: 'Gemi, uçak, kamyon ya da tren gibi araçlarla taşınan mallar bu sigorta ile poliçede yer alan şartlar ve klozlar uyarınca bir kaza ya da bir olaya bağlı olarak fiziken zarar görmesi durumunda sigorta tarafından teminat altına alınır.',
     body: [],
-  },
-  {
-    id: 'kurumsal-endustriyel',
-    idx: '11',
-    title: 'Kurumsal & Endüstriyel',
-    kicker: 'İşletmenize özel sigorta çözümleri',
-    desc: 'İşletmeniz için gerekli olabilecek; İnşaat tamamlama, Kefalet, All Risks, Sorumluluk, Makine Kırılması, Elektronik Cihaz, Enerji Sistemleri, Enerji Santralleri sigortaları gibi sigortaları içerir.',
-    body: [
-      'Her biri için öncelikle risk tespiti yapılıp sonrasında ihtiyaca yönelik sigorta çözümleri sunulur.',
-    ],
   },
 ];
 

@@ -23,7 +23,7 @@ export function ProductsList({ go }) {
       <PageHeader kicker="Ürünler" title={<>11 ürün kategorisi, <span style={{ color: 'var(--primary)' }}>tek danışman.</span></>}
         lead="Kasko ve trafik sigortasından bireysel emeklilik ve nakliyata kadar tüm sigorta ihtiyaçlarınızda uzman rehberlik."
         breadcrumb="Ana Sayfa / Ürünler" />
-      <section className="section">
+      <section className="section" style={{ paddingTop: 0, paddingBottom: 48 }}>
         <div className="container">
           <div className="r3-1 mob-1" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 16 }}>
             {all.map(p => {
@@ -341,9 +341,9 @@ export function ProductDetail({ id, go }) {
                 </div>
                 <div style={{ fontSize: 15, lineHeight: 1.7, color: 'var(--text-2)', margin: 0, maxWidth: 420 }} dangerouslySetInnerHTML={{ __html: desc }} />
               </div>
-              <div style={{ background: 'var(--slate-50)', display: 'grid', placeItems: 'center', padding: 40, borderLeft: '1px solid var(--border)' }}>
+              <div style={{ background: 'var(--slate-50)', display: 'grid', placeItems: 'center', borderLeft: '1px solid var(--border)', overflow: 'hidden' }}>
                 {p.image_url
-                  ? <img src={p.image_url} alt={title} style={{ width: '100%', maxWidth: 260, height: 'auto', objectFit: 'contain' }} />
+                  ? <img src={p.image_url} alt={title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                   : <ProductIllust id={base.id} />
                 }
               </div>
@@ -353,7 +353,7 @@ export function ProductDetail({ id, go }) {
       </section>
 
       {(bodyHtml || bodyArr) && (
-        <section className="section" style={{ padding: '48px 0 0' }}>
+        <section className="section" style={{ padding: '20px 0 0' }}>
           <div className="container">
             <div className="card" style={{ padding: '36px 40px' }}>
               {bodyHtml
@@ -367,7 +367,7 @@ export function ProductDetail({ id, go }) {
         </section>
       )}
 
-      <section className="section" style={{ padding: '48px 0' }}>
+      <section className="section" style={{ padding: '24px 0 48px' }}>
         <div className="container">
           <div className="mob-1" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 48, alignItems: 'start' }}>
             <div style={{ paddingTop: 8 }}>
