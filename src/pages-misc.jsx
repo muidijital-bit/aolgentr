@@ -507,7 +507,7 @@ export function QuoteSuccess({ type, onReset }) {
     <div style={{ padding: 8 }}>
       <div style={{ width: 56, height: 56, borderRadius: 16, background: 'var(--primary-50)', color: 'var(--primary)', display: 'grid', placeItems: 'center' }}><IconCheck size={28} /></div>
       <h3 className="display-3" style={{ margin: '20px 0 10px' }}>Talebiniz alındı.</h3>
-      <p style={{ color: 'var(--text-2)', margin: '0 0 20px' }}>{type} teklif talebiniz <strong>{COMPANY.quoteEmail}</strong> adresine iletildi. ≤ 4 saat içinde dönüş sağlanacak.</p>
+      <p style={{ color: 'var(--text-2)', margin: '0 0 20px' }}>{type} teklif talebiniz alındı. En kısa sürede uzman ekibimiz size dönüş yapacak.</p>
       <button className="btn btn-secondary" onClick={onReset}>Yeni talep</button>
     </div>
   );
