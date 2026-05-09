@@ -66,7 +66,7 @@ export function AboutStrip({ go }) {
               Kurumsal deneyim ve butik operasyon bir arada. 30 yıllık sektör birikimi, +12.000 mutlu müşteri ve +21.000 yönetilen poliçeyle.
             </p>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 12, marginTop: 32 }}>
-              {[['30+', 'Yıl deneyim'], ['20', 'Yetkili Sigorta Acenteliği '], ['+12.000', 'Mutlu müşteri'], ['+21.000', 'Yönetilen poliçe']].map(([a, b], i) => (
+              {[['30+', 'Yıl deneyim'], ['+20', 'Yetkili Sigorta Acenteliği'], ['+12.000', 'Mutlu müşteri'], ['+21.000', 'Yönetilen poliçe']].map(([a, b], i) => (
                 <div key={i} className="card" style={{ padding: 20 }}>
                   <div style={{ fontFamily: 'var(--font-display)', fontSize: 32, fontWeight: 800, letterSpacing: '-0.02em', color: 'var(--primary)' }}>{a}</div>
                   <div style={{ fontSize: 13, color: 'var(--text-2)', marginTop: 4 }}>{b}</div>
@@ -158,7 +158,7 @@ export function AgenciesSection({ go, compact = false }) {
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', gap: 40, marginBottom: 36, flexWrap: 'wrap' }}>
           <div>
             <SectionLabel>Acentelikler</SectionLabel>
-            <h2 className="display-2" style={{ margin: '14px 0 0' }}>23 güçlü iş ortağı.</h2>
+            <h2 className="display-2" style={{ margin: '14px 0 0' }}>+20 güçlü iş ortağı.</h2>
           </div>
           {!compact && <button className="btn btn-secondary" onClick={() => go('/acenteliklerimiz')}>Tümünü gör <IconArrow size={12} /></button>}
         </div>

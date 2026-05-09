@@ -4,6 +4,7 @@ import { ICONS_BY_PRODUCT, IconArrow, IconCheck } from './icons.jsx';
 import { PageHeader } from './components.jsx';
 import { NotFound } from './pages-misc.jsx';
 import { supabase } from './supabase.js';
+import { sendEmail } from './email.js';
 
 export function ProductsList({ go }) {
   const [dbMap, setDbMap] = useState({});
@@ -20,8 +21,8 @@ export function ProductsList({ go }) {
 
   return (
     <div className="page-enter">
-      <PageHeader kicker="Ürünler" title={<>11 ürün kategorisi, <span style={{ color: 'var(--primary)' }}>tek danışman.</span></>}
-        lead="Kasko ve trafik sigortasından bireysel emeklilik ve nakliyata kadar tüm sigorta ihtiyaçlarınızda uzman rehberlik."
+      <PageHeader kicker="Ürünler" title={<>Tüm ürün kategorilerinde <span style={{ color: 'var(--primary)' }}>uzman danışmanlık.</span></>}
+        lead="Kasko ve trafik sigortasından Bireysel Emeklilik ve Kurumsal & Endüstriyel Sigortalara kadar tüm sigorta ihtiyaçlarınızda uzman rehberlik."
         breadcrumb="Ana Sayfa / Ürünler" />
       <section className="section" style={{ paddingTop: 0, paddingBottom: 48 }}>
         <div className="container">
@@ -49,8 +50,10 @@ function ProductContactForm({ productTitle }) {
   const [s, setS] = useState({ name: '', phone: '', email: '', note: '', consent: false });
   const [errs, setErrs] = useState({});
   const [sent, setSent] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [submitErr, setSubmitErr] = useState('');
 
-  const submit = (e) => {
+  const submit = async (e) => {
     e.preventDefault();
     const er = {};
     if (!s.name.trim()) er.name = 'Ad soyad gerekli.';
@@ -58,7 +61,23 @@ function ProductContactForm({ productTitle }) {
     if (s.email && !/\S+@\S+\.\S+/.test(s.email)) er.email = 'Geçerli bir e-posta giriniz.';
     if (!s.consent) er.consent = 'KVKK onayı gerekli.';
     setErrs(er);
-    if (!Object.keys(er).length) setSent(true);
+    if (Object.keys(er).length) return;
+    setSending(true); setSubmitErr('');
+    try {
+      await sendEmail({
+        form_type: `Ürün Teklif — ${productTitle}`,
+        from_name: s.name,
+        from_phone: s.phone,
+        from_email: s.email || '—',
+        subject: productTitle,
+        message: s.note || '—',
+      });
+      setSent(true);
+    } catch {
+      setSubmitErr('Talep gönderilemedi. Lütfen tekrar deneyin.');
+    } finally {
+      setSending(false);
+    }
   };
 
   const ip = { padding: '11px 14px', border: '1px solid var(--border)', borderRadius: 'var(--radius)', fontSize: 14, outline: 'none', width: '100%', boxSizing: 'border-box' };
@@ -93,9 +112,10 @@ function ProductContactForm({ productTitle }) {
         <span>KVKK kapsamında kişisel verilerimin işlenmesini kabul ediyorum.</span>
       </label>
       {errs.consent && <span style={{ fontSize: 12, color: 'var(--primary)', marginTop: -8 }}>{errs.consent}</span>}
-      <button className="btn btn-primary" type="submit" style={{ justifySelf: 'start' }}>
-        Gönder <IconArrow size={12} />
+      <button className="btn btn-primary" type="submit" disabled={sending} style={{ justifySelf: 'start' }}>
+        {sending ? 'Gönderiliyor…' : 'Gönder'} {!sending && <IconArrow size={12} />}
       </button>
+      {submitErr && <span style={{ fontSize: 12, color: 'var(--primary)', marginTop: -8 }}>{submitErr}</span>}
     </form>
   );
 }

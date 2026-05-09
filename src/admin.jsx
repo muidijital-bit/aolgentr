@@ -93,35 +93,107 @@ function RichEditor({ value, onChange }) {
   );
 }
 
-/* ─── Image upload ───────────────────────────────────────── */
+/* ─── Image compress + upload ────────────────────────────── */
+function compressImage(file, maxBytes = 200 * 1024, maxDim = 1200) {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    const url = URL.createObjectURL(file);
+    img.onload = () => {
+      URL.revokeObjectURL(url);
+      let { width, height } = img;
+      if (width > maxDim || height > maxDim) {
+        const ratio = Math.min(maxDim / width, maxDim / height);
+        width = Math.round(width * ratio);
+        height = Math.round(height * ratio);
+      }
+      const canvas = document.createElement('canvas');
+      canvas.width = width; canvas.height = height;
+      canvas.getContext('2d').drawImage(img, 0, 0, width, height);
+      let quality = 0.85;
+      const attempt = () => {
+        canvas.toBlob(blob => {
+          if (!blob) { reject(new Error('Canvas toBlob failed')); return; }
+          if (blob.size <= maxBytes || quality <= 0.4) {
+            resolve(new File([blob], file.name.replace(/\.[^.]+$/, '.jpg'), { type: 'image/jpeg' }));
+          } else { quality = Math.round((quality - 0.1) * 10) / 10; attempt(); }
+        }, 'image/jpeg', quality);
+      };
+      attempt();
+    };
+    img.onerror = reject;
+    img.src = url;
+  });
+}
+
 function ImageUpload({ productId, currentUrl, onUploaded }) {
   const [uploading, setUploading] = useState(false);
+  const [status, setStatus] = useState('');
   const [preview, setPreview] = useState(currentUrl);
-  const upload = async (file) => {
+
+  const doUpload = async (file) => {
     setUploading(true);
-    const ext = file.name.split('.').pop();
-    const path = `${productId}-${Date.now()}.${ext}`;
-    const { error } = await supabase.storage.from('product-images').upload(path, file, { upsert: true });
-    if (error) { alert('Yükleme hatası: ' + error.message); setUploading(false); return; }
-    const { data } = supabase.storage.from('product-images').getPublicUrl(path);
-    setPreview(data.publicUrl);
-    onUploaded(data.publicUrl);
+    setStatus('Sıkıştırılıyor…');
+    try {
+      const before = file.size;
+      const compressed = await compressImage(file);
+      const after = compressed.size;
+      setStatus(`Yükleniyor… (${(before/1024).toFixed(0)}KB → ${(after/1024).toFixed(0)}KB)`);
+      const path = `${productId}-${Date.now()}.jpg`;
+      const { error } = await supabase.storage.from('product-images').upload(path, compressed, { upsert: true, contentType: 'image/jpeg' });
+      if (error) throw error;
+      const { data } = supabase.storage.from('product-images').getPublicUrl(path);
+      setPreview(data.publicUrl);
+      onUploaded(data.publicUrl);
+      setStatus('');
+    } catch (e) {
+      alert('Yükleme hatası: ' + e.message);
+      setStatus('');
+    }
     setUploading(false);
   };
+
+  const recompress = async () => {
+    if (!preview) return;
+    setUploading(true);
+    setStatus('Mevcut görsel indiriliyor…');
+    try {
+      const res = await fetch(preview);
+      const blob = await res.blob();
+      const file = new File([blob], 'image.jpg', { type: blob.type });
+      await doUpload(file);
+    } catch (e) {
+      alert('Sıkıştırma hatası: ' + e.message);
+      setStatus('');
+      setUploading(false);
+    }
+  };
+
   return (
     <div>
-      <div style={{ marginBottom: 12, borderRadius: 10, overflow: 'hidden', background: 'var(--slate-50)', border: '1px solid var(--border)', height: 160, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      <div style={{ marginBottom: 12, borderRadius: 10, overflow: 'hidden', background: 'var(--slate-50)', border: '1px solid var(--border)', height: 160, display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative' }}>
         {preview ? <img src={preview} alt="" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
           : <div style={{ color: 'var(--text-2)', fontSize: 13 }}>Görsel yok — SVG kullanılacak</div>}
+        {status && (
+          <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.55)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <span style={{ fontSize: 12, color: '#fff', fontWeight: 600, padding: '6px 12px', background: 'rgba(0,0,0,0.4)', borderRadius: 8 }}>{status}</span>
+          </div>
+        )}
       </div>
-      <div style={{ display: 'flex', gap: 8 }}>
+      <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
         <label style={{ flex: 1 }}>
-          <input type="file" accept="image/*" style={{ display: 'none' }} onChange={e => e.target.files[0] && upload(e.target.files[0])} />
+          <input type="file" accept="image/*" style={{ display: 'none' }} onChange={e => e.target.files[0] && doUpload(e.target.files[0])} />
           <div className="btn btn-secondary" style={{ display: 'block', textAlign: 'center', cursor: 'pointer' }}>
-            {uploading ? 'Yükleniyor…' : 'Görsel Yükle'}
+            {uploading ? status || 'İşleniyor…' : 'Görsel Yükle'}
           </div>
         </label>
-        {preview && <button type="button" className="btn btn-secondary" style={{ color: 'var(--primary)' }} onClick={() => { setPreview(null); onUploaded(null); }}>Kaldır</button>}
+        {preview && !uploading && (
+          <button type="button" className="btn btn-secondary" style={{ color: 'var(--primary)' }} onClick={recompress} title="Mevcut görseli sıkıştır ve yeniden yükle">
+            Sıkıştır
+          </button>
+        )}
+        {preview && !uploading && (
+          <button type="button" className="btn btn-secondary" style={{ color: 'var(--primary)' }} onClick={() => { setPreview(null); onUploaded(null); }}>Kaldır</button>
+        )}
       </div>
     </div>
   );

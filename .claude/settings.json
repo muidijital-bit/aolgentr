@@ -9,7 +9,27 @@
       "Bash(cp ~/Downloads/kasko.png /Users/mui/projects/aolgentr/public/assets/slide-kasko.png)",
       "Bash(cp ~/Downloads/saglik.png /Users/mui/projects/aolgentr/public/assets/slide-saglik.png)",
       "Bash(cp ~/Downloads/konutisyeri.png /Users/mui/projects/aolgentr/public/assets/slide-konut.png)",
-      "Bash(cp ~/Downloads/bireyselemeklilik.png /Users/mui/projects/aolgentr/public/assets/slide-bes.png)"
+      "Bash(cp ~/Downloads/bireyselemeklilik.png /Users/mui/projects/aolgentr/public/assets/slide-bes.png)",
+      "Bash(curl -s \"https://viennalife.com.tr/\")",
+      "Bash(curl -s \"https://viennalife.com.tr/assets/images/viennalife-logo.svg\" -o /Users/mui/projects/aolgentr/public/assets/agencies/viennalife-emeklilik.svg)",
+      "Bash(sed -i '' \"s/{ v: <>20+</>, l: 'Yetkili Sigorta Acenteliği' }/{ v: <>+20<\\\\/>, l: 'Yetkili Sigorta Acenteliği' }/\" /Users/mui/projects/aolgentr/src/header-hero.jsx)",
+      "Bash(sed -i '' 's/Türkiye genelinde şube/Şube/' /Users/mui/projects/aolgentr/src/header-hero.jsx)",
+      "Bash(sed -i '' \"s/\\\\['20', 'Yetkili Sigorta Acenteliği '/\\\\['+20', 'Yetkili Sigorta Acenteliği'/\" /Users/mui/projects/aolgentr/src/pages-home.jsx)",
+      "Bash(sed -i '' 's/23 güçlü iş ortağı\\\\./+20 güçlü iş ortağı./' /Users/mui/projects/aolgentr/src/pages-home.jsx)",
+      "Bash(sed -i '' \"s/{ n: '20',     l: 'Yetkili sigorta acenteliği' }/{ n: '+20',    l: 'Yetkili sigorta acenteliği' }/\" src/pages-misc.jsx)",
+      "Bash(sed -i '' 's/30 yıla yakın bir süreden beri/+30 yıla yakın bir süreden beri/' src/pages-misc.jsx)",
+      "Bash(sed -i '' 's/şirket çalışanı olduk — 20/şirket çalışanı olduk, 20/' src/pages-misc.jsx)",
+      "Bash(sed -i '' 's/memnuniyet yarattık — bundan/memnuniyet yarattık, bundan/' src/pages-misc.jsx)",
+      "Bash(sed -i '' 's/her koşul açıkça anlatılır\\\\./her koşul açıkça anlatıyoruz./' src/pages-misc.jsx)",
+      "Bash(sed -i '' 's/11 ürün kategorisi, <span style={{ color: .var\\(--primary\\). }}>tek danışman.<\\\\/span>/Tüm ürün kategorilerinde <span style={{ color: '\"'\"'var\\(--primary\\)'\"'\"' }}>uzman danışmanlık.<\\\\/span>/' src/pages-products.jsx)",
+      "Bash(sed -i '' 's/lead=\"Kasko ve trafik sigortasından bireysel emeklilik ve nakliyata kadar tüm sigorta ihtiyaçlarınızda uzman rehberlik.\"/lead=\"Kasko ve trafik sigortasından Bireysel Emeklilik ve Kurumsal \\\\&amp; Endüstriyel Sigortalara kadar tüm sigorta ihtiyaçlarınızda uzman rehberlik.\"/' src/pages-products.jsx)",
+      "Bash(npx vite *)",
+      "Bash(supabase --version)",
+      "Bash(brew install *)",
+      "Bash(supabase init *)",
+      "Bash(npm uninstall *)",
+      "Bash(supabase secrets *)",
+      "Bash(supabase login *)"
     ],
     "additionalDirectories": [
       "/Users/mui/Downloads"

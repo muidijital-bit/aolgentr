@@ -174,7 +174,7 @@ export const AGENCIES = [
   { name: 'Koru Sigorta',         logo: '/assets/agencies/koru-sigorta.png' },
   { name: 'Orient Sigorta',       logo: '/assets/agencies/orient-sigorta.png' },
   { name: 'BNP Paribas Cardif',   logo: '/assets/agencies/bnp-paribas-cardif.png' },
-  { name: 'ViennaLife Emeklilik', logo: '/assets/agencies/viennalife-emeklilik.png' },
+  { name: 'ViennaLife Emeklilik', logo: '/assets/agencies/viennalife-emeklilik.svg' },
 ];
 
 export const BRANCHES = [

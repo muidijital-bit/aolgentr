@@ -305,8 +305,8 @@ export function Hero({ go }) {
               <div style={{ display: 'flex' }}>
                 {[
                   { v: <><span>30</span><span className="pct">+</span></>, l: 'Yıl sektör deneyimi' },
-                  { v: <>20</>, l: 'Yetkili Sigorta Acenteliği' },
-                  { v: <>5</>, l: 'Türkiye genelinde şube' },
+                  { v: <>+20</>, l: 'Yetkili Sigorta Acenteliği' },
+                  { v: <>5</>, l: 'Şube' },
                 ].map((s, i) => (
                   <div key={i} style={{ flex: 1, paddingLeft: i === 0 ? 0 : 20, borderLeft: i === 0 ? 'none' : '1px solid var(--border)' }}>
                     <div className="hero-stat-value">{s.v}</div>

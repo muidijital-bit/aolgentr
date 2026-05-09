@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { COMPANY, AGENCIES, BRANCHES } from './data.jsx';
 import { IconCheck, IconArrow } from './icons.jsx';
 import { SectionLabel, PageHeader } from './components.jsx';
+import { sendEmail } from './email.js';
 
 export function AboutPage({ go }) {
   const wants = [
@@ -12,7 +13,7 @@ export function AboutPage({ go }) {
   ];
   const milestones = [
     { n: '30+',     l: 'Yıllık sektör deneyimi' },
-    { n: '20',     l: 'Yetkili sigorta acenteliği' },
+    { n: '20+',     l: 'Yetkili sigorta acenteliği' },
     { n: '+12.000', l: 'Mutlu müşteri' },
     { n: '+21.000', l: 'Yönetilen poliçe' },
   ];
@@ -67,21 +68,21 @@ export function AboutPage({ go }) {
                 Doğru <span style={{ color: 'var(--primary)' }}>yerdesiniz.</span>
               </h2>
               <p style={{ fontSize: 16, lineHeight: 1.75, color: 'var(--text-2)', margin: '0 0 20px' }}>
-                30 yıla yakın bir süreden beri sektörün içindeyiz. Müşteri olduk, şirket çalışanı olduk — 20 yıldan bu yana acenteyiz.
+                +30 yıla yakın bir süreden beri sektörün içindeyiz. Müşteri olduk, şirket çalışanı olduk, 20 yıldan bu yana acenteyiz.
               </p>
               <p style={{ fontSize: 16, lineHeight: 1.75, color: 'var(--text-2)', margin: '0 0 20px' }}>
                 Ülkemizin en büyük ve uluslararası bilinirliği olan şirketlerinde çalıştık, farklı pozisyonlarda bulunduk, yöneticilik yaptık. Değişimin ve gelişimin gücüne inanıyoruz; onun için sürekli kendimizi yenilemeye çalışıyoruz.
               </p>
               <p style={{ fontSize: 16, lineHeight: 1.75, color: 'var(--text-2)', margin: 0 }}>
-                Çalışmayı çok seviyoruz. Şimdiye kadar hep mutluluk ve memnuniyet yarattık — bundan sonra da telefonlarımız hep memnuniyet için çalsın istiyoruz. Operasyon kalitesinin işin kalitesine önemli etkilerinin olduğunu çok iyi biliyoruz; onun için işinde uzman takım arkadaşları ile çalışıyoruz.
+                Çalışmayı çok seviyoruz. Şimdiye kadar hep mutluluk ve memnuniyet yarattık, bundan sonra da telefonlarımız hep memnuniyet için çalsın istiyoruz. Operasyon kalitesinin işin kalitesine önemli etkilerinin olduğunu çok iyi biliyoruz; onun için işinde uzman takım arkadaşları ile çalışıyoruz.
               </p>
             </div>
             <div style={{ display: 'grid', gap: 12 }}>
               {[
                 ['Doğru eşleştirme', '+20 şirketin ürünlerini karşılaştırarak ihtiyacınıza en uygun poliçeyi birlikte belirliyoruz.'],
-                ['Şeffaf teminat', 'Hangi risk teminat altında, hangisi değil — her madde, her koşul açıkça anlatılır.'],
+                ['Şeffaf teminat', 'Hangi risk teminat altında, hangisi değil — her madde, her koşul açıkça anlatıyoruz.'],
                 ['Hasar takibi', 'Poliçe satışı bittiğinde işimiz başlar. Hasar sürecini uçtan uca sizin adınıza yönetiyoruz.'],
-                ['Uzun vadeli ilişki', 'Her yenileme döneminde portföyünüz yeniden değerlendirilerek size en uygun seçenek sunulur.'],
+                ['Uzun vadeli ilişki', 'Her yenileme döneminde portföyünüz yeniden değerlendirip size en uygun seçeneği sunuyoruz.'],
               ].map(([t, d], i) => (
                 <div key={i} className="card" style={{ padding: 24, display: 'flex', gap: 16, alignItems: 'flex-start' }}>
                   <div style={{ flexShrink: 0, width: 32, height: 32, borderRadius: 8, background: 'var(--primary-50)', color: 'var(--primary)', display: 'grid', placeItems: 'center', fontSize: 12, fontWeight: 700 }}>0{i+1}</div>
@@ -105,7 +106,7 @@ export function AboutPage({ go }) {
               Güçlü iş ortakları, <span style={{ color: 'var(--primary)' }}>doğru teklif.</span>
             </h2>
             <p style={{ fontSize: 16, lineHeight: 1.75, color: 'var(--text-2)', margin: '0 0 16px' }}>
-              Gerek ulusal bazda gerekse uluslararası alanda en güçlü şirketlerin güvenilir iş ortağı olarak çalışmalarımıza devam ediyoruz.
+              Ulusal ve Uluslararası alanda en güçlü şirketlerin güvenilir iş ortağı olarak çalışmalarımıza devam ediyoruz.
             </p>
             <p style={{ fontSize: 16, lineHeight: 1.75, color: 'var(--text-2)', margin: '0 0 32px' }}>
               En doğru içeriği en uygun fiyata size sunmak için özen ve titizlikle çalışıyoruz. Bizi büyütecek en önemli unsurun sizin memnuniyetiniz ve mutluluğunuz olduğunu çok iyi biliyoruz.
@@ -148,8 +149,8 @@ function AgencyCardFull({ agency, idx }) {
 export function AgenciesPage({ go }) {
   return (
     <div className="page-enter">
-      <PageHeader kicker="Acentelikler" title={<>22 sigorta şirketinin <span style={{ color: 'var(--primary)' }}>yetkili acentesi.</span></>}
-        lead="Türkiye'nin önde gelen ulusal ve uluslararası sigorta şirketleri." breadcrumb="Ana Sayfa / Acentelikler" />
+      <PageHeader kicker="Acentelikler" title={<>+20 sigorta şirketinin <span style={{ color: 'var(--primary)' }}>yetkili acentesi.</span></>}
+        lead="Türkiye'nin ve dünyanın önde gelen sigorta şirketleri." breadcrumb="Ana Sayfa / Acentelikler" />
       <section className="section" style={{ paddingTop: 32, paddingBottom: 48 }}>
         <div className="container">
           <div className="r4-2 mob-1" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 12 }}>
@@ -167,8 +168,10 @@ export function ContactForm() {
   const [s, setS] = useState({ name: '', phone: '', email: '', subject: '', message: '', consent: false });
   const [errs, setErrs] = useState({});
   const [sent, setSent] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [submitErr, setSubmitErr] = useState('');
 
-  const submit = (e) => {
+  const submit = async (e) => {
     e.preventDefault();
     const er = {};
     if (!s.name.trim()) er.name = 'Ad soyad gerekli.';
@@ -177,7 +180,23 @@ export function ContactForm() {
     if (!s.message.trim()) er.message = 'Mesajınızı giriniz.';
     if (!s.consent) er.consent = 'KVKK onayı gerekli.';
     setErrs(er);
-    if (!Object.keys(er).length) setSent(true);
+    if (Object.keys(er).length) return;
+    setSending(true); setSubmitErr('');
+    try {
+      await sendEmail({
+        form_type: 'Mesaj Gönder',
+        from_name: s.name,
+        from_phone: s.phone,
+        from_email: s.email || '—',
+        subject: s.subject || '—',
+        message: s.message,
+      });
+      setSent(true);
+    } catch {
+      setSubmitErr('Mesaj gönderilemedi. Lütfen tekrar deneyin.');
+    } finally {
+      setSending(false);
+    }
   };
 
   const ip = { padding: '11px 14px', border: '1px solid var(--border)', borderRadius: 'var(--radius)', fontSize: 14, outline: 'none', width: '100%', boxSizing: 'border-box' };
@@ -224,9 +243,10 @@ export function ContactForm() {
         <span>KVKK kapsamında kişisel verilerimin işlenmesini kabul ediyorum.</span>
       </label>
       {errs.consent && <span style={{ fontSize: 12, color: 'var(--primary)', marginTop: -8 }}>{errs.consent}</span>}
-      <button className="btn btn-primary" type="submit" style={{ justifySelf: 'start' }}>
-        Mesaj Gönder <IconArrow size={12} />
+      <button className="btn btn-primary" type="submit" disabled={sending} style={{ justifySelf: 'start' }}>
+        {sending ? 'Gönderiliyor…' : 'Mesaj Gönder'} {!sending && <IconArrow size={12} />}
       </button>
+      {submitErr && <span style={{ fontSize: 12, color: 'var(--primary)' }}>{submitErr}</span>}
     </form>
   );
 }
@@ -313,7 +333,9 @@ export function QuoteFormKasko({ compact = false }) {
   const [s, setS] = useState(empty);
   const [errs, setErrs] = useState({});
   const [sent, setSent] = useState(false);
-  const submit = (e) => {
+  const [sending, setSending] = useState(false);
+  const [submitErr, setSubmitErr] = useState('');
+  const submit = async (e) => {
     e.preventDefault();
     const er = {};
     if (s.type === 'bireysel') {
@@ -328,7 +350,23 @@ export function QuoteFormKasko({ compact = false }) {
     if (!s.docSerial.trim()) er.docSerial = 'Belge seri no gerekli.';
     if (!s.consent) er.consent = 'KVKK onayı gerekli.';
     setErrs(er);
-    if (!Object.keys(er).length) setSent(true);
+    if (Object.keys(er).length) return;
+    setSending(true); setSubmitErr('');
+    try {
+      await sendEmail({
+        form_type: 'Kasko / Trafik Teklif',
+        from_name: s.type === 'bireysel' ? `TC: ${s.tc}` : `VKN: ${s.vkn}`,
+        from_phone: s.phone,
+        from_email: '—',
+        subject: 'Kasko / Trafik',
+        message: `Tip: ${s.type === 'bireysel' ? 'Bireysel' : 'Kurumsal'}\n${s.type === 'bireysel' ? `TC: ${s.tc} | Doğum: ${s.dob}` : `VKN: ${s.vkn}`}\nTelefon: ${s.phone}\nMeslek: ${s.job}\nPlaka: ${s.plate}\nBelge Seri: ${s.docSerial}`,
+      });
+      setSent(true);
+    } catch {
+      setSubmitErr('Talep gönderilemedi. Lütfen tekrar deneyin.');
+    } finally {
+      setSending(false);
+    }
   };
   if (sent) return <QuoteSuccess type="Kasko / Trafik" onReset={() => { setSent(false); setS(empty); }} />;
   const F = ({ label, err, children }) => (
@@ -374,7 +412,10 @@ export function QuoteFormKasko({ compact = false }) {
         KVKK aydınlatma metnini okudum, onaylıyorum.
       </label>
       {errs.consent && <span style={{ fontSize: 12, color: 'var(--primary)' }}>{errs.consent}</span>}
-      <button className="btn btn-primary" type="submit" style={{ justifySelf: 'start' }}>Teklif Talebi Gönder <IconArrow size={12} /></button>
+      <button className="btn btn-primary" type="submit" disabled={sending} style={{ justifySelf: 'start' }}>
+        {sending ? 'Gönderiliyor…' : 'Teklif Talebi Gönder'} {!sending && <IconArrow size={12} />}
+      </button>
+      {submitErr && <span style={{ fontSize: 12, color: 'var(--primary)' }}>{submitErr}</span>}
     </form>
   );
 }
@@ -387,7 +428,9 @@ export function QuoteFormSaglik({ compact = false }) {
   const [consent, setConsent] = useState(false);
   const [sent, setSent] = useState(false);
   const [errs, setErrs] = useState({});
-  const submit = (e) => {
+  const [sending, setSending] = useState(false);
+  const [submitErr, setSubmitErr] = useState('');
+  const submit = async (e) => {
     e.preventDefault();
     const er = {};
     parts.forEach((p, i) => { if (!/^\d{11}$/.test(p.tc)) er['tc'+i]='TC gerekli'; if (!p.dob) er['dob'+i]='Tarih gerekli'; });
@@ -395,7 +438,24 @@ export function QuoteFormSaglik({ compact = false }) {
     if (mode === 'continue' && !prevC) er.prevC = 'Şirket seçin';
     if (!consent) er.consent = 'Onay gerekli';
     setErrs(er);
-    if (!Object.keys(er).length) setSent(true);
+    if (Object.keys(er).length) return;
+    setSending(true); setSubmitErr('');
+    try {
+      const partsText = parts.map((p, i) => `Kişi ${i+1}: TC ${p.tc} | Doğum: ${p.dob}`).join('\n');
+      await sendEmail({
+        form_type: 'Sağlık Sigortası Teklif',
+        from_name: '—',
+        from_phone: phone,
+        from_email: '—',
+        subject: 'Sağlık Sigortası',
+        message: `${partsText}\nPoliçe: ${mode === 'new' ? 'İlk poliçe' : `Devam eden — ${prevC}`}`,
+      });
+      setSent(true);
+    } catch {
+      setSubmitErr('Talep gönderilemedi. Lütfen tekrar deneyin.');
+    } finally {
+      setSending(false);
+    }
   };
   if (sent) return <QuoteSuccess type="Sağlık" onReset={() => { setSent(false); setParts([{ tc: '', dob: '' }]); setPhone(''); setConsent(false); }} />;
   const ip = { padding: '12px 14px', border: '1px solid var(--border)', borderRadius: 'var(--radius)', fontSize: 14, width: '100%', outline: 'none' };
@@ -438,7 +498,10 @@ export function QuoteFormSaglik({ compact = false }) {
       <label style={{ display: 'flex', gap: 10, alignItems: 'center', padding: 14, border: '1px solid var(--border)', borderRadius: 'var(--radius)', fontSize: 13 }}>
         <input type="checkbox" checked={consent} onChange={e => setConsent(e.target.checked)} /> KVKK aydınlatma metnini onaylıyorum.
       </label>
-      <button className="btn btn-primary" type="submit" style={{ justifySelf: 'start' }}>Teklif Talebi Gönder <IconArrow size={12} /></button>
+      <button className="btn btn-primary" type="submit" disabled={sending} style={{ justifySelf: 'start' }}>
+        {sending ? 'Gönderiliyor…' : 'Teklif Talebi Gönder'} {!sending && <IconArrow size={12} />}
+      </button>
+      {submitErr && <span style={{ fontSize: 12, color: 'var(--primary)' }}>{submitErr}</span>}
     </form>
   );
 }
