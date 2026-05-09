@@ -1,0 +1,18 @@
+User-agent: *
+Allow: /
+Disallow: /admin
+
+# AI Crawlers — indexing allowed
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: GoogleBot
+Allow: /
+
+Sitemap: https://www.aol.gen.tr/sitemap.xml

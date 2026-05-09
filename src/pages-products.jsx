@@ -5,6 +5,7 @@ import { PageHeader } from './components.jsx';
 import { NotFound } from './pages-misc.jsx';
 import { supabase } from './supabase.js';
 import { sendEmail } from './email.js';
+import { useSEO, PRODUCT_FAQ } from './seo.jsx';
 
 function FormField({ label, err, children }) {
   return (
@@ -17,6 +18,12 @@ function FormField({ label, err, children }) {
 }
 
 export function ProductsList({ go }) {
+  useSEO({
+    title: 'Sigorta Ürünleri | AOL Sigorta Ankara',
+    description: 'Kasko, trafik, sağlık, konut, DASK, bireysel emeklilik, seyahat ve daha fazlası. Tüm sigorta ihtiyaçlarınız için +20 şirket karşılaştırması.',
+    path: '/urunler',
+    breadcrumbs: [{ name: 'Ana Sayfa', path: '/' }, { name: 'Ürünler', path: '/urunler' }],
+  });
   const [dbMap, setDbMap] = useState({});
   useEffect(() => {
     supabase.from('products').select('*')
@@ -342,6 +349,18 @@ export function ProductDetail({ id, go }) {
   }, [id]);
   if (!base) return <NotFound go={go} />;
   const p = { ...base, ...(dbData || {}) };
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  useSEO({
+    title: `${p.title} | AOL Sigorta Ankara`,
+    description: `${p.desc_short || p.desc || p.title} AOL Sigorta ile +20 sigorta şirketinin tekliflerini karşılaştırın.`,
+    path: `/urunler/${id}`,
+    breadcrumbs: [
+      { name: 'Ana Sayfa', path: '/' },
+      { name: 'Ürünler', path: '/urunler' },
+      { name: p.title, path: `/urunler/${id}` },
+    ],
+    faq: PRODUCT_FAQ[id] || [],
+  });
   const title = p.title || base.title;
   const kicker = p.kicker || base.kicker;
   const desc = p.desc_short || p.desc;

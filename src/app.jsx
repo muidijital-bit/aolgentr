@@ -1,4 +1,5 @@
 import { useState, useEffect, useMemo } from 'react';
+import { useSEO, HOME_FAQ } from './seo.jsx';
 import { Header, Hero } from './header-hero.jsx';
 import { Footer, TweaksPanel, CookieConsent } from './components.jsx';
 import { ProductsSection, AboutStrip, QuickQuote, AgenciesSection } from './pages-home.jsx';
@@ -7,6 +8,13 @@ import { AboutPage, AgenciesPage, ContactPage, QuotePage, GizlilikPage, KvkkPage
 import { AdminPanel } from './admin.jsx';
 
 function HomePage({ go }) {
+  useSEO({
+    title: 'AOL Sigorta — Ankara Sigorta Acentesi | 30 Yıllık Deneyim',
+    description: 'Ankara\'nın köklü sigorta acentesi. +20 sigorta şirketinin tekliflerini karşılaştırıyoruz. Kasko, sağlık, konut, bireysel emeklilik ve daha fazlası. 0312 468 34 50',
+    path: '/',
+    breadcrumbs: [{ name: 'Ana Sayfa', path: '/' }],
+    faq: HOME_FAQ,
+  });
   return (
     <div className="page-enter">
       <Hero go={go} />

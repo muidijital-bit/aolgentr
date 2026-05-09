@@ -3,8 +3,15 @@ import { COMPANY, AGENCIES, BRANCHES } from './data.jsx';
 import { IconCheck, IconArrow } from './icons.jsx';
 import { SectionLabel, PageHeader } from './components.jsx';
 import { sendEmail } from './email.js';
+import { useSEO } from './seo.jsx';
 
 export function AboutPage({ go }) {
+  useSEO({
+    title: 'Hakkımızda | AOL Sigorta Ankara',
+    description: '30 yıla yakın sektör deneyimi, +20 sigorta şirketinin yetkili acenteliği. Ankara merkezli, 5 şubeli uzman sigorta danışmanlık ekibi.',
+    path: '/hakkimizda',
+    breadcrumbs: [{ name: 'Ana Sayfa', path: '/' }, { name: 'Hakkımızda', path: '/hakkimizda' }],
+  });
   const wants = [
     'İhtiyaç duyduğunuzda hemen ulaşmak ve doğru yönlendirme almak',
     'Sigorta işlerinizi güvendiğiniz birisinin takip etmesini sağlamak',
@@ -147,6 +154,12 @@ function AgencyCardFull({ agency, idx }) {
 }
 
 export function AgenciesPage({ go }) {
+  useSEO({
+    title: 'Acenteliklerimiz | AOL Sigorta — +20 Sigorta Şirketi',
+    description: 'Allianz, Axa, Mapfre, Groupama ve daha +20 ulusal ve uluslararası sigorta şirketinin yetkili acentesiyiz.',
+    path: '/acenteliklerimiz',
+    breadcrumbs: [{ name: 'Ana Sayfa', path: '/' }, { name: 'Acenteliklerimiz', path: '/acenteliklerimiz' }],
+  });
   return (
     <div className="page-enter">
       <PageHeader kicker="Acentelikler" title={<>+20 sigorta şirketinin <span style={{ color: 'var(--primary)' }}>yetkili acentesi.</span></>}
@@ -255,6 +268,12 @@ export function ContactForm() {
 }
 
 export function ContactPage({ go }) {
+  useSEO({
+    title: 'İletişim | AOL Sigorta Ankara — 0312 468 34 50',
+    description: 'AOL Sigorta\'ya ulaşın. Ankara Çankaya merkez ve 4 şubemizle hizmetinizdeyiz. 0312 468 34 50 — info@aol.gen.tr',
+    path: '/iletisim',
+    breadcrumbs: [{ name: 'Ana Sayfa', path: '/' }, { name: 'İletişim', path: '/iletisim' }],
+  });
   return (
     <div className="page-enter">
 
@@ -514,6 +533,12 @@ export function QuoteSuccess({ type, onReset }) {
 }
 
 export function QuotePage({ go }) {
+  useSEO({
+    title: 'Sigorta Teklifi Al | AOL Sigorta — Ücretsiz Karşılaştırma',
+    description: '+20 sigorta şirketinin tekliflerini ücretsiz karşılaştırın. Kasko, sağlık sigortası ve tüm ürünler için hızlı teklif alın.',
+    path: '/teklif-al',
+    breadcrumbs: [{ name: 'Ana Sayfa', path: '/' }, { name: 'Teklif Al', path: '/teklif-al' }],
+  });
   const [tab, setTab] = useState('mesaj');
   return (
     <div className="page-enter">
