@@ -6,6 +6,16 @@ import { NotFound } from './pages-misc.jsx';
 import { supabase } from './supabase.js';
 import { sendEmail } from './email.js';
 
+function FormField({ label, err, children }) {
+  return (
+    <label style={{ display: 'grid', gap: 5 }}>
+      <span style={{ fontSize: 13, fontWeight: 500, color: 'var(--text)' }}>{label}</span>
+      {children}
+      {err && <span style={{ fontSize: 12, color: 'var(--primary)' }}>{err}</span>}
+    </label>
+  );
+}
+
 export function ProductsList({ go }) {
   const [dbMap, setDbMap] = useState({});
   useEffect(() => {
@@ -81,13 +91,6 @@ function ProductContactForm({ productTitle }) {
   };
 
   const ip = { padding: '11px 14px', border: '1px solid var(--border)', borderRadius: 'var(--radius)', fontSize: 14, outline: 'none', width: '100%', boxSizing: 'border-box' };
-  const F = ({ label, err, children }) => (
-    <label style={{ display: 'grid', gap: 5 }}>
-      <span style={{ fontSize: 13, fontWeight: 500, color: 'var(--text)' }}>{label}</span>
-      {children}
-      {err && <span style={{ fontSize: 12, color: 'var(--primary)' }}>{err}</span>}
-    </label>
-  );
 
   if (sent) return (
     <div style={{ padding: '24px 0', textAlign: 'center' }}>
@@ -100,16 +103,16 @@ function ProductContactForm({ productTitle }) {
   return (
     <form onSubmit={submit} style={{ display: 'grid', gap: 14 }}>
       <div className="mob-xs-1" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
-        <F label="Ad Soyad *" err={errs.name}><input style={ip} value={s.name} onChange={e => setS({ ...s, name: e.target.value })} /></F>
-        <F label="Telefon *" err={errs.phone}><input style={ip} type="tel" value={s.phone} onChange={e => setS({ ...s, phone: e.target.value })} /></F>
+        <FormField label="Ad Soyad *" err={errs.name}><input style={ip} value={s.name} onChange={e => setS({ ...s, name: e.target.value })} /></FormField>
+        <FormField label="Telefon *" err={errs.phone}><input style={ip} type="tel" value={s.phone} onChange={e => setS({ ...s, phone: e.target.value })} /></FormField>
       </div>
-      <F label="E-posta" err={errs.email}><input style={ip} type="email" value={s.email} onChange={e => setS({ ...s, email: e.target.value })} /></F>
-      <F label="Notunuz">
+      <FormField label="E-posta" err={errs.email}><input style={ip} type="email" value={s.email} onChange={e => setS({ ...s, email: e.target.value })} /></FormField>
+      <FormField label="Notunuz">
         <textarea style={{ ...ip, resize: 'vertical', minHeight: 80 }} value={s.note} onChange={e => setS({ ...s, note: e.target.value })} />
-      </F>
+      </FormField>
       <label style={{ display: 'flex', gap: 10, alignItems: 'flex-start', padding: '12px 14px', border: '1px solid var(--border)', borderRadius: 'var(--radius)', fontSize: 13, cursor: 'pointer' }}>
         <input type="checkbox" style={{ marginTop: 1 }} checked={s.consent} onChange={e => setS({ ...s, consent: e.target.checked })} />
-        <span>KVKK kapsamında kişisel verilerimin işlenmesini kabul ediyorum.</span>
+        <span><a href="/kvkk" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--primary)' }}>KVKK aydınlatma metni</a> kapsamında kişisel verilerimin işlenmesini kabul ediyorum.</span>
       </label>
       {errs.consent && <span style={{ fontSize: 12, color: 'var(--primary)', marginTop: -8 }}>{errs.consent}</span>}
       <button className="btn btn-primary" type="submit" disabled={sending} style={{ justifySelf: 'start' }}>

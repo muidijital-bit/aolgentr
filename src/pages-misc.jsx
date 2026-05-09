@@ -164,6 +164,16 @@ export function AgenciesPage({ go }) {
   );
 }
 
+function FormField({ label, err, children }) {
+  return (
+    <label style={{ display: 'grid', gap: 5 }}>
+      <span style={{ fontSize: 13, fontWeight: 500, color: 'var(--text)' }}>{label}</span>
+      {children}
+      {err && <span style={{ fontSize: 12, color: 'var(--primary)' }}>{err}</span>}
+    </label>
+  );
+}
+
 export function ContactForm() {
   const [s, setS] = useState({ name: '', phone: '', email: '', subject: '', message: '', consent: false });
   const [errs, setErrs] = useState({});
@@ -200,13 +210,6 @@ export function ContactForm() {
   };
 
   const ip = { padding: '11px 14px', border: '1px solid var(--border)', borderRadius: 'var(--radius)', fontSize: 14, outline: 'none', width: '100%', boxSizing: 'border-box' };
-  const F = ({ label, err, children }) => (
-    <label style={{ display: 'grid', gap: 5 }}>
-      <span style={{ fontSize: 13, fontWeight: 500, color: 'var(--text)' }}>{label}</span>
-      {children}
-      {err && <span style={{ fontSize: 12, color: 'var(--primary)' }}>{err}</span>}
-    </label>
-  );
 
   if (sent) return (
     <div style={{ padding: '32px 0', textAlign: 'center' }}>
@@ -220,12 +223,12 @@ export function ContactForm() {
   return (
     <form onSubmit={submit} style={{ display: 'grid', gap: 14 }}>
       <div className="mob-xs-1" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
-        <F label="Ad Soyad *" err={errs.name}><input style={ip} value={s.name} onChange={e => setS({ ...s, name: e.target.value })} /></F>
-        <F label="Telefon *" err={errs.phone}><input style={ip} type="tel" value={s.phone} onChange={e => setS({ ...s, phone: e.target.value })} /></F>
+        <FormField label="Ad Soyad *" err={errs.name}><input style={ip} value={s.name} onChange={e => setS({ ...s, name: e.target.value })} /></FormField>
+        <FormField label="Telefon *" err={errs.phone}><input style={ip} type="tel" value={s.phone} onChange={e => setS({ ...s, phone: e.target.value })} /></FormField>
       </div>
       <div className="mob-xs-1" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
-        <F label="E-posta" err={errs.email}><input style={ip} type="email" value={s.email} onChange={e => setS({ ...s, email: e.target.value })} /></F>
-        <F label="Konu" err={errs.subject}>
+        <FormField label="E-posta" err={errs.email}><input style={ip} type="email" value={s.email} onChange={e => setS({ ...s, email: e.target.value })} /></FormField>
+        <FormField label="Konu" err={errs.subject}>
           <select style={ip} value={s.subject} onChange={e => setS({ ...s, subject: e.target.value })}>
             <option value="">Seçiniz…</option>
             <option>Teklif Talebi</option>
@@ -233,14 +236,14 @@ export function ContactForm() {
             <option>Poliçe Yenileme</option>
             <option>Genel Bilgi</option>
           </select>
-        </F>
+        </FormField>
       </div>
-      <F label="Mesajınız *" err={errs.message}>
+      <FormField label="Mesajınız *" err={errs.message}>
         <textarea style={{ ...ip, resize: 'vertical', minHeight: 100 }} value={s.message} onChange={e => setS({ ...s, message: e.target.value })} />
-      </F>
+      </FormField>
       <label style={{ display: 'flex', gap: 10, alignItems: 'flex-start', padding: '12px 14px', border: '1px solid var(--border)', borderRadius: 'var(--radius)', fontSize: 13, cursor: 'pointer' }}>
         <input type="checkbox" style={{ marginTop: 1 }} checked={s.consent} onChange={e => setS({ ...s, consent: e.target.checked })} />
-        <span>KVKK kapsamında kişisel verilerimin işlenmesini kabul ediyorum.</span>
+        <span><a href="/kvkk" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--primary)' }}>KVKK aydınlatma metni</a> kapsamında kişisel verilerimin işlenmesini kabul ediyorum.</span>
       </label>
       {errs.consent && <span style={{ fontSize: 12, color: 'var(--primary)', marginTop: -8 }}>{errs.consent}</span>}
       <button className="btn btn-primary" type="submit" disabled={sending} style={{ justifySelf: 'start' }}>
@@ -369,13 +372,6 @@ export function QuoteFormKasko({ compact = false }) {
     }
   };
   if (sent) return <QuoteSuccess type="Kasko / Trafik" onReset={() => { setSent(false); setS(empty); }} />;
-  const F = ({ label, err, children }) => (
-    <label style={{ display: 'grid', gap: 6 }}>
-      <span style={{ fontSize: 13, fontWeight: 500 }}>{label}</span>
-      {children}
-      {err && <span style={{ fontSize: 12, color: 'var(--primary)' }}>{err}</span>}
-    </label>
-  );
   const ip = { padding: '12px 14px', border: '1px solid var(--border)', borderRadius: 'var(--radius)', fontSize: 14, outline: 'none' };
   return (
     <form onSubmit={submit} style={{ display: 'grid', gap: 14 }}>
@@ -392,24 +388,24 @@ export function QuoteFormKasko({ compact = false }) {
       {/* TC / VKN + tarih */}
       {s.type === 'bireysel' ? (
         <div className="mob-xs-1" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
-          <F label="T.C. Kimlik No *" err={errs.tc}><input style={ip} maxLength={11} value={s.tc} onChange={e => setS({ ...s, tc: e.target.value.replace(/\D/g, '') })} /></F>
-          <F label="Doğum tarihi *" err={errs.dob}><input type="date" style={ip} value={s.dob} onChange={e => setS({ ...s, dob: e.target.value })} /></F>
+          <FormField label="T.C. Kimlik No *" err={errs.tc}><input style={ip} maxLength={11} value={s.tc} onChange={e => setS({ ...s, tc: e.target.value.replace(/\D/g, '') })} /></FormField>
+          <FormField label="Doğum tarihi *" err={errs.dob}><input type="date" style={ip} value={s.dob} onChange={e => setS({ ...s, dob: e.target.value })} /></FormField>
         </div>
       ) : (
-        <F label="Vergi Kimlik No (VKN) *" err={errs.vkn}><input style={ip} maxLength={10} value={s.vkn} onChange={e => setS({ ...s, vkn: e.target.value.replace(/\D/g, '') })} /></F>
+        <FormField label="Vergi Kimlik No (VKN) *" err={errs.vkn}><input style={ip} maxLength={10} value={s.vkn} onChange={e => setS({ ...s, vkn: e.target.value.replace(/\D/g, '') })} /></FormField>
       )}
 
       <div className="mob-xs-1" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
-        <F label="Telefon *" err={errs.phone}><input style={ip} type="tel" value={s.phone} onChange={e => setS({ ...s, phone: e.target.value })} /></F>
-        <F label="Meslek *" err={errs.job}><input style={ip} value={s.job} onChange={e => setS({ ...s, job: e.target.value })} /></F>
+        <FormField label="Telefon *" err={errs.phone}><input style={ip} type="tel" value={s.phone} onChange={e => setS({ ...s, phone: e.target.value })} /></FormField>
+        <FormField label="Meslek *" err={errs.job}><input style={ip} value={s.job} onChange={e => setS({ ...s, job: e.target.value })} /></FormField>
       </div>
       <div className="mob-xs-1" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
-        <F label="Plaka *" err={errs.plate}><input style={ip} placeholder="06 ABC 123" value={s.plate} onChange={e => setS({ ...s, plate: e.target.value.toUpperCase() })} /></F>
-        <F label="Belge seri no *" err={errs.docSerial}><input style={ip} value={s.docSerial} onChange={e => setS({ ...s, docSerial: e.target.value.toUpperCase() })} /></F>
+        <FormField label="Plaka *" err={errs.plate}><input style={ip} placeholder="06 ABC 123" value={s.plate} onChange={e => setS({ ...s, plate: e.target.value.toUpperCase() })} /></FormField>
+        <FormField label="Belge seri no *" err={errs.docSerial}><input style={ip} value={s.docSerial} onChange={e => setS({ ...s, docSerial: e.target.value.toUpperCase() })} /></FormField>
       </div>
       <label style={{ display: 'flex', gap: 10, alignItems: 'center', padding: 14, border: '1px solid var(--border)', borderRadius: 'var(--radius)', fontSize: 13 }}>
         <input type="checkbox" checked={s.consent} onChange={e => setS({ ...s, consent: e.target.checked })} />
-        KVKK aydınlatma metnini okudum, onaylıyorum.
+        <a href="/kvkk" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--primary)' }}>KVKK aydınlatma metnini</a> okudum, onaylıyorum.
       </label>
       {errs.consent && <span style={{ fontSize: 12, color: 'var(--primary)' }}>{errs.consent}</span>}
       <button className="btn btn-primary" type="submit" disabled={sending} style={{ justifySelf: 'start' }}>
@@ -496,7 +492,7 @@ export function QuoteFormSaglik({ compact = false }) {
         </select>
       )}
       <label style={{ display: 'flex', gap: 10, alignItems: 'center', padding: 14, border: '1px solid var(--border)', borderRadius: 'var(--radius)', fontSize: 13 }}>
-        <input type="checkbox" checked={consent} onChange={e => setConsent(e.target.checked)} /> KVKK aydınlatma metnini onaylıyorum.
+        <input type="checkbox" checked={consent} onChange={e => setConsent(e.target.checked)} /> <a href="/kvkk" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--primary)' }}>KVKK aydınlatma metnini</a> onaylıyorum.
       </label>
       <button className="btn btn-primary" type="submit" disabled={sending} style={{ justifySelf: 'start' }}>
         {sending ? 'Gönderiliyor…' : 'Teklif Talebi Gönder'} {!sending && <IconArrow size={12} />}

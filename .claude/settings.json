@@ -29,7 +29,12 @@
       "Bash(supabase init *)",
       "Bash(npm uninstall *)",
       "Bash(supabase secrets *)",
-      "Bash(supabase login *)"
+      "Bash(supabase login *)",
+      "Read(//Users/mui/Library/Caches/**)",
+      "Bash(sips -s format jpeg -s formatOptions 85 -Z 1400 \"/Users/mui/Downloads/kasko.png\" --out \"/Users/mui/projects/aolgentr/public/assets/slide-kasko.jpg\")",
+      "Bash(sips -s format jpeg -s formatOptions 85 -Z 1400 \"/Users/mui/Downloads/saglik.png\" --out \"/Users/mui/projects/aolgentr/public/assets/slide-saglik.jpg\")",
+      "Bash(sips -s format jpeg -s formatOptions 85 -Z 1400 \"/Users/mui/Downloads/konutisyeri.png\" --out \"/Users/mui/projects/aolgentr/public/assets/slide-konut.jpg\")",
+      "Bash(sips -s format jpeg -s formatOptions 85 -Z 1400 \"/Users/mui/Downloads/bireyselemeklilik.png\" --out \"/Users/mui/projects/aolgentr/public/assets/slide-bes.jpg\")"
     ],
     "additionalDirectories": [
       "/Users/mui/Downloads"

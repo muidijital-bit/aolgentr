@@ -205,22 +205,22 @@ export function Header({ route, go }) {
 /* ---------- Hero Slider data ---------- */
 export const HERO_SLIDES = [
   {
-    id: 'kasko', img: '/assets/slide-kasko.png', path: '/urunler/kasko',
+    id: 'kasko', img: '/assets/slide-kasko.jpg', path: '/urunler/kasko',
     title: 'Aracınız için tam kapsamlı koruma',
     desc: 'Kasko ve zorunlu trafik sigortasında +20 şirketin tekliflerini sizin için hazırlıyor ve kıyaslıyoruz.',
   },
   {
-    id: 'saglik', img: '/assets/slide-saglik.png', path: '/urunler/saglik-sigortasi',
+    id: 'saglik', img: '/assets/slide-saglik.jpg', path: '/urunler/saglik-sigortasi',
     title: 'Sağlığınız için özel çözümler',
     desc: 'Sağlık problemlerinizde ne yapacağınızı düşünmeyin; tüm özel hastaneler ve doktorlar elinizin altında.',
   },
   {
-    id: 'konut', img: '/assets/slide-konut.png', path: '/urunler/konut-isyeri-sigortasi',
+    id: 'konut', img: '/assets/slide-konut.jpg', path: '/urunler/konut-isyeri-sigortasi',
     title: 'Konut ve işyeriniz güvencede',
     desc: 'Yangın, hırsızlık, sel ve su hasarları, deprem ve beklenmedik riskleri teminat altına alın.',
   },
   {
-    id: 'bes', img: '/assets/slide-bes.png', path: '/urunler/bireysel-emeklilik',
+    id: 'bes', img: '/assets/slide-bes.jpg', path: '/urunler/bireysel-emeklilik',
     title: 'Geleceğinizi bugünden planlayın',
     desc: 'Bireysel Emeklilik ile düzenli tasarruf yapın, %20 devlet katkısı ile yatırımınızı katlayın.',
   },
