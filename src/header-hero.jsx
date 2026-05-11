@@ -220,7 +220,7 @@ export const HERO_SLIDES = [
     desc: 'Yangın, hırsızlık, sel ve su hasarları, deprem ve beklenmedik riskleri teminat altına alın.',
   },
   {
-    id: 'bes', img: '/assets/slide-bes.jpg', path: '/urunler/bireysel-emeklilik',
+    id: 'bes', img: '/assets/bireysel.png', path: '/urunler/bireysel-emeklilik',
     title: 'Geleceğinizi bugünden planlayın',
     desc: 'Bireysel Emeklilik ile düzenli tasarruf yapın, %20 devlet katkısı ile yatırımınızı katlayın.',
   },
